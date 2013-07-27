@@ -1,5 +1,5 @@
 
-[clio]( ../public/images/Clio_logo_244x87.png)
+[clio]( clioflict/public/images/Clio_logo_244x87.png)
 
 ## [Clio] (http://www.goclio.com/?gclid=CMOuncr4z7gCFcdr7Aod1TwAgw) Conflict Checking System
 
