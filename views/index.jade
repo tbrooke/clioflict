@@ -1,10 +1,11 @@
 extends layout
 
 block content
-  h1= title
+  #title-space
+    h1= title
   nav
     - var nav = {}; nav[title] = 'active'
     ul
-      li(class='#{nav.Query}') Enter Query 
+      li(class='#{nav.Query}') Check for Conflict
       li(class='#{nav.Admin}') Admin  
   p Welcome to #{title}
