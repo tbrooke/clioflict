@@ -1,5 +1,5 @@
 
 
 exports.index = function(req, res){
-  res.render('Admin', { title: 'Query' });
+  res.render('admin', { title: 'Admin' });
 };
