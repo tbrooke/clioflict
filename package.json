@@ -1,5 +1,5 @@
 {
-  "name": "application-name",
+  "name": "clioflict",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,8 +7,8 @@
   },
   "dependencies": {
     "express": "3.3.4",
-    "jade": "*",
-    "stylus": "*",
-    "request": "*"
+    "jade": "0.34",
+    "stylus": "0.34",
+    "request": "2.25"
   }
 }
