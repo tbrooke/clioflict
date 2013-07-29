@@ -1,7 +1,5 @@
-#title-space {
+title {
   text-align: center;
-  margin-top: -20px;
-  margin-bottom: 60px;
 }
 body {
   padding: 50px;
@@ -9,8 +7,4 @@ body {
 }
 a {
   color: #00b7ff;
-}
-
-nav {
-  font-size: 20px;	
 }
