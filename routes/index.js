@@ -4,5 +4,5 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Clio Conflict checker' });
+  res.render('index', { title: 'Clio Conflict Checker' });
 };
