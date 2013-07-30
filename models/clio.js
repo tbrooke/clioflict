@@ -1,4 +1,4 @@
-// Model for users
+// Model for clios
 
 // Inspired by: https://github.com/madhums/node-express-mongoose-demo
 
@@ -17,11 +17,10 @@ var mongoose = require('mongoose')
  * User Schema
  */
 
-var UserSchema = new Schema({
+var ClioSchema = new Schema({
   name: { type: String, default: '' },
-  email: { type: String, default: '' },
+  description: { type: String, default: '' },
   username: { type: String, default: '' },
-  hashed_password: { type: String, default: '' },
+  hashed_authtoken: { type: String, default: '' },
   salt: { type: String, default: '' },
-  authToken: { type: String, default: '' },  //  I don't think we need this
 })
