@@ -9,6 +9,10 @@
 // Token endpoint: https://app.goclio.com/oauth/token
 //
 // Access Token location: Authorization header w/ Bearer prefix
+//
+// Auth Appproval:  https://app.goclio.com/oauth/approval
+
+
 
 
 var qs = require('querystring')
