@@ -6,6 +6,8 @@ block content
   nav
     - var nav = {}; nav[title] = 'active'
     ul
-      li(class='#{nav.query}') Check for Conflict
-      li(class='#{nav.admin}') Admin  
+      li(class='#{nav.query}') 
+        a(href='/query') Check for Conflict
+      li(class='#{nav.admin}') 
+        a(href='/Admin') Administration
   
