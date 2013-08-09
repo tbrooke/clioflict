@@ -1,4 +1,4 @@
 
-exports.index = function(req, res){
+exports.query = function(req, res){
   res.render('query', { title: 'Query' });
 };
