@@ -3,14 +3,18 @@
  * GET home page.
  */
 
-exports.index = function(req, res){
-  res.render('index', { title: 'Clio Conflict Checker' });
-};
+	exports.index = function(req, res){
+	  res.render('index', { title: 'Clio Conflict Checker' });
+	};
 
-exports.about = function(req, res){
-  res.render('query', { title: 'New Query' })
-};
+	exports.query = function(req, res){
+	  res.render('query', { title: 'New Query' })
+	};
 
-exports.about = function(req, res){
-  res.render('user', { title: 'Users' })
-};
+	exports.user = function(req, res){
+	  res.render('user', { title: 'Users' })
+	};
+
+	exports.admin = function(req, res){
+	  res.render('admin', { title: 'Admin' })
+	};
