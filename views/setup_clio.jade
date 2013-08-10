@@ -3,25 +3,9 @@ extends layout
 block content
   h1= title
   div#admin-area
-    nav
-    - var nav = {}; nav[title] = 'active'
-    ul  
-
-      li(class='#{nav.Query}') 
-        a(href='/query') List Clio Sites
-      li(class='#{nav.setup_clio}') 
-        a(href='/setup_clio') Enter New Clio Site
-      li(class='#{nav.Admin}') 
-        a(href='/admin') Authorize Clio Site
-
-
-     
-
-
-
-     h5 Enter Information for a Clio Site
-     hr
-     form(method='post',action='')
+    h5 Enter Information for a Clio Site
+    hr
+    form(method='post',action='')
          label(for='name') Clinic Site:
          input(type='text',name='name',id='name') 
          label(for='descrip') Description:
@@ -29,4 +13,4 @@ block content
          label(for='phone') Authorization Token
          input(type='text', phone='token',id='token')  
          input(type='submit',name='submit',value='Submit').submit-button
-     hr
+    hr

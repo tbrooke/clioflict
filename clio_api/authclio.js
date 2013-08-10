@@ -24,10 +24,12 @@ var qs = require('querystring')
   , url = 'https://app.goclio.com/oauth/authorize/'
   ;
 request.post({url:url, oauth:oauth}, function (e, r, body) {
+  
   // Ideally, you would take the body in the response
   // and construct a URL that a user clicks on (like a sign in button).
   // The verifier is only available in the response after a user has 
-  // verified with twitter that they are authorizing your app.
+  // verified with clio that they are authorizing your app.
+
   var access_token = qs.parse(body)
     , oauth = 
       { consumer_key: CONSUMER_KEY

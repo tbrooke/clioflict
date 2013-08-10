@@ -28,6 +28,7 @@ app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/query', routes.query);
 app.get('/admin', routes.admin);
+app.get('/setup_clio', routes.setup_clio);
 
 
 
