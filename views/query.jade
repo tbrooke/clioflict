@@ -4,6 +4,11 @@ block content
   h1= title
   nav
     - var nav = {}; nav[title] = 'active'
+      li(class='#{nav.Query}') 
+        a(href='/') Home
+      li(class='#{nav.Admin}') 
+        a(href='/admin') Administration
+
    h3 Enter the information below to search for a conflict
    hr  	 	 	 
    div#contact-area

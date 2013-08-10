@@ -4,7 +4,17 @@ block content
   h1= title
   nav
     - var nav = {}; nav[title] = 'active'
-    ul
-      li(class='#{nav.Query}') Enter Query 
-      li(class='#{nav.Admin}') Admin  
-  p Welcome to #{title}
+      li(class='#{nav.Home}') 
+        a(href='/') Home
+      li(class='#{nav.Query}') 
+        a(href='/query') Check for Conflict
+  div#admin-area
+     form(method='post',action='')
+         label(for='name') Clinic Site:
+         input(type='text',name='name',id='name') 
+         label(for='descrip') Description:
+         input(type='text',fname='descrip',id='descrip') 
+         label(for='phone') Authorization Token
+         input(type='text', phone='token',id='token')  
+     hr
+     input(type='submit',name='submit',value='Submit').submit-button
