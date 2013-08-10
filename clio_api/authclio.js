@@ -33,6 +33,7 @@ var OAuth2 = require('simple-oauth2')(credentials);
 
 
 // Authorization OAuth2 URI
+
 var authorization_uri = OAuth2.AuthCode.authorizeURL({
   redirect_uri: 'http://localhost:3000/callback',
 });

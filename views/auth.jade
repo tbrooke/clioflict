@@ -2,17 +2,17 @@ extends layout
 
 block content
   h1= title
-  div#admin-area
+  div#auth-area
+    h3 Obtaining Authorization
     nav
     - var nav = {}; nav[title] = 'active'
+
     ul  
 
       li(class='#{nav.Query}') 
         a(href='/query') List Clio Sites
       li(class='#{nav.setup_clio}') 
         a(href='/setup_clio') Enter New Clio Site
-      li(class='#{nav.auth}') 
+      li(class='#{nav.Admin}') 
         a(href='/auth') Authorize Clio Site
 
-
-     
