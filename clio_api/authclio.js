@@ -2,6 +2,9 @@
 // Based in twitter Oauth Example:
 //      https://github.com/mikeal/request
 //
+//  Also See:
+//      https://github.com/andreareginato/simple-oauth2
+//
 //  Clio Auth urls
 //
 // Authorization endpoint: https://app.goclio.com/oauth/authorize/
@@ -11,6 +14,8 @@
 // Access Token location: Authorization header w/ Bearer prefix
 //
 // Auth Appproval:  https://app.goclio.com/oauth/approval
+
+
 // Set the configuration settings
 
 
@@ -27,8 +32,37 @@ var credentials = {
 var OAuth2 = require('simple-oauth2')(credentials);
 
 
+// Authorization OAuth2 URI
+var authorization_uri = OAuth2.AuthCode.authorizeURL({
+  redirect_uri: 'http://localhost:3000/callback',
+});
 
 
+// Initial page redirecting to Clio
+
+app.get('/auth', function (req, res) {
+    res.redirect(authorization_uri);
+});
+
+// Callback service parsing the authorization token and asking for the access token
+
+app.get('/callback', function (req, res) {
+  var code = req.query.code; 
+  console.log('/callback');
+  OAuth2.AuthCode.getToken({
+    code: code,
+    redirect_uri: 'http://localhost:3000/callback'
+  }, saveToken);
+
+  function saveToken(error, result) {
+    if (error) { console.log('Access Token Error', error.message); }
+    token = OAuth2.AccessToken.create(result);
+  }
+});
+
+app.get('/', function (req, res) {
+  res.send('Hello World');
+});
 
 
 
