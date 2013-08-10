@@ -1,27 +1,18 @@
 extends layout
 
 block content
-  h1= title
-  nav
-    - var nav = {}; nav[title] = 'active'
-      li(class='#{nav.Query}') 
-        a(href='/') Home
-      li(class='#{nav.Admin}') 
-        a(href='/admin') Administration
-
-   h3 Enter the information below to search for a conflict
-   hr  	 	 	 
-   div#contact-area
-    form(method='post',action='')
-        label(for='lname') Last Name:
-        input(type='text',lname='lname',id='lname') 
-        label(for='fname') First Name:
-        input(type='text',fname='fname',id='fname') 
-        label(for='phone') Phone:
-        input(type='text', phone='phone',id='phone')  
-        label(for='dob') Date of Birth:
-        input(type='text',dob='dob',id='phone')  
-
+  h1= title 	 	 	 
+  div#query-area
+    h5 Enter the information below to search for a conflict
     hr
-    input(type='submit',name='submit',value='Submit').submit-button
-  
+    form(method='post',action='')
+          label(for='lname') Last Name:
+          input(type='text',lname='lname',id='lname') 
+          label(for='fname') First Name:
+          input(type='text',fname='fname',id='fname') 
+          label(for='phone') Phone:
+          input(type='text', phone='phone',id='phone')  
+          label(for='dob') Date of Birth:
+          input(type='text',dob='dob',id='phone')  
+          input(type='submit',name='submit',value='Submit').submit-button
+  hr

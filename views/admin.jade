@@ -2,13 +2,9 @@ extends layout
 
 block content
   h1= title
-  nav
-    - var nav = {}; nav[title] = 'active'
-      li(class='#{nav.Home}') 
-        a(href='/') Home
-      li(class='#{nav.Query}') 
-        a(href='/query') Check for Conflict
   div#admin-area
+     h5 Enter Information for a Clio Site
+     hr
      form(method='post',action='')
          label(for='name') Clinic Site:
          input(type='text',name='name',id='name') 
@@ -16,5 +12,5 @@ block content
          input(type='text',fname='descrip',id='descrip') 
          label(for='phone') Authorization Token
          input(type='text', phone='token',id='token')  
+         input(type='submit',name='submit',value='Submit').submit-button
      hr
-     input(type='submit',name='submit',value='Submit').submit-button

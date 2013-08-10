@@ -16,3 +16,12 @@ body {
 a {
   color: #00b7ff;
 }
+#query-area {
+	margin-top: 100px;
+	text-align: center;
+}
+
+#admin-area {
+	margin-top: 100px;
+	text-align: center;
+}
