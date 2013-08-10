@@ -4,7 +4,19 @@ block content
   h1= title
   nav
     - var nav = {}; nav[title] = 'active'
-    ul
-      li(class='#{nav.Query}') Enter Query 
-      li(class='#{nav.Admin}') Admin  
-  p Enter the Name below:
+   h3 Enter the information below to search for a conflict
+   hr
+   div#contact-area
+    form(method='post',action='')
+        label(for='lname') Last Name:
+        input(type='text',lname='lname',id='lname') 
+        label(for='fname') First Name:
+        input(type='text',fname='fname',id='fname') 
+        label(for='phone') Phone:
+        input(type='text', phone='phone',id='phone')  
+        label(for='dob') Date of Birth:
+        input(type='text',dob='dob',id='phone')  
+
+
+        input(type='submit',name='submit',value='Submit').submit-button
+  
