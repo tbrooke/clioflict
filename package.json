@@ -10,5 +10,8 @@
     "jade": "0.34",
     "stylus": "0.34",
     "request": "2.25"
+  },
+  "devDependencies": {
+    "mocha": "~1.12.0"
   }
 }
