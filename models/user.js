@@ -11,17 +11,17 @@ var mongoose = require('mongoose')
   , Schema = mongoose.Schema
   , crypto = require('crypto')
   , _ = require('underscore')
-  , authTypes = ['github', 'twitter', 'facebook', 'google']
 
 /**
  * User Schema
  */
 
-var UserSchema = new Schema({
+var userSchema = new Schema({
   name: { type: String, default: '' },
   email: { type: String, default: '' },
   username: { type: String, default: '' },
   hashed_password: { type: String, default: '' },
-  salt: { type: String, default: '' },
-  authToken: { type: String, default: '' },  //  I don't think we need this
-})
+  salt: { type: String, default: '' }
+});
+
+exports = mongoose.model('User', userSchema);
