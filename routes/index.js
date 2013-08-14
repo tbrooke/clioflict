@@ -5,6 +5,7 @@
 
 var auth = require('./auth');
 var user = require('./user');
+var clio = require('./clio');
 
 
 module.exports = function(app) {
@@ -13,8 +14,10 @@ module.exports = function(app) {
 	app.get('/query', query);
 	app.get('/admin', admin);
 	app.get('/login', auth.loginForm);
-	app.post('/login', auth.login)
+	app.post('/login', auth.login);
 	app.get('/logout', auth.logout);
+	app.get('/callback', clio.callback)
+	app.get('/clioAuth', clio.clioAuth)
 }
 
 var index = function(req, res){
