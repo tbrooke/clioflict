@@ -1,10 +1,14 @@
+var clio = require('../lib/clioApi')
 
 
+var authorization_uri = clio.authorization_uri
+
+var OAuth2 = clio.OAuth2
 
 exports.clioAuth = function(req, res) {
   return res.redirect(authorization_uri)};
 
- exports.callback = function (req, res) {
+exports.callback = function (req, res) {
   var code = req.query.code; 
   console.log('/callback');
   OAuth2.AuthCode.getToken({
