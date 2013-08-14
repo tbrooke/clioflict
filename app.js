@@ -6,7 +6,7 @@ var express = require('express'),
     path = require('path'),
     passport = require('passport'),
     flash = require('connect-flash');
-    OAuth2 = require('simple-oauth2');
+    OAuth2 = require('oauth');
 
 
 var app = express();

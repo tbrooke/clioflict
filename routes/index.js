@@ -16,7 +16,7 @@ module.exports = function(app) {
 	app.get('/login', auth.loginForm);
 	app.post('/login', auth.login);
 	app.get('/logout', auth.logout);
-	app.post('/callback', clio.callback)
+	app.get('/callback', clio.callback);
 	app.get('/clioAuth', clio.clioAuth)
 }
 
