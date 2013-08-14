@@ -16,7 +16,7 @@ exports.clioAuth = function(req, res) {
     if (error) { console.log('Access Token Error', error.message); }
     token = OAuth2.AccessToken.create(result);
   }
-});
+};
 
 
 
