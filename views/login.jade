@@ -1,5 +1,9 @@
+if flash
+  p= flash
 p Please enter your login information
-label Username
-input(type='text')
-label Password
-input(type='password')
+form(action='login', method='post')
+  label Email
+  input(type='text', name='username')
+  label Password
+  input(type='password', name='password')
+  input(type='submit') Submit

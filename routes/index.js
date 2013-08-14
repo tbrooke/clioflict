@@ -14,7 +14,7 @@ module.exports = function(app) {
 	app.get('/admin', admin);
 	app.get('/login', auth.loginForm);
 	app.post('/login', auth.login)
-	app.post('/logout', auth.logout);
+	app.get('/logout', auth.logout);
 }
 
 var index = function(req, res){
