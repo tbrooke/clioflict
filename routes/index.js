@@ -13,13 +13,13 @@ module.exports = function(app) {
 	app.get('/users', user.list);
 	app.get('/query', query);
 	app.get('/admin', admin);
+	app.post('/admin', admin);
 	app.get('/login', auth.loginForm);
 	app.post('/login', auth.login);
 	app.get('/logout', auth.logout);
 	app.get('/callback', clio.callback);
 	app.get('/clioAuth', clio.clioAuth);
-}; 
-
+}
 
 
 
@@ -34,4 +34,5 @@ var query = function(req, res){
 
 var admin = function(req, res){
   res.render('admin', { title: 'Admin' })
+    if (req.body.authorize == 'authorize') return res.redirect('/clioAuth'); 
 };
