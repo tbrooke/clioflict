@@ -7,10 +7,13 @@ block content
      hr
      form(method='post',action='')
          label(for='name') Clinic Site:
-         input(type='text',name='name',id='name') 
+         input(type='text', name='name',id='name') 
          label(for='descrip') Description:
-         input(type='text',fname='descrip',id='descrip') 
-         label(for='phone') Authorization Token
+         input(type='text', fname='descrip',id='descrip') 
+         label(for='phone') Phone
          input(type='text', phone='token',id='token')  
+         label(for='prefix') Clinic Prefix
+         input(for='prefix', fname='prefix', id='prefix')
          input(type='submit',name='submit',value='Submit').submit-button
+         input(type='submit',name='Authorize',value='Authorize').submit-button
      hr

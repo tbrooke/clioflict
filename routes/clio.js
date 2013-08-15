@@ -1,7 +1,7 @@
 var clio = require('../lib/clioApi')
 
 
-var authorization_uri = clio.authorization_uri
+ var authorization_uri = clio.authorization_uri
 
 
 
@@ -11,16 +11,16 @@ exports.clioAuth = function(req, res) {
 
 
  exports.callback = function (req, res) {
-  var code = req.query.code; 
+  var code = req.query.code;
   console.log('/callback');
-  OAuth2.AuthCode.getToken({
+  clio.OAuth2.AuthCode.getToken({
     code: code,
-    redirect_uri: 'http://localhost:3000/callback'
+    redirect_uri: 'http://localhost:3000/callback',
   }, saveToken);
 
   function saveToken(error, result) {
     if (error) { console.log('Access Token Error', error.message); }
-    token = OAuth2.AccessToken.create(result);
+    token = clio.OAuth2.AccessToken.create(result);
   }
 };
 
