@@ -17,7 +17,7 @@ exports.clioAuth = function(req, res) {
   clio.OAuth2.AuthCode.getToken({
     code: code,
     grant_type: "authorization_code",
-    redirect_uri: 'http://localhost:3000/callback',
+    redirect_uri: 'https://3godkmdzjjjb.runscope.net/callback',
     
   }, saveToken);
 
