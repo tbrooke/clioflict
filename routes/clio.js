@@ -12,9 +12,11 @@ exports.clioAuth = function(req, res) {
 
  exports.callback = function (req, res) {
   var code = req.query.code;
+  debugger;
   console.log('/callback');
   clio.OAuth2.AuthCode.getToken({
     code: code,
+    grant_type: "authorization_code",
     redirect_uri: 'http://localhost:3000/callback',
     
   }, saveToken);
