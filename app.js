@@ -34,7 +34,6 @@ if ('development' == app.get('env')) {
 
 require('./lib/db');
 require('./lib/auth');
-require('./lib/clioApi')
 require('./routes')(app);
 
 http.createServer(app).listen(app.get('port'), function(){

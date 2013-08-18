@@ -10,10 +10,8 @@ var clio = require('./clio');
 
 module.exports = function(app) {
 	app.get('/', index);
-	app.get('/users', user.list);
 	app.get('/query', query);
 	app.get('/admin', admin);
-	app.post('/admin', admin);
 	app.get('/login', auth.loginForm);
 	app.post('/login', auth.login);
 	app.get('/logout', auth.logout);
