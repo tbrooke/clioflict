@@ -36,14 +36,6 @@ var OAuth2 = require('simple-oauth2')({
   tokenPath: "/oauth/token"
 });
 
-exports.OAuth2 = OAuth2
-
-// Authorization uri definition
-
-/*var authorizationUri = OAuth2.AuthCode.authorizeURL({ 
-  redirect_uri: myUrl + '/callback', 
-});*/
-
 exports.clioAuth = function(req, res) {
   var userId = req.user.id;
 
@@ -71,8 +63,15 @@ exports.callback = function (req, res) {
     User.findById(userId, function(err, user) {
       if (err) console.log("error: ", err);
       ClioAccount.setupAccount(result.access_token, user, function(err) {
-        res.render('index');
+        res.redirect('admin');
       });
     })
   }
+};
+
+exports.removeAccount = function(req, res) {
+  ClioAccount.findByIdAndRemove(req.params.account_id, function(err) {
+    if (err) console.log("error: ", err);
+    res.redirect('admin');
+  });
 };

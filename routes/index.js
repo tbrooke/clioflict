@@ -19,6 +19,9 @@ module.exports = function(app) {
 	app.get('/logout', auth.logout);
 	app.get('/callback', clio.callback);
 	app.get('/clioAuth', ensureLoggedIn('/login'), clio.clioAuth);
+  app.get('/remove_account/:account_id', 
+          ensureLoggedIn('/login'),
+          clio.removeAccount);
 };
 
 var index = function(req, res){
