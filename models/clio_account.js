@@ -17,7 +17,6 @@ clioAccountSchema.static('setupAccount', function(accessToken, callback) {
   };
 
   function handleExistingAccount(err, clioAccount) {
-    debugger;
     if (err) {
       console.log("error: " + err);
     } else if (!clioAccount) {
