@@ -1,12 +1,16 @@
 extends layout
 
 block content
-  if flash
-    p= flash
-  p Please enter your login information
-  form(action='login', method='post')
-    label Email
-    input(type='text', name='email')
-    label Password
-    input(type='password', name='password')
-    input(type='submit') Submit
+  .row
+    .col-md-6
+      if flash
+        p= flash
+      p Please enter your login information
+      form(action='login', method='post', role='form')
+        .form-group
+          label Email
+          input.form-control(type='text', name='email')
+        .form-group
+          label Password
+          input.form-control(type='password', name='password')
+        input.btn.btn-default(type='submit') Submit

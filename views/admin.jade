@@ -2,26 +2,17 @@ extends layout
 
 block content
   div#admin-area
-     h5 Enter Information for a Clio Site
-     hr
-     form(method='post',action='')
-         label(for='name') Clinic Name:
-         input(type='text', name='name',id='name') 
-         label(for='descrip') Description of Clinic:
-         input(type='text', fname='descrip',id='descrip') 
-         label(for='phone') Clinic Phone:
-         input(type='text', phone='token',id='token')  
-         label(for='prefix') Clinic Prefix:
-         input(for='prefix', fname='prefix', id='prefix')
-         input(type='submit',name='submit',value='Submit').submit-button
-         h4= 'The App key and App Secret need to be entered below for authorization'
-         p= 'The App Key and App Secret will not be saved to the database since they are only needed to authorize the Application'
-         p= 'The easiest way to get the keys is to simply copy and paste them from Clio'
-         p= 'You may obtain the keys here: '
-           a(href='https://app.goclio.com/settings/developer_applications') View App Keys
-         label(for='key') App Key
-         input(for='key', fname='key', id='key')
-         label(for='secret') App Secret
-         input(for='secret', fname='secret', id='secret')
-         a(class='button',href="/clioAuth") Authorize 
-     hr
+    h5 Linked Accounts
+    a(class='btn btn-primary',href="/clioAuth") Add an Account
+    if accounts.length
+      table.table.table-striped
+        tr
+          th Account Name
+          th
+        each account in accounts
+          tr
+            td= account.name
+            td
+              a(href="#") Remove
+
+    hr
