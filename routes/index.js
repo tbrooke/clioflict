@@ -20,14 +20,13 @@ module.exports = function(app) {
 };
 
 var index = function(req, res){
-  res.render('index', { title: 'Clio Conflict Checker' });
+  res.render('index', { title: 'Clio Conflict Checker', req: req });
 };
 
 var query = function(req, res){
-  res.render('query', { title: 'New Query' })
+  res.render('query', { title: 'New Query', req: req });
 };
 
 var admin = function(req, res){
-  res.render('admin', { title: 'Admin' })
-    if (req.body.authorize == 'authorize') return res.redirect('/clioAuth'); 
+  res.render('admin', { title: 'Admin', req: req });
 };
