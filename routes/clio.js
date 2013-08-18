@@ -16,6 +16,8 @@
 // Auth Appproval:  https://app.goclio.com/oauth/approval
 
 var request = require('request');
+var passport = require('passport');
+
 var ClioAccount = require('../models').ClioAccount;
 
 //var url ='https://app-goclio-com-3godkmdzjjjb.runscope.net/'

@@ -6,17 +6,17 @@
 var auth = require('./auth');
 var user = require('./user');
 var clio = require('./clio');
-
+var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
 module.exports = function(app) {
 	app.get('/', index);
-	app.get('/query', query);
-	app.get('/admin', admin);
+	app.get('/query', ensureLoggedIn('/login'), query);
+	app.get('/admin', ensureLoggedIn('/login'), admin);
 	app.get('/login', auth.loginForm);
 	app.post('/login', auth.login);
 	app.get('/logout', auth.logout);
 	app.get('/callback', clio.callback);
-	app.get('/clioAuth', clio.clioAuth);
+	app.get('/clioAuth', ensureLoggedIn('/login'), clio.clioAuth);
 }
 
 
