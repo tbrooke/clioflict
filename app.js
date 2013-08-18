@@ -24,7 +24,6 @@ app.configure(function() {
   app.use(express.session({ secret: '48hgU2kykg97LKEipHoK' }));
   app.use(passport.initialize());
   app.use(passport.session());
-  //app.use(app.router);
   app.use(require('stylus').middleware(__dirname + '/public'));
   app.use(express.static(path.join(__dirname, 'public')));
 });

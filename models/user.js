@@ -6,7 +6,8 @@ var userSchema = mongoose.Schema({
   hashedPassword: String,
   salt: String,
   authenticationToken: { type: String, index: {unique: true} },
-  resetToken: String
+  resetToken: String,
+  clioAccountIds: [String]
 });
 
 userSchema.plugin(require('mongoose-lifecycle'));

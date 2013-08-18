@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var clioApi  = require('../lib/clio_api');
+var _ = require('lodash');
 
 var clioAccountSchema = mongoose.Schema({
   accessToken: { type: String, required: true, index: {unique: true}},
@@ -7,7 +8,7 @@ var clioAccountSchema = mongoose.Schema({
   name: String
 });
 
-clioAccountSchema.static('setupAccount', function(accessToken, callback) {
+clioAccountSchema.static('setupAccount', function(accessToken, user, callback) {
   var parsedClio;
   clioApi.get(accessToken, '/users/who_am_i', handleApiResponse);
 
@@ -27,9 +28,19 @@ clioAccountSchema.static('setupAccount', function(accessToken, callback) {
     return clioAccount.save(handleAccountSave);
   };
 
-  function handleAccountSave(err) {
+  function handleAccountSave(err, clioAccount) {
     if (err) console.log("error: " + err);
+    else {
+      addAccountIdToUser(clioAccount.id);
+    }
     return callback();
+  };
+
+  function addAccountIdToUser(accountId) {
+    if (!_.find(user.clioAccountIds, function(acc) { return acc === accountId; })) {
+      user.clioAccountIds.push(accountId);
+      user.save();
+    }
   };
 
 });

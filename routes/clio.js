@@ -19,6 +19,7 @@ var request = require('request');
 var passport = require('passport');
 
 var ClioAccount = require('../models').ClioAccount;
+var User        = require('../models').User;
 
 //var url ='https://app-goclio-com-3godkmdzjjjb.runscope.net/'
 var url ='https://app-goclio-com-ukwn42x8ympw.runscope.net'
@@ -39,30 +40,39 @@ exports.OAuth2 = OAuth2
 
 // Authorization uri definition
 
-var authorizationUri = OAuth2.AuthCode.authorizeURL({ 
+/*var authorizationUri = OAuth2.AuthCode.authorizeURL({ 
   redirect_uri: myUrl + '/callback', 
-});
+});*/
 
 exports.clioAuth = function(req, res) {
-  return res.redirect(authorizationUri);
+  var userId = req.user.id;
+
+  return res.redirect(OAuth2.AuthCode.authorizeURL({
+    redirect_uri: myUrl + '/callback',
+    state: userId
+  }));
 };
 
 exports.callback = function (req, res) {
   var code = req.query.code;
-  console.log('/callback', code);
+  var userId = req.query.state;
+
   OAuth2.AuthCode.getToken({
     code: code,
     grant_type: "authorization_code",
     client_id: clioClientId,
     client_secret: clioClientSecret,
     redirect_uri: myUrl + '/callback'
-    
   }, saveToken);
 
   function saveToken(error, result) {
     if (error) { console.log('Access Token Error', error.message); }
-    ClioAccount.setupAccount(result.access_token, function(err) {
-      res.render('index');
+
+    User.findById(userId, function(err, user) {
+      if (err) console.log("error: ", err);
+      ClioAccount.setupAccount(result.access_token, user, function(err) {
+        res.render('index');
+      });
     })
   }
 };

@@ -17,10 +17,7 @@ module.exports = function(app) {
 	app.get('/logout', auth.logout);
 	app.get('/callback', clio.callback);
 	app.get('/clioAuth', ensureLoggedIn('/login'), clio.clioAuth);
-}
-
-
-
+};
 
 var index = function(req, res){
   res.render('index', { title: 'Clio Conflict Checker' });
