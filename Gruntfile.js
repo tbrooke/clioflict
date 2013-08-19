@@ -73,6 +73,6 @@ module.exports = function(grunt) {
   grunt.registerTask('fullBuild', ['buildAngular', 'build']);
 
   grunt.registerTask('default', ['watch']);
-  grunt.registerTask('buildAngular', ['exec', 'exec:ng-deps', 'exec:ng-build'])
+  grunt.registerTask('buildAngular', ['exec:ng-deps', 'exec:ng-build'])
 
 };
