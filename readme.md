@@ -16,7 +16,7 @@ npm install -g grunt-cli bower nodemon && npm install
 Then, in one terminal run:
 
 ```bash
-bower install && grunt build
+bower install && grunt fullBuild
 ```
 
 In another terminal run:

@@ -70,6 +70,7 @@ module.exports = function(grunt) {
       'concat',
       'clean:postBuild'
     ]);
+  grunt.registerTask('fullBuild', ['buildAngular', 'build']);
 
   grunt.registerTask('default', ['watch']);
   grunt.registerTask('buildAngular', ['exec', 'exec:ng-deps', 'exec:ng-build'])
