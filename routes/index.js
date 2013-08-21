@@ -41,11 +41,10 @@ var query = function(req, res){
 
   function searchForClients(accessToken, query) {
     var options = {qs: {query: query}, headers: {ContentType: 'application/json'}};
-    var request = clioApi.get(accessToken, '/clients', options, function(err, response) {
+    var request = clioApi.get(accessToken, '/contacts', options, function(err, response) {
       if (err) return res.send(err);
       return res.send(response.body);
     });
-    console.log(request.uri);
   };
 };
 
