@@ -2,8 +2,12 @@
   "name": "clioflict",
   "version": "0.0.1",
   "dependencies": {
-      "bootstrap": "v3.0.0-rc.2",
-      "angular-1.1.6": "*"
+    "bootstrap": "v3.0.0",
+    "angular-1.1.6": "*",
+    "bootstrap-theme-cirrus": "*"
   },
-  "private": true
+  "private": true,
+  "resolutions": {
+    "bootstrap": "3.0.0"
+  }
 }

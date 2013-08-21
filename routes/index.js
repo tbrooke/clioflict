@@ -4,14 +4,14 @@
  */
 
 var auth = require('./auth');
-var user = require('./user');
 var clio = require('./clio');
 var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
 var ClioAccount = require('../models').ClioAccount;
+var clioApi     = require('../lib/clio_api');
 
 module.exports = function(app) {
-	app.get('/', index);
+	app.get('/', ensureLoggedIn('/login'), index);
 	app.get('/query', ensureLoggedIn('/login'), query);
 	app.get('/admin', ensureLoggedIn('/login'), admin);
 	app.get('/login', auth.loginForm);
@@ -29,7 +29,24 @@ var index = function(req, res){
 };
 
 var query = function(req, res){
-  res.render('query', { title: 'New Query', req: req });
+  var query = req.query.searchTerm;
+
+  ClioAccount.find().
+              where('_id').in(req.user.clioAccountIds).
+              exec(function(err,accounts) {
+                accounts.forEach(function(account) {
+                  searchForClients(account.accessToken, query);
+                });
+              });
+
+  function searchForClients(accessToken, query) {
+    var options = {qs: {query: query}, headers: {ContentType: 'application/json'}};
+    var request = clioApi.get(accessToken, '/clients', options, function(err, response) {
+      if (err) return res.send(err);
+      return res.send(response.body);
+    });
+    console.log(request.uri);
+  };
 };
 
 var admin = function(req, res){

@@ -1,3 +1,7 @@
 extends layout
 
 block content
+  .app(ng-app='clioClientSearch')
+    .search(ng-controller='SearchController')
+      input.form-inline(type='text', ng-model='searchTerm', placeholder='Search for Clients')
+      button(ng-click='search()') Search

@@ -74,4 +74,5 @@ exports.removeAccount = function(req, res) {
     if (err) console.log("error: ", err);
     res.redirect('admin');
   });
+  // Query all users and remove clioAccountId
 };

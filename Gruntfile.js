@@ -21,8 +21,10 @@ module.exports = function(grunt) {
     },
     copy: {
       bootstrapFonts: {
-        src: '',
-        dest: ''
+        expand: true,
+        cwd: 'bower_components/bootstrap-theme-cirrus/dist/fonts',
+        src: '*',
+        dest: 'public/fonts/'
       }
     },
     concat: {
@@ -30,7 +32,15 @@ module.exports = function(grunt) {
         separator: '\n\n',
         stripBanners: true,
         banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-          '<%= grunt.template.today("yyyy-mm-dd") %> */'
+          '<%= grunt.template.today("yyyy-mm-dd") %> */\n'
+      },
+      client: {
+        src: [
+          'client/clio_client_search.js',
+          'client/controllers/**.js',
+          'client/directives/**.js'
+        ],
+        dest: 'tmp/client.js' 
       },
       js: {
         src: [
@@ -38,23 +48,29 @@ module.exports = function(grunt) {
           'bower_components/bootstrap/dist/js/bootstrap.min.js',
           'bower_components/angular-1.1.6/build/angular.js',
           'bower_components/angular-1.1.6/build/angular-resource.js',
-          'bower_components/angular-1.1.6/build/angular-cookies.js'
+          'bower_components/angular-1.1.6/build/angular-cookies.js',
+          'tmp/templates.js',
+          'tmp/client.js'
         ],
         dest: 'public/js/app.js'
       },
       css: {
         src: [
-          'bower_components/bootstrap/dist/css/bootstrap.min.css',
+          'bower_components/bootstrap-theme-cirrus/dist/css/bootstrap.min.css',
           'public/stylesheets/style.css'
         ],
         dest: 'public/css/app.css'
       }
     },
     watch: {
-      templates: {
-        files: [],
+      client: {
+        files: ['client/templates/**.html', 'client/**/*.js'],
         tasks: ['build']
       }
+    },
+    ngTemplates: {
+      src: 'client/templates/**.html',
+      dest: 'tmp/templates.js'
     }
   });
 
@@ -67,12 +83,14 @@ module.exports = function(grunt) {
   grunt.registerTask('build', 
     [
       'clean:preBuild',
+      'copy',
+      'concat:client',
       'concat',
       'clean:postBuild'
     ]);
   grunt.registerTask('fullBuild', ['buildAngular', 'build']);
 
-  grunt.registerTask('default', ['watch']);
+  grunt.registerTask('default', ['watch:client']);
   grunt.registerTask('buildAngular', ['exec:ng-deps', 'exec:ng-build'])
 
 };
