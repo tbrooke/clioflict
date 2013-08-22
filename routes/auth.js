@@ -14,7 +14,8 @@ exports.logout = function(req, res) {
 };
 
 exports.signupForm = function(req, res) {
-	return res.render('signup', {title: 'Add User', flash: req.flash('error'), req: req})
+return res.render('signup', {title: 'Add a New User', flash: req.flash('error'), req: req})
 };
 
-exports.signup = function(req, res)
+// exports.signup = function(req, res)
+
