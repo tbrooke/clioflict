@@ -12,3 +12,9 @@ exports.logout = function(req, res) {
   req.logout();
   res.redirect('/');
 };
+
+exports.signupForm = function(req, res) {
+	return res.render('signup', {title: 'Add User', flash: req.flash('error'), req: req})
+};
+
+exports.signup = function(req, res)
