@@ -35,15 +35,16 @@ var query = function(req, res){
               where('_id').in(req.user.clioAccountIds).
               exec(function(err,accounts) {
                 accounts.forEach(function(account) {
-                  searchForClients(account.accessToken, query);
+                  searchForClients(account, query);
                 });
               });
 
-  function searchForClients(accessToken, query) {
+  function searchForClients(account, query) {
     var options = {qs: {query: query}, headers: {ContentType: 'application/json'}};
-    var request = clioApi.get(accessToken, '/contacts', options, function(err, response) {
+    var request = clioApi.get(account.accessToken, '/contacts', options, function(err, response) {
       if (err) return res.send(err);
-      return res.send(response.body);
+      toSend = {account: account, results: response.body};
+      return res.send(toSend);
     });
   };
 };

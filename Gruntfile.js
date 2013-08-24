@@ -16,7 +16,7 @@ module.exports = function(grunt) {
       }
     },
     clean: {
-      preBuild: ['public/css/app.css','public/js/app.js'],
+      preBuild: ['public/css/app.css','public/js/app.js','public/stylesheets/style.css'],
       postBuild: []
     },
     copy: {
@@ -37,6 +37,7 @@ module.exports = function(grunt) {
       client: {
         src: [
           'client/clio_client_search.js',
+          'client/services/**.js',
           'client/controllers/**.js',
           'client/directives/**.js'
         ],
@@ -49,8 +50,8 @@ module.exports = function(grunt) {
           'bower_components/angular-1.1.6/build/angular.js',
           'bower_components/angular-1.1.6/build/angular-resource.js',
           'bower_components/angular-1.1.6/build/angular-cookies.js',
-          'tmp/templates.js',
-          'tmp/client.js'
+          'tmp/client.js',
+          'tmp/templates.js'
         ],
         dest: 'public/js/app.js'
       },
@@ -62,28 +63,48 @@ module.exports = function(grunt) {
         dest: 'public/css/app.css'
       }
     },
+    stylus: {
+      compile: {
+        files: {
+          'public/stylesheets/style.css': 'public/stylesheets/style.styl'
+        }
+      }
+    },
     watch: {
       client: {
-        files: ['client/templates/**.html', 'client/**/*.js'],
+        files: [
+          'client/templates/**.html',
+          'client/**/*.js',
+          'public/stylesheets/*.styl'
+        ],
         tasks: ['build']
       }
     },
-    ngTemplates: {
-      src: 'client/templates/**.html',
-      dest: 'tmp/templates.js'
+    ngtemplates: {
+      clioClientSearch: {
+        options: {
+          base: 'client/templates'
+        },
+        src: 'client/templates/**.html',
+        dest: 'tmp/templates.js'
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-angular-templates');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-exec');
 
   grunt.registerTask('build', 
     [
       'clean:preBuild',
       'copy',
+      'stylus',
+      'ngtemplates',
       'concat:client',
       'concat',
       'clean:postBuild'
