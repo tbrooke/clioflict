@@ -1,4 +1,6 @@
+var User     = require('../models').User;
 var passport = require('passport');
+var request = require('request');
 
 exports.loginForm = function(req, res) {
   return res.render('login', {title: 'Login', flash: req.flash('error'), req: req});
@@ -13,9 +15,20 @@ exports.logout = function(req, res) {
   res.redirect('/');
 };
 
-exports.signupForm = function(req, res) {
-return res.render('signup', {title: 'Add a New User', flash: req.flash('error'), req: req})
+
+exports.signupForm = function(req,res) {
+	return res.render('login', {title: 'Sign Up New User', flash: req.flash('error'), req: req});
 };
 
-// exports.signup = function(req, res)
+exports.signup = function (req, res) {
+    new User ({email: req.body.email, 
+    		password: req.body.password, 
+    		admin: req.body.admin}).save();
+};
 
+
+// exports.create = function (req, res) {
+//   var user = new User(req.body)
+//   user.provider = 'local'
+//   user.save();
+//     };

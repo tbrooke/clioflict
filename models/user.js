@@ -7,7 +7,8 @@ var userSchema = mongoose.Schema({
   salt: String,
   authenticationToken: { type: String, index: {unique: true} },
   resetToken: String,
-  clioAccountIds: [String]
+  clioAccountIds: [String],
+  admin: [Boolean]
 });
 
 userSchema.plugin(require('mongoose-lifecycle'));
@@ -52,5 +53,8 @@ User.on('beforeInsert', function(user){
   shasum.update(user.email + ":" + user.salt);
   user.authenticationToken = shasum.digest('base64');
 });
+
+
+
 
 module.exports = User;
