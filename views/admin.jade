@@ -2,28 +2,28 @@ extends layout
 
 block content
   div#admin-area
-    ul.nav.nab-tabs
+    ul.nav.nav-tabs
+      li
+        a(href='#accounts',data-toggle="tab") Accounts
       li(data-toggle="tab")
-        a(href='Account') Accounts
-      li(data-toggle="tab")
-        a(href='User') Users
-    div#tab-content.tab-content
-      div#accounts.tab-pane.fade
-        h5 Linked Accounts
-        a(class='btn btn-primary',href="/clioAuth") Add an Account
-        if accounts.length
-          table.table.table-striped
-            tr
-              th Account Name
-              th
+        a(href='#users',data-toggle="tab") Users
+  div#tab-content.tab-content
+    div#accounts.tab-pane.fade
+      h5 Linked Accounts
+      a(class='btn btn-primary',href="/clioAuth") Add an Account
+      if accounts.length
+        table.table.table-striped
+          tr
+            th Account Name
+            th
           each account in accounts
             tr
               td= account.name
               td
                 a(href="/remove_account/" + account.id) Remove
-      div#users.tab-pane.fade
-        h5 Users
-        a(class='btn btn-primary',href="/signup") Add a User
+    div#users.tab-pane.fade
+      h5 Users
+      a(class='btn btn-primary',href="/signup") Add a User
     //-     if users.length
     //-       table.table.table-striped
     //-         tr
