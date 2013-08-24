@@ -21,3 +21,5 @@
 #title-space{margin:35px 0 35px}
 body{padding:50px}
 .search input[type='text']{width:50%;margin-right:20px}
+.search .search-results{margin-top:35px;}
+.search .search-results .search-account{border:3px solid #eee;border-radius:5px}

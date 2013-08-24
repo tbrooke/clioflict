@@ -17606,14 +17606,14 @@ clioClientSearch.factory('searchDB', [function($scope){
 }]);
 
 clioClientSearch.controller('SearchController',
-  ['$scope','$templateCache','searchDB',
-    function($scope, $templateCache, searchDB) {
+  ['$scope','searchDB',
+    function($scope, searchDB) {
       $scope.vm = {};
       $scope.vm.accounts = [];
 
       $scope.search = function() {
         var data = {searchTerm: $scope.searchTerm};
-        searchDB = {};
+        //searchDB = {};
         $scope.vm.accounts = [];
 
         $.ajax('/query', {
@@ -17621,10 +17621,13 @@ clioClientSearch.controller('SearchController',
           success: function(response,status,jqXHR) {
             var account = response.account;
             var results = JSON.parse(response.results);
-            $scope.vm.accounts.push(account);
-            searchDB[account['_id']] = {account: account, results: results};
+            account.contacts = results.contacts;
+            $scope.$apply(function () {
+              $scope.vm.accounts.push(account);
+              console.log(account);
+              //searchDB[account['_id']] = {account: account, results: results};
+            });
 
-            console.log(response);
           }
         });
       };
