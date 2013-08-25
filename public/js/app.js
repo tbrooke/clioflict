@@ -21660,7 +21660,6 @@ clioClientSearch.controller('SearchController',
           account.contacts = results.contacts;
           $scope.$apply(function () {
             $scope.vm.accounts.push(account);
-            console.log(account);
           });
         }
       };

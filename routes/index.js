@@ -31,7 +31,6 @@ var index = function(req, res){
 
 var query = function(req, res){
   var query = req.query.searchTerm;
-  console.log(query);
   var totalAccounts, totalCompletedRequests = 0;
 
   ClioAccount.find().
