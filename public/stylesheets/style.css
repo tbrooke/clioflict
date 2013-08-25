@@ -2,7 +2,7 @@
 body{padding:50px}
 .search input[type='text']{width:50%;margin-right:20px}
 .search .search-results{margin-top:35px;}
-.search .search-results .search-account{margin-right:10px;border:3px solid #eee;-webkit-border-radius:5px;border-radius:5px;max-height:250px;overflow-y:scroll}
+.search .search-results .search-account{margin-right:10px;border:3px solid #eee;-webkit-border-radius:5px;border-radius:5px;height:250px;overflow-y:scroll}
 .search .search-results .search-account h4{border-bottom:2px solid #ccc}
 #admin-area header{margin-bottom:20px;}
 #admin-area header h4{display:inline;margin-right:30px}

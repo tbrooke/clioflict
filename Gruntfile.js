@@ -60,6 +60,7 @@ module.exports = function(grunt) {
       css: {
         src: [
           'bower_components/bootstrap-theme-cirrus/dist/css/bootstrap.min.css',
+          'public/stylesheets/spinner.css',
           'public/stylesheets/style.css'
         ],
         dest: 'public/css/app.css'

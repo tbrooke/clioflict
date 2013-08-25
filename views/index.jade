@@ -10,6 +10,11 @@ block content
       .search-results
         .search-account.col-md-5(ng-repeat="account in vm.accounts")
           h4 {{account.name}}
-          ul.account-contacts.list-unstyled
-            li.account-contact(ng-repeat="contact in account.contacts")
-              p {{contact.name}}
+          div(ng-switch="account.isLoading")
+            .facebookG(ng-switch-when="true")
+              .blockG_1.facebook_blockG
+              .blockG_2.facebook_blockG
+              .blockG_3.facebook_blockG
+            ul.account-contacts.list-unstyled(ng-switch-when="false")
+              li.account-contact(ng-repeat="contact in account.contacts")
+                p {{contact.name}}
