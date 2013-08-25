@@ -6,13 +6,14 @@
 var auth = require('./auth');
 var clio = require('./clio');
 var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
+var streamable = require('../app').streamable;
 
 var ClioAccount = require('../models').ClioAccount;
 var clioApi     = require('../lib/clio_api');
 
 module.exports = function(app) {
 	app.get('/', ensureLoggedIn('/login'), index);
-	app.get('/query', ensureLoggedIn('/login'), query);
+	app.get('/query', [ensureLoggedIn('/login'), streamable, query]);
 	app.get('/admin', ensureLoggedIn('/login'), admin);
 	app.get('/login', auth.loginForm);
 	app.post('/login', auth.login);
@@ -30,10 +31,13 @@ var index = function(req, res){
 
 var query = function(req, res){
   var query = req.query.searchTerm;
+  console.log(query);
+  var totalAccounts, totalCompletedRequests = 0;
 
   ClioAccount.find().
               where('_id').in(req.user.clioAccountIds).
               exec(function(err,accounts) {
+                totalAccounts = accounts.length;
                 accounts.forEach(function(account) {
                   searchForClients(account, query);
                 });
@@ -42,9 +46,10 @@ var query = function(req, res){
   function searchForClients(account, query) {
     var options = {qs: {query: query}, headers: {ContentType: 'application/json'}};
     var request = clioApi.get(account.accessToken, '/contacts', options, function(err, response) {
-      if (err) return res.send(err);
+      totalCompletedRequests++;
       toSend = {account: account, results: response.body};
-      return res.send(toSend);
+      res.write(JSON.stringify(toSend));
+      if (totalCompletedRequests === totalAccounts) res.end();
     });
   };
 };

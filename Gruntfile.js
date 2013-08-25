@@ -47,6 +47,8 @@ module.exports = function(grunt) {
         src: [
           'bower_components/jquery/jquery.min.js',
           'bower_components/bootstrap/dist/js/bootstrap.min.js',
+          'bower_components/socket.io-client/dist/socket.io.js',
+          'bower_components/streamable/client.js',
           'bower_components/angular-1.1.6/build/angular.js',
           'bower_components/angular-1.1.6/build/angular-resource.js',
           'bower_components/angular-1.1.6/build/angular-cookies.js',
@@ -65,6 +67,9 @@ module.exports = function(grunt) {
     },
     stylus: {
       compile: {
+        options: {
+          use: [require('nib')]
+        },
         files: {
           'public/stylesheets/style.css': 'public/stylesheets/style.styl'
         }

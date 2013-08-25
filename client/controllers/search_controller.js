@@ -5,24 +5,23 @@ clioClientSearch.controller('SearchController',
       $scope.vm.accounts = [];
 
       $scope.search = function() {
-        var data = {searchTerm: $scope.searchTerm};
+        var data = {params: {searchTerm: $scope.searchTerm}};
         //searchDB = {};
         $scope.vm.accounts = [];
 
-        $.ajax('/query', {
-          data: data, 
-          success: function(response,status,jqXHR) {
-            var account = response.account;
-            var results = JSON.parse(response.results);
-            account.contacts = results.contacts;
-            $scope.$apply(function () {
-              $scope.vm.accounts.push(account);
-              console.log(account);
-              //searchDB[account['_id']] = {account: account, results: results};
-            });
-
-          }
-        });
+        Streamable.get('/query', data, {
+          onData: accountHandler,
+          onError: function(err) { console.log(err); }
+        })
+        function accountHandler(data) {
+          var account = data.account;
+          var results = JSON.parse(data.results);
+          account.contacts = results.contacts;
+          $scope.$apply(function () {
+            $scope.vm.accounts.push(account);
+            console.log(account);
+          });
+        }
       };
     }
   ]);

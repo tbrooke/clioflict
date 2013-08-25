@@ -1,10 +1,11 @@
 
 var express = require('express'),
-    routes = require('./routes'),
     http = require('http'),
     path = require('path'),
     passport = require('passport'),
-    flash = require('connect-flash');
+    flash = require('connect-flash'),
+    stylus = require('stylus'),
+    nib = require('nib');
 
 
 require('./lib/db');
@@ -18,6 +19,13 @@ var store = new SessionStore({
 
 
 var app = express();
+
+function compile(str, path) {
+  return stylus(str)
+    .set('filename', path)
+    .set('compress', true)
+    .use(nib());
+}
 
 // all environments
 app.configure(function() {
@@ -37,7 +45,7 @@ app.configure(function() {
   }));
   app.use(passport.initialize());
   app.use(passport.session());
-  app.use(require('stylus').middleware(__dirname + '/public'));
+  app.use(stylus.middleware({src: __dirname + '/public', compile: compile}));
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
@@ -53,9 +61,13 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-require('./lib/auth');
-require('./routes')(app);
-
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+var io = require('socket.io').listen(server);
+io.set('log level', 1);
+exports.streamable = require('streamable').streamable(io);
+
+require('./lib/auth');
+require('./routes')(app);

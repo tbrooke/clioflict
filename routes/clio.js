@@ -22,8 +22,9 @@ var ClioAccount = require('../models').ClioAccount;
 var User        = require('../models').User;
 
 //var url ='https://app-goclio-com-3godkmdzjjjb.runscope.net/'
-var url ='https://app-goclio-com-ukwn42x8ympw.runscope.net'
-var myUrl = 'https://callcenter1.fwd.wf';
+//var url ='https://app-goclio-com-ukwn42x8ympw.runscope.net'
+var url = 'https://app.goclio.com';
+var myUrl = 'https://3aa344b0.ngrok.com';
 
 var clioClientId = 'qgRdVxi60UATe1JlaDBr3KWfNbOaLB0Ce2Ehzdnk';
 var clioClientSecret = 'td3MSYAa4jr8oplIsCTIiseSL8FwCJyRwbjjkjJN';
@@ -58,6 +59,7 @@ exports.callback = function (req, res) {
   }, saveToken);
 
   function saveToken(error, result) {
+    console.log(result);
     if (error) { console.log('Access Token Error', error.message); }
 
     User.findById(userId, function(err, user) {

@@ -4,7 +4,9 @@
   "dependencies": {
     "bootstrap": "v3.0.0",
     "angular-1.1.6": "*",
-    "bootstrap-theme-cirrus": "*"
+    "bootstrap-theme-cirrus": "*",
+    "socket.io-client": "~0.9.16",
+    "streamable": "*"
   },
   "private": true,
   "resolutions": {
