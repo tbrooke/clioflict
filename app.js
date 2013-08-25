@@ -41,6 +41,12 @@ app.configure(function() {
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
+app.locals.navBarClasses = function(req, path) {
+  if (req.path === path) {
+    return ['active'];
+  }
+  return [];
+};
 
 // development only
 if ('development' == app.get('env')) {
