@@ -17,16 +17,16 @@ html
           a.navbar-brand(href='/') Clio Conflict Checker
         .collapse.navbar-collapse
           ul.nav.navbar-nav
+            li.active
+              a(href='/') Home
             li
-              a(href='/', data-toggle="pill") Home
-            li
-              a(href='/admin', data-toggle="pill") Admin
+              a(href='/admin') Admin
             if req.isAuthenticated()
               li
-                a(href='/logout',data-toggle="pill") Logout
+                a(href='/logout') Logout
             else
               li
-                a(href='/login', data-toggle="pill") Login
+                a(href='/login') Login
 
     .container
       #title-space
