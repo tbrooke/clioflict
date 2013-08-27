@@ -37,8 +37,3 @@ exports.signup = function (req, res) {
 };
 
 
-// exports.create = function (req, res) {
-//   var user = new User(req.body)
-//   user.provider = 'local'
-//   user.save();
-//     };
