@@ -7,8 +7,8 @@ exports.admin = function(req, res){
   ClioAccount.in('_id', accountIds).exec(function(err,accounts) {
     res.render('admin', { title: 'Admin', accounts: accounts, req: req });
   });
-  User.in('_id',userIds).exec(function(err,users){
-  	res.render('admin', { users: users, req: req });
+  User.find('_id',userIds).exec(function(err, users){
+  	return res.{ users: users, req: req });
   });
 };
 
