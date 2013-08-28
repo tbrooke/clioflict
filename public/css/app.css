@@ -1,4 +1,4 @@
-/*! clioflict - v0.0.1 - 2013-08-24 */
+/*! clioflict - v0.0.1 - 2013-08-27 */
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,300,600);/*!
  * Cirrus v0.3.0
  *
@@ -31,7 +31,7 @@ nav {
 }
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 20px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 a {
   color: #00b7ff;

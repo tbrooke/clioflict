@@ -23,11 +23,12 @@ block content
       a(class='btn btn-primary',href="/clioAuth") Add an Account
     div#users.tab-pane.fade
       h5 Users
-      a(class='btn btn-primary',href="/signup") Add a User
-        if users.length
+      if req.user.admin.length
+        a(class='btn btn-primary',href="/signup") Add a User
+        if users
           table.table.table-striped
             tr
-              th User  Email
+              th User Email
               th
           each user in users
             tr

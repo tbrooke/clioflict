@@ -3,11 +3,11 @@ var User = require('../models').Users;
 
 exports.admin = function(req, res){
   accountIds = req.user.clioAccountIds;
-  userIds = req.user.userIds;
-  ClioAccount.in('_id', accountIds).exec(function(err,accounts) {
+  var userIds = req.user.userIds;
+  ClioAccount.in('_id', accountIds).exec(function(err,accounts, users) {
   	if (err) return;
   	users = User.find('_id', userIds);
-    res.render('admin', { title: 'Admin', accounts: accounts, users: users, req: req });
+    res.render('admin', { title: 'Admin', {accounts: accounts, users: users} });
   });
 };
 
