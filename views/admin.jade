@@ -25,14 +25,13 @@ block content
       h5 Users
       if req.user.admin.length
         a(class='btn btn-primary',href="/signup") Add a User
-        if users
-          table.table.table-striped
-            tr
-              th User Email
-              th
-          each user in users
-            tr
-              td= user.email
-              td
-                a(href="/remove_user/" + user.id) Remove        
+      table.table.table-striped
+        tr
+          th User Email
+            th
+        each user in users
+          tr
+            td= user.email
+            td
+              a(href="/remove_user/" + user.id) Remove        
     hr
