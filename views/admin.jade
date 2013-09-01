@@ -23,15 +23,15 @@ block content
       a(class='btn btn-primary',href="/clioAuth") Add an Account
     div#users.tab-pane.fade
       h5 Users
-      if req.user.admin.length
+      if req.user.admin
         a(class='btn btn-primary',href="/signup") Add a User
-      table.table.table-striped
-        tr
-          th User Email
-            th
-        each user in users
+        table.table.table-striped
           tr
-            td= user.email
-            td
-              a(href="/remove_user/" + user.id) Remove        
+            th User Email
+              th
+          each user in users
+            tr
+              td= user.email
+              td
+                a(href="/remove_user/" + user.id) Remove
     hr

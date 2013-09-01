@@ -8,6 +8,7 @@ var clio = require('./clio');
 var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
 var ClioAccount = require('../models').ClioAccount;
+var User        = require('../models').User;
 var clioApi     = require('../lib/clio_api');
 
 module.exports = function(app) {
@@ -53,6 +54,12 @@ var query = function(req, res){
 var admin = function(req, res){
   accountIds = req.user.clioAccountIds;
   ClioAccount.find().in('_id', accountIds).exec(function(err,accounts) {
-    res.render('admin', { title: 'Admin', accounts: accounts, req: req });
+    User.find(function(err,users) {
+      res.render('admin', { title: 'Admin', 
+        accounts: accounts,
+        users: users,
+        req: req
+      });
+    });
   });
 };
