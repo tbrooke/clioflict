@@ -21691,14 +21691,25 @@ clioClientSearch.controller('SearchController',
   ]);
 
 
+clioClientSearch.directive('clioloader', 
+  [function() {
+    return {
+      restrict: 'E',
+      replace: true,
+      templateUrl: 'loader.html'
+    };
+  }]
+);
+
+
 angular.module("clioClientSearch").run(["$templateCache", function($templateCache) {
 
-  $templateCache.put("hello.html",
-    "<p>Hello World!</p>\n"
-  );
-
-  $templateCache.put("search_results.html",
-    ""
+  $templateCache.put("loader.html",
+    "<div class=\"facebookG\">\n" +
+    "  <div class=\"blockG_1 facebook_blockG\"></div>\n" +
+    "  <div class=\"blockG_2 facebook_blockG\"></div>\n" +
+    "  <div class=\"blockG_3 facebook_blockG\"></div>\n" +
+    "</div>\n"
   );
 
 }]);
