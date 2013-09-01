@@ -2,8 +2,9 @@ extends layout
 
 block content
   div#admin-area
-    h5 Linked Accounts
-    a(class='btn btn-primary',href="/clioAuth") Add an Account
+    header
+      h5 Linked Accounts
+      a(class='btn btn-primary',href="/clioAuth") Add an Account
     if accounts.length
       table.table.table-striped
         tr

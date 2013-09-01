@@ -4,15 +4,18 @@
  */
 
 var auth = require('./auth');
-var user = require('./user');
 var clio = require('./clio');
 var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
+var streamable = require('../app').streamable;
 
 var ClioAccount = require('../models').ClioAccount;
+var clioApi     = require('../lib/clio_api');
 
 module.exports = function(app) {
-	app.get('/', index);
-	app.get('/query', ensureLoggedIn('/login'), query);
+	app.get('/', ensureLoggedIn('/login'), index);
+  app.get('/accounts', ensureLoggedIn('/login'), accounts);
+	app.get('/query', [ensureLoggedIn('/login'), streamable, query]);
+  app.get('/query/:account_id', [ensureLoggedIn('/login'), streamable, accountQuery]);
 	app.get('/admin', ensureLoggedIn('/login'), admin);
 	app.get('/login', auth.loginForm);
 	app.post('/login', auth.login);
@@ -24,12 +27,61 @@ module.exports = function(app) {
           clio.removeAccount);
 };
 
-var index = function(req, res){
+var index = function(req, res) {
   res.render('index', { title: 'Clio Conflict Checker', req: req });
 };
 
+var accounts = function(req, res) {
+  ClioAccount.find().
+    where('_id').in(req.user.clioAccountIds).
+    exec(function(err,accounts) {
+      if (err) { console.log(err); }
+      var accountsToSend = [];
+      accounts.forEach(function(account) {
+        accountsToSend.push({
+          id: account['_id'],
+          name: account.name
+        });
+      });
+
+      res.send({accounts: accountsToSend});
+    });
+};
+
 var query = function(req, res){
-  res.render('query', { title: 'New Query', req: req });
+  var query = req.query.searchTerm;
+  var totalAccounts, totalCompletedRequests = 0;
+
+  ClioAccount.find().
+              where('_id').in(req.user.clioAccountIds).
+              exec(function(err,accounts) {
+                accounts.forEach(function(account) {
+                  searchForClients(account, query);
+                });
+              });
+
+  function searchForClients(account, query) {
+    var options = {qs: {query: query}, headers: {ContentType: 'application/json'}};
+    var request = clioApi.get(account.accessToken, '/contacts', options, function(err, response) {
+      totalCompletedRequests++;
+      toSend = {account: account, results: response.body};
+      res.write(JSON.stringify(toSend));
+      if (totalCompletedRequests === totalAccounts) res.end();
+    });
+  };
+};
+
+var accountQuery = function(req, res){
+  var accountId = req.params.account_id;
+  var query = req.query.searchTerm;
+
+  ClioAccount.findById(accountId).exec(function(err,account) {
+    var options = {qs: {query: query}, headers: {ContentType: 'application/json'}};
+    var request = clioApi.get(account.accessToken, '/contacts', options, function(err, response) {
+      toSend = {account: account, results: response.body};
+      res.send(toSend);
+    });
+  });
 };
 
 var admin = function(req, res){

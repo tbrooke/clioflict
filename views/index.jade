@@ -1,3 +1,20 @@
 extends layout
 
 block content
+  .app(ng-app='clioClientSearch')
+    //div(ng-include="'hello.html'")
+    .search(ng-controller='SearchController')
+      form.form-inline
+        input.form-control(type='text', ng-model='searchTerm', placeholder='Search for Clients')
+        input.btn.btn-default(type='submit', ng-click='search()') Search
+      .search-results(ng-if='hasSearched')
+        .search-account.col-md-5(ng-repeat="account in vm.accounts")
+          h4 {{account.name}}
+          div(ng-switch="account.isLoading")
+            .facebookG(ng-switch-when="true")
+              .blockG_1.facebook_blockG
+              .blockG_2.facebook_blockG
+              .blockG_3.facebook_blockG
+            ul.account-contacts.list-unstyled(ng-switch-when="false")
+              li.account-contact(ng-repeat="contact in account.contacts")
+                p {{contact.name}}
