@@ -10,19 +10,20 @@ var clioAccountSchema = mongoose.Schema({
 
 clioAccountSchema.static('setupAccount', function(accessToken, user, callback) {
   var parsedClio;
-  clioApi.get(accessToken, '/users/who_am_i', handleApiResponse);
+  clioApi.get(accessToken, '/users/who_am_i', {}, handleApiResponse);
 
   function handleApiResponse(err, response, body) {
     parsedClio = JSON.parse(body);
-    return ClioAccount.findOne({clioId: parsedClio.account.id}, handleExistingAccount);
+    return ClioAccount.findOne({clioId: parsedClio.account.id}, handleAccount);
   };
 
-  function handleExistingAccount(err, clioAccount) {
+  function handleAccount(err, clioAccount) {
     if (err) {
       console.log("error: " + err);
     } else if (!clioAccount) {
       clioAccount = new ClioAccount({clioId: parsedClio.account.id});
     }
+
     clioAccount.accessToken = accessToken;
     clioAccount.name = parsedClio.account.name;
     return clioAccount.save(handleAccountSave);

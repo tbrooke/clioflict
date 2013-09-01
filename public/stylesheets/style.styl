@@ -1,13 +1,31 @@
-#logo
-  float: left
+@import 'nib'
+
 #title-space
-  text-align: center
-nav
-  margin-top: 150px
-  font-size: 25px
-  margin-left: 350px
+  //text-align: center
+  margin: 35px 0 35px
 body
   padding: 50px
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
-a
-  color: #00B7FF
+  //font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+
+.search
+  input[type='text']
+    width: 50%
+    margin-right: 20px
+  .search-results
+    margin-top: 35px
+    .search-account
+      h4
+        border-bottom: 2px solid #ccc
+
+      margin-right: 10px
+      border: 3px solid #eee
+      border-radius: 5px
+      height: 250px
+      overflow-y: scroll
+
+#admin-area
+  header  
+    margin-bottom: 20px
+    h4
+      display: inline
+      margin-right: 30px
