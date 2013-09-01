@@ -25,6 +25,7 @@ block content
       h5 Users
       if req.user.admin
         a(class='btn btn-primary',href="/signup") Add a User
+      if users.length
         table.table.table-striped
           tr
             th User Email
