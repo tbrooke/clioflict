@@ -21734,11 +21734,17 @@ clioClientSearch.directive('personsummary',
 angular.module("clioClientSearch").run(["$templateCache", function($templateCache) {
 
   $templateCache.put("company_summary.html",
-    "<p>Company: {{company.name}}</p>"
+    "<div class=\"summary company-summary\">\n" +
+    "  <div class=\"glyphicon glyphicon-home\"></div>\n" +
+    "  <div class=\"details\">\n" +
+    "    <p>{{company.name}}</p>\n" +
+    "  </div>\n" +
+    "  <div class=\"clearfix\"></div>\n" +
+    "</div>\n"
   );
 
   $templateCache.put("loader.html",
-    "<div class=\"facebookG\">\n" +
+    "<div class=\"loader facebookG\">\n" +
     "  <div class=\"blockG_1 facebook_blockG\"></div>\n" +
     "  <div class=\"blockG_2 facebook_blockG\"></div>\n" +
     "  <div class=\"blockG_3 facebook_blockG\"></div>\n" +
@@ -21746,7 +21752,13 @@ angular.module("clioClientSearch").run(["$templateCache", function($templateCach
   );
 
   $templateCache.put("person_summary.html",
-    "<p>Person: {{person.name}}</p>"
+    "<div class=\"summary person-summary\">\n" +
+    "  <span class=\"glyphicon glyphicon-user\"></span>\n" +
+    "  <div class=\"details\">\n" +
+    "    <p>{{person.name}}</p>\n" +
+    "  </div>\n" +
+    "  <div class=\"clearfix\"></div>\n" +
+    "</div>\n"
   );
 
 }]);
