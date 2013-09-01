@@ -11,7 +11,10 @@ clioClientSearch.controller('SearchController',
 
         Streamable.get('/query', data, {
           onData: onDataHandler,
-          onError: function(err) { console.log(err); }
+          onError: function(err) {
+            // assume error happened b/c user is required to reauthenticate
+            window.location = '/login';
+          }
         });
 
         function onDataHandler(data) {

@@ -14,7 +14,8 @@ var mongoose = require('mongoose');
 var SessionStore = require("session-mongoose")(express);
 var store = new SessionStore({
     connection: mongoose.connection,
-    interval: 120000 // expiration check worker run interval in millisec (default: 60000)
+    //interval: 120000 // expiration check worker run interval in millisec (default: 60000)
+    sweeper: false
 });
 
 
