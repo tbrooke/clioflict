@@ -37,6 +37,7 @@ clioClientSearch.controller('SearchController',
             $scope.$apply(function () {
               $.extend(account, data.account);
               account.contacts = results.contacts;
+              console.log(results.contacts);
               account.isLoading = false;
             });
           },

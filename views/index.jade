@@ -14,4 +14,5 @@ block content
             clioloader(ng-switch-when="true")
             ul.account-contacts.list-unstyled(ng-switch-when="false")
               li.account-contact(ng-repeat="contact in account.contacts")
-                p {{contact.name}}
+                personsummary(ng-if='contact.type=="Person"', person='contact')
+                companysummary(ng-if='contact.type=="Company"', company='contact')

@@ -21678,6 +21678,7 @@ clioClientSearch.controller('SearchController',
             $scope.$apply(function () {
               $.extend(account, data.account);
               account.contacts = results.contacts;
+              console.log(results.contacts);
               account.isLoading = false;
             });
           },
@@ -21702,7 +21703,39 @@ clioClientSearch.directive('clioloader',
 );
 
 
+clioClientSearch.directive('companysummary', 
+  [function() {
+    return {
+      restrict: 'E',
+      replace: true,
+      templateUrl: 'company_summary.html',
+      scope: {
+        company: '='
+      }
+    };
+  }]
+);
+
+
+clioClientSearch.directive('personsummary', 
+  [function() {
+    return {
+      restrict: 'E',
+      replace: true,
+      templateUrl: 'person_summary.html',
+      scope: {
+        person: '='
+      }
+    };
+  }]
+);
+
+
 angular.module("clioClientSearch").run(["$templateCache", function($templateCache) {
+
+  $templateCache.put("company_summary.html",
+    "<p>Company: {{company.name}}</p>"
+  );
 
   $templateCache.put("loader.html",
     "<div class=\"facebookG\">\n" +
@@ -21710,6 +21743,10 @@ angular.module("clioClientSearch").run(["$templateCache", function($templateCach
     "  <div class=\"blockG_2 facebook_blockG\"></div>\n" +
     "  <div class=\"blockG_3 facebook_blockG\"></div>\n" +
     "</div>\n"
+  );
+
+  $templateCache.put("person_summary.html",
+    "<p>Person: {{person.name}}</p>"
   );
 
 }]);
