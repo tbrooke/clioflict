@@ -1,4 +1,4 @@
-/*! clioflict - v0.0.1 - 2013-08-25 */
+/*! clioflict - v0.0.1 - 2013-09-01 */
 /*! jQuery v2.0.3 | (c) 2005, 2013 jQuery Foundation, Inc. | jquery.org/license
 //@ sourceMappingURL=jquery.min.map
 */
@@ -21631,7 +21631,7 @@ angular.module('ngCookies', ['ng']).
 })(window, window.angular);
 
 
-/*! clioflict - v0.0.1 - 2013-08-25 */
+/*! clioflict - v0.0.1 - 2013-09-01 */
 var clioClientSearch = angular.module('clioClientSearch', []);
 
 
@@ -21644,55 +21644,43 @@ clioClientSearch.controller('SearchController',
     function($scope, searchDB) {
       $scope.vm = {};
       $scope.vm.accounts = [];
+      $scope.hasSearched = false;
 
-      $scope.search = function() {
-        var data = {params: {searchTerm: $scope.searchTerm}};
-        //searchDB = {};
-        $scope.vm.accounts = [];
 
-        Streamable.get('/query', data, {
-          onData: onDataHandler,
-          onError: function(err) {
-            // assume error happened b/c user is required to reauthenticate
-            window.location = '/login';
-          }
-        });
-
-        function onDataHandler(data) {
-          if (data.accounts) {
-            return accountsHandler(data);
-          } else {
-            return accountHandler(data);
-          }
-        }
-
-        function accountsHandler(data) {
+      $.get('/accounts', function(data) {
           var accounts = data.accounts;
-          $.each(accounts, function(i, account) {
-            account.isLoading = true;
-          });
 
           $scope.$apply(function() {
             $scope.vm.accounts = accounts;
           });
-        }
+        });
 
-        function accountHandler(data) {
-          var account = data.account;
-          var results = JSON.parse(data.results);
-          account.contacts = results.contacts;
-          $scope.$apply(function () {
-            var found = false;
-            $.each($scope.vm.accounts, function(i, acc) {
-              if (acc['_id'] === account['_id']) {
-                found = true;
-                acc.contacts = account.contacts;
-                acc.isLoading = false;
-              }
-            });
-            if (found === false) { $scope.vm.accounts.push(account); }
+      $scope.search = function() {
+        $scope.hasSearched = true;
+        var data = {params: {searchTerm: $scope.searchTerm}};
+        //searchDB = {};
+
+        $.each($scope.vm.accounts, function(i, account) {
+          account.isLoading = true;
+        });
+
+        $.each($scope.vm.accounts, function(i, account) {
+          Streamable.get('/query/' + account.id, data, {
+            onData: function(data) {
+              var results = JSON.parse(data.results);
+              $scope.$apply(function () {
+                $.extend(account, data.account);
+                account.contacts = results.contacts;
+                account.isLoading = false;
+              });
+            },
+            onError: function(err) {
+              // assume error happened b/c user is required to reauthenticate
+              window.location = '/login';
+            }
           });
-        }
+        });
+
       };
     }
   ]);

@@ -13,7 +13,9 @@ var clioApi     = require('../lib/clio_api');
 
 module.exports = function(app) {
 	app.get('/', ensureLoggedIn('/login'), index);
+  app.get('/accounts', ensureLoggedIn('/login'), accounts);
 	app.get('/query', [ensureLoggedIn('/login'), streamable, query]);
+  app.get('/query/:account_id', [ensureLoggedIn('/login'), streamable, accountQuery]);
 	app.get('/admin', ensureLoggedIn('/login'), admin);
 	app.get('/login', auth.loginForm);
 	app.post('/login', auth.login);
@@ -25,8 +27,25 @@ module.exports = function(app) {
           clio.removeAccount);
 };
 
-var index = function(req, res){
+var index = function(req, res) {
   res.render('index', { title: 'Clio Conflict Checker', req: req });
+};
+
+var accounts = function(req, res) {
+  ClioAccount.find().
+    where('_id').in(req.user.clioAccountIds).
+    exec(function(err,accounts) {
+      if (err) { console.log(err); }
+      var accountsToSend = [];
+      accounts.forEach(function(account) {
+        accountsToSend.push({
+          id: account['_id'],
+          name: account.name
+        });
+      });
+
+      res.send({accounts: accountsToSend});
+    });
 };
 
 var query = function(req, res){
@@ -52,6 +71,19 @@ var query = function(req, res){
       if (totalCompletedRequests === totalAccounts) res.end();
     });
   };
+};
+
+var accountQuery = function(req, res){
+  var accountId = req.params.account_id;
+  var query = req.query.searchTerm;
+
+  ClioAccount.findById(accountId).exec(function(err,account) {
+    var options = {qs: {query: query}, headers: {ContentType: 'application/json'}};
+    var request = clioApi.get(account.accessToken, '/contacts', options, function(err, response) {
+      toSend = {account: account, results: response.body};
+      res.send(toSend);
+    });
+  });
 };
 
 var admin = function(req, res){

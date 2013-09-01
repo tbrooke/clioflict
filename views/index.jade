@@ -7,7 +7,7 @@ block content
       form.form-inline
         input.form-control(type='text', ng-model='searchTerm', placeholder='Search for Clients')
         input.btn.btn-default(type='submit', ng-click='search()') Search
-      .search-results
+      .search-results(ng-if='hasSearched')
         .search-account.col-md-5(ng-repeat="account in vm.accounts")
           h4 {{account.name}}
           div(ng-switch="account.isLoading")
