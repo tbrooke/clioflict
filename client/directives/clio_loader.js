@@ -1,10 +1,9 @@
 clioClientSearch.directive('clioloader', 
-  ['$templateCache', function($templateCache) {
-    console.log($templateCache.get('loader.html'));
+  [function() {
     return {
       restrict: 'E',
       replace: true,
-      template: $templateCache.get('loader.html')
+      templateUrl: 'loader.html'
     };
   }]
 );
