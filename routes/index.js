@@ -55,8 +55,6 @@ var query = function(req, res){
   ClioAccount.find().
               where('_id').in(req.user.clioAccountIds).
               exec(function(err,accounts) {
-                res.write(JSON.stringify({accounts: accounts}));
-
                 accounts.forEach(function(account) {
                   searchForClients(account, query);
                 });
