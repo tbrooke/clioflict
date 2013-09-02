@@ -1,5 +1,12 @@
 @import 'nib'
 
+person-color = #ffdddd
+person-color-dark = #ffbbbb
+
+company-color = #ddddff
+company-color-dark = #bbbbff
+
+
 #title-space
   //text-align: center
   margin: 35px 0 35px
@@ -30,12 +37,15 @@ search-box-padding()
 
       .results
         max-height: 230px
+        overflow-y: scroll
+
+      ul
+        margin: 0
 
       margin-right: 10px
       margin-bottom: 5px
       border: 3px solid #eee
       border-radius: 5px
-      overflow-y: scroll
       padding: 0
 
 #admin-area
@@ -61,7 +71,12 @@ search-box-padding()
     margin: 0
 
 .person-summary
-  background-color: #ffdddd
+  background-color: person-color
+  &:hover
+    background-color: person-color-dark
+
 
 .company-summary
-  background-color: #ddddff
+  background-color: company-color
+  &:hover
+    background-color: company-color-dark
