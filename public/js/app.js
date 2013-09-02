@@ -21729,55 +21729,34 @@ clioClientSearch.directive('clioloader',
 );
 
 
-clioClientSearch.directive('companydetails', 
+clioClientSearch.directive('contactdetails', 
   [function() {
     return {
       restrict: 'E',
       replace: true,
-      templateUrl: 'company_details.html',
+      templateUrl: 'contact_details.html',
       scope: {
-        company: '='
+        contact: '='
+      },
+      link: function(scope, element, attrs) {
+        scope.contactTypeClass = scope.contact.type.toLowerCase() + '-details';
       }
     };
   }]
 );
 
-
-clioClientSearch.directive('companysummary', 
+clioClientSearch.directive('contactsummary', 
   [function() {
     return {
       restrict: 'E',
       replace: true,
-      templateUrl: 'company_summary.html',
+      templateUrl: 'contact_summary.html',
       scope: {
-        company: '='
-      }
-    };
-  }]
-);
-
-
-clioClientSearch.directive('persondetails', 
-  [function() {
-    return {
-      restrict: 'E',
-      replace: true,
-      templateUrl: 'person_details.html',
-      scope: {
-        person: '='
-      }
-    };
-  }]
-);
-
-clioClientSearch.directive('personsummary', 
-  [function() {
-    return {
-      restrict: 'E',
-      replace: true,
-      templateUrl: 'person_summary.html',
-      scope: {
-        person: '='
+        contact: '='
+      },
+      link: function(scope, element, attrs) {
+        scope.contactTypeClass = 'summary ' + 
+                                 scope.contact.type.toLowerCase() + '-summary';
       }
     };
   }]
@@ -21790,21 +21769,21 @@ angular.module("clioClientSearch").run(["$templateCache", function($templateCach
     ""
   );
 
-  $templateCache.put("company_details.html",
-    "<div class=\"company-details\">\n" +
+  $templateCache.put("contact_details.html",
+    "<div ng-class=\"contactTypeClass\">\n" +
     "  <header>\n" +
-    "    <h5 class=\"name\">{{company.name}}</h5>\n" +
-    "    <h6 class=\"account\">{{company.accountName}}</h6>\n" +
+    "    <h5 class=\"name\">{{contact.name}}</h5>\n" +
+    "    <h6 class=\"account\">{{contact.accountName}}</h6>\n" +
     "    <div class=\"clearfix\"></div>\n" +
     "  </header>\n" +
     "</div>"
   );
 
-  $templateCache.put("company_summary.html",
-    "<div class=\"summary company-summary\">\n" +
+  $templateCache.put("contact_summary.html",
+    "<div ng-class=\"contactTypeClass\">\n" +
     "  <div class=\"glyphicon glyphicon-home\"></div>\n" +
     "  <div class=\"details\">\n" +
-    "    <p>{{company.name}}</p>\n" +
+    "    <p>{{contact.name}}</p>\n" +
     "  </div>\n" +
     "  <div class=\"clearfix\"></div>\n" +
     "</div>\n"
@@ -21819,26 +21798,6 @@ angular.module("clioClientSearch").run(["$templateCache", function($templateCach
     "  <div class=\"blockG_1 facebook_blockG\"></div>\n" +
     "  <div class=\"blockG_2 facebook_blockG\"></div>\n" +
     "  <div class=\"blockG_3 facebook_blockG\"></div>\n" +
-    "</div>\n"
-  );
-
-  $templateCache.put("person_details.html",
-    "<div class=\"person-details\">\n" +
-    "  <header>\n" +
-    "    <h5 class=\"name\">{{person.name}}</h5>\n" +
-    "    <h6 class=\"account\">{{person.accountName}}</h6>\n" +
-    "    <div class=\"clearfix\"></div>\n" +
-    "  </header>\n" +
-    "</div>"
-  );
-
-  $templateCache.put("person_summary.html",
-    "<div class=\"summary person-summary\">\n" +
-    "  <span class=\"glyphicon glyphicon-user\"></span>\n" +
-    "  <div class=\"details\">\n" +
-    "    <p>{{person.name}}</p>\n" +
-    "  </div>\n" +
-    "  <div class=\"clearfix\"></div>\n" +
     "</div>\n"
   );
 

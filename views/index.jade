@@ -16,8 +16,7 @@ block content
             clioloader(ng-switch-when="true")
             ul.account-contacts.list-unstyled(ng-switch-when="false")
               li.account-contact(ng-repeat="contact in account.contacts", ng-click='toggleContact(contact, account.name)')
-                personsummary(ng-if='contact.type=="Person"', person='contact')
-                companysummary(ng-if='contact.type=="Company"', company='contact')
+                contactsummary(contact='contact')
 
       .contact-details.col-md-6(ng-if='hasSearched')
         h3 Selected Contact Details
@@ -25,5 +24,4 @@ block content
           | Click on a contact from the search results to see their details
         ul(ng-if='vm.selectedContacts.length')
           li.selected-contact(ng-repeat='contact in vm.selectedContacts')
-            persondetails(ng-if='contact.type=="Person"', person='contact')
-            persondetails(ng-if='contact.type=="Company"', company='contact')
+            contactdetails(contact='contact')
