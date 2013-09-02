@@ -5,10 +5,19 @@ clioClientSearch.directive('contactdetails',
       replace: true,
       templateUrl: 'contact_details.html',
       scope: {
-        contact: '='
+        contact: '=',
+        removeContact: '&'
       },
       link: function(scope, element, attrs) {
         scope.contactTypeClass = scope.contact.type.toLowerCase() + '-details';
+
+        scope.showHideContact = function(contact) {
+          if (contact.isCollapsed) {
+            contact.isCollapsed = false;
+          } else {
+            contact.isCollapsed = true;
+          }
+        };
       }
     };
   }]
