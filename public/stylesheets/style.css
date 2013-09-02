@@ -13,21 +13,28 @@ body{padding:50px}
 .summary .glyphicon{float:left;margin-right:10px}
 .summary .details{float:left}
 .summary p{margin:0}
-.person-summary{background-color:#fdd;}
-.person-summary:hover{background-color:#fbb}
-.person-summary.selected{background-color:#fbb}
-.company-summary{background-color:#ddf;}
-.company-summary:hover{background-color:#bbf}
-.company-summary.selected{background-color:#bbf}
+.person-summary{color:#634523;background-color:#ccb69f;}
+.person-summary:hover{background-color:#726659}
+.person-summary.selected{background-color:#726659}
+.company-summary{color:#16323e;background-color:#8aa4b0;}
+.company-summary:hover{background-color:#394348}
+.company-summary.selected{background-color:#394348}
 .contact-details ul{list-style-type:none;padding:0;}
 .contact-details ul li{padding:0;margin:0}
-.person-details{padding:0;border:2px solid #ccc;background-color:#fdd;}
-.person-details header{width:100%;margin:0;padding:5px;}
+.person-details{padding:0;border:2px solid #ccc;}
+.person-details article{padding:5px}
+.person-details header{width:100%;margin:0;padding:10px 5px;}
 .person-details header h5.name{float:left;margin:0;padding:0}
 .person-details header h6.account{float:right;margin:0;padding:0}
-.person-details header{background-color:#fbb}
-.company-details{padding:0;border:2px solid #ccc;background-color:#ddf;}
-.company-details header{width:100%;margin:0;padding:5px;}
+.person-details header span.glyphicon{float:right;padding-left:5px}
+.person-details header{background-color:#ccb69f;color:#634523}
+.company-details{padding:0;border:2px solid #ccc;}
+.company-details article{padding:5px}
+.company-details header{width:100%;margin:0;padding:10px 5px;}
 .company-details header h5.name{float:left;margin:0;padding:0}
 .company-details header h6.account{float:right;margin:0;padding:0}
-.company-details header{background-color:#bbf}
+.company-details header span.glyphicon{float:right;padding-left:5px}
+.company-details header{background-color:#8aa4b0;color:#16323e}
+.table-bordered{border:1px solid #ccc;}
+.table-bordered thead > tr > th{font-size:11px;border:1px solid #ccc}
+.table-bordered tbody > tr > td{border:1px solid #ccc}

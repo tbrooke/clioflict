@@ -1,7 +1,64 @@
 <div ng-class="contactTypeClass">
   <header>
     <h5 class="name">{{contact.name}}</h5>
+    <span class="glyphicon glyphicon-minus-sign" ng-click='removeContact(contact)'>
+    </span>
     <h6 class="account">{{contact.accountName}}</h6>
     <div class="clearfix"></div>
   </header>
+  <article>
+    <div class="email-addresses" ng-if='contact.email_addresses.length'>
+      <h6>Email Addresses:</h6>
+      <table class="table table-bordered">
+        <thead><tr>
+          <th>Type</th>
+          <th>Address</th>
+        </tr></thead>
+        <tbody>
+          <tr ng-repeat='email in contact.email_addresses'>
+            <td>{{email.name}}</td>
+            <td>{{email.address}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="phone-numbers" ng-if='contact.phone_numbers.length'>
+      <h6>Phone Numbers:</h6>
+      <table class="table table-bordered">
+        <thead><tr>
+          <th>Type</th>
+          <th>Number</th>
+        </tr></thead>
+        <tbody>
+          <tr ng-repeat='phone in contact.phone_numbers'>
+            <td>{{phone.name}}</td>
+            <td>{{phone.number}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="addresses" ng-if='contact.addresses.length'>
+      <h6>Addresses:</h6>
+      <table class="table table-bordered">
+        <thead><tr>
+          <th>Type</th>
+          <th>City</th>
+          <th>Country</th>
+          <th>Postal Code</th>
+          <th>Street</th>
+          <th>Province</th>
+        </tr></thead>
+        <tbody>
+          <tr ng-repeat='address in contact.addresses'>
+            <td>{{address.name}}</td>
+            <td>{{address.city}}</td>
+            <td>{{address.country}}</td>
+            <td>{{address.postal_code}}</td>
+            <td>{{address.street}}</td>
+            <td>{{address.province}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
 </div>

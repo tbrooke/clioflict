@@ -1,12 +1,15 @@
 @import 'nib'
 
-person-color = #ffdddd
-person-color-dark = #ffbbbb
+person-color = #CCB69F
+person-color-dark = #726659
+person-font-color = #634523
 
-company-color = #ddddff
-company-color-dark = #bbbbff
+company-color = #8AA4B0
+company-color-dark = #394348
+company-font-color = #16323E
 
-border-style = 2px solid #ccc
+border-color = #ccc
+border-style = 2px solid border-color
 
 #title-space
   margin: 35px 0 35px
@@ -70,6 +73,7 @@ search-box-padding()
     margin: 0
 
 .person-summary
+  color: person-font-color
   background-color: person-color
   &:hover
     background-color: person-color-dark
@@ -78,6 +82,7 @@ search-box-padding()
 
 
 .company-summary
+  color: company-font-color
   background-color: company-color
   &:hover
     background-color: company-color-dark
@@ -95,10 +100,12 @@ search-box-padding()
 details()
   padding: 0
   border: border-style
+  article
+    padding: 5px
   header
     width: 100%
     margin: 0
-    padding: 5px
+    padding: 10px 5px
     h5.name
       float: left
       margin: 0
@@ -107,15 +114,26 @@ details()
       float: right
       margin: 0
       padding: 0
+    span.glyphicon
+      float: right
+      padding-left: 5px
 
 .person-details
   details()
-  background-color: person-color
   header
-    background-color: person-color-dark
+    background-color: person-color
+    color: person-font-color
 
 .company-details
   details()
-  background-color: company-color
   header
-    background-color: company-color-dark
+    background-color: company-color
+    color: company-font-color
+
+.table-bordered
+  border: 1px solid border-color
+  thead > tr > th
+    font-size: 11px
+    border: 1px solid border-color
+  tbody > tr > td
+    border: 1px solid border-color

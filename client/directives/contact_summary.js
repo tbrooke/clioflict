@@ -10,6 +10,13 @@ clioClientSearch.directive('contactsummary',
       link: function(scope, element, attrs) {
         scope.contactTypeClass = 'summary ' + 
                                  scope.contact.type.toLowerCase() + '-summary';
+
+        scope.glyphsClass = 'glyphicon ';
+        if (scope.contact.type === 'Person') {
+          scope.glyphsClass += 'glyphicon-user';
+        } else {
+          scope.glyphsClass += 'glyphicon-home';
+        }
       }
     };
   }]

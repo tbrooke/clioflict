@@ -21757,6 +21757,13 @@ clioClientSearch.directive('contactsummary',
       link: function(scope, element, attrs) {
         scope.contactTypeClass = 'summary ' + 
                                  scope.contact.type.toLowerCase() + '-summary';
+
+        scope.glyphsClass = 'glyphicon ';
+        if (scope.contact.type === 'Person') {
+          scope.glyphsClass += 'glyphicon-user';
+        } else {
+          scope.glyphsClass += 'glyphicon-home';
+        }
       }
     };
   }]
@@ -21773,15 +21780,72 @@ angular.module("clioClientSearch").run(["$templateCache", function($templateCach
     "<div ng-class=\"contactTypeClass\">\n" +
     "  <header>\n" +
     "    <h5 class=\"name\">{{contact.name}}</h5>\n" +
+    "    <span class=\"glyphicon glyphicon-minus-sign\" ng-click='removeContact(contact)'>\n" +
+    "    </span>\n" +
     "    <h6 class=\"account\">{{contact.accountName}}</h6>\n" +
     "    <div class=\"clearfix\"></div>\n" +
     "  </header>\n" +
+    "  <article>\n" +
+    "    <div class=\"email-addresses\" ng-if='contact.email_addresses.length'>\n" +
+    "      <h6>Email Addresses:</h6>\n" +
+    "      <table class=\"table table-bordered\">\n" +
+    "        <thead><tr>\n" +
+    "          <th>Type</th>\n" +
+    "          <th>Address</th>\n" +
+    "        </tr></thead>\n" +
+    "        <tbody>\n" +
+    "          <tr ng-repeat='email in contact.email_addresses'>\n" +
+    "            <td>{{email.name}}</td>\n" +
+    "            <td>{{email.address}}</td>\n" +
+    "          </tr>\n" +
+    "        </tbody>\n" +
+    "      </table>\n" +
+    "    </div>\n" +
+    "    <div class=\"phone-numbers\" ng-if='contact.phone_numbers.length'>\n" +
+    "      <h6>Phone Numbers:</h6>\n" +
+    "      <table class=\"table table-bordered\">\n" +
+    "        <thead><tr>\n" +
+    "          <th>Type</th>\n" +
+    "          <th>Number</th>\n" +
+    "        </tr></thead>\n" +
+    "        <tbody>\n" +
+    "          <tr ng-repeat='phone in contact.phone_numbers'>\n" +
+    "            <td>{{phone.name}}</td>\n" +
+    "            <td>{{phone.number}}</td>\n" +
+    "          </tr>\n" +
+    "        </tbody>\n" +
+    "      </table>\n" +
+    "    </div>\n" +
+    "    <div class=\"addresses\" ng-if='contact.addresses.length'>\n" +
+    "      <h6>Addresses:</h6>\n" +
+    "      <table class=\"table table-bordered\">\n" +
+    "        <thead><tr>\n" +
+    "          <th>Type</th>\n" +
+    "          <th>City</th>\n" +
+    "          <th>Country</th>\n" +
+    "          <th>Postal Code</th>\n" +
+    "          <th>Street</th>\n" +
+    "          <th>Province</th>\n" +
+    "        </tr></thead>\n" +
+    "        <tbody>\n" +
+    "          <tr ng-repeat='address in contact.addresses'>\n" +
+    "            <td>{{address.name}}</td>\n" +
+    "            <td>{{address.city}}</td>\n" +
+    "            <td>{{address.country}}</td>\n" +
+    "            <td>{{address.postal_code}}</td>\n" +
+    "            <td>{{address.street}}</td>\n" +
+    "            <td>{{address.province}}</td>\n" +
+    "          </tr>\n" +
+    "        </tbody>\n" +
+    "      </table>\n" +
+    "    </div>\n" +
+    "  </article>\n" +
     "</div>"
   );
 
   $templateCache.put("contact_summary.html",
     "<div ng-class=\"contactTypeClass\">\n" +
-    "  <div class=\"glyphicon glyphicon-home\"></div>\n" +
+    "  <div ng-class='glyphsClass'></div>\n" +
     "  <div class=\"details\">\n" +
     "    <p>{{contact.name}}</p>\n" +
     "  </div>\n" +
