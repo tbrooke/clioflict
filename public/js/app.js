@@ -21452,10 +21452,10 @@ angular.module('ngResource', ['ng']).
 (function(window, angular, undefined) {
 'use strict';
 
-/**
+*
  * @ngdoc overview
  * @name ngCookies
- */
+ 
 
 
 angular.module('ngCookies', ['ng']).
@@ -21786,6 +21786,22 @@ angular.module("clioClientSearch").run(["$templateCache", function($templateCach
     "    <div class=\"clearfix\"></div>\n" +
     "  </header>\n" +
     "  <article>\n" +
+    "   <div class=\"email-addresses\" ng-if='contact.email_addresses.length'>\n" +
+    "      <h6>Date of Birth:</h6>\n" +
+    "      <table class=\"table table-bordered\">\n" +
+    "        <thead><tr>\n" +
+    "          <th>Type</th>\n" +
+    "          <th>Address</th>\n" +
+    "        </tr></thead>\n" +
+    "        <tbody>\n" +
+    "          <tr ng-repeat='email in contact.email_addresses'>\n" +
+    "            <td>{{email.name}}</td>\n" +
+    "            <td>{{email.address}}</td>\n" +
+    "          </tr>\n" +
+    "        </tbody>\n" +
+    "      </table>\n" +
+    "    </div>\n" +
+    "    \n" +
     "    <div class=\"email-addresses\" ng-if='contact.email_addresses.length'>\n" +
     "      <h6>Email Addresses:</h6>\n" +
     "      <table class=\"table table-bordered\">\n" +
