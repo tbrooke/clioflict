@@ -21655,6 +21655,14 @@ clioClientSearch.controller('SearchController',
           });
         });
 
+      $scope.toggle = function(account) {
+        if (account.isCollapsed) {
+          account.isCollapsed = false;
+        } else {
+          account.isCollapsed = true;
+        }
+      };
+
       $scope.search = function() {
         $scope.hasSearched = true;
         var searchData = {params: {searchTerm: $scope.searchTerm}};
@@ -21662,6 +21670,7 @@ clioClientSearch.controller('SearchController',
 
         $.each($scope.vm.accounts, function(i, account) {
           account.isLoading = true;
+          account.contacts = [];
         });
 
         Streamable.get('/query', searchData, {
