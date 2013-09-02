@@ -6,7 +6,8 @@
     "angular-1.1.6": "*",
     "bootstrap-theme-cirrus": "*",
     "socket.io-client": "~0.9.16",
-    "streamable": "*"
+    "streamable": "*",
+    "underscore": "~1.5.1"
   },
   "private": true,
   "resolutions": {

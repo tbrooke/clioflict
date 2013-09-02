@@ -3,6 +3,7 @@ clioClientSearch.controller('SearchController',
     function($scope, searchDB) {
       $scope.vm = {};
       $scope.vm.accounts = [];
+      $scope.vm.selectedContacts = [];
       $scope.hasSearched = false;
 
 
@@ -14,11 +15,26 @@ clioClientSearch.controller('SearchController',
           });
         });
 
-      $scope.toggle = function(account) {
+      $scope.toggleAccount = function(account) {
         if (account.isCollapsed) {
           account.isCollapsed = false;
         } else {
           account.isCollapsed = true;
+        }
+      };
+
+      $scope.toggleContact = function(contact) {
+        var foundIndex;
+        $.each($scope.vm.selectedContacts, function(i, selectedContact) {
+          if (selectedContact.id === contact.id) {
+            foundIndex = i;
+          }
+        });
+
+        if (foundIndex) {
+          $scope.vm.selectedContacts.splice(foundIndex, 1);
+        } else {
+          $scope.vm.selectedContacts.push(contact);
         }
       };
 
