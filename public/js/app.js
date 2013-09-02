@@ -21729,55 +21729,41 @@ clioClientSearch.directive('clioloader',
 );
 
 
-clioClientSearch.directive('companydetails', 
+clioClientSearch.directive('contactdetails', 
   [function() {
     return {
       restrict: 'E',
       replace: true,
-      templateUrl: 'company_details.html',
+      templateUrl: 'contact_details.html',
       scope: {
-        company: '='
+        contact: '='
+      },
+      link: function(scope, element, attrs) {
+        scope.contactTypeClass = scope.contact.type.toLowerCase() + '-details';
       }
     };
   }]
 );
 
-
-clioClientSearch.directive('companysummary', 
+clioClientSearch.directive('contactsummary', 
   [function() {
     return {
       restrict: 'E',
       replace: true,
-      templateUrl: 'company_summary.html',
+      templateUrl: 'contact_summary.html',
       scope: {
-        company: '='
-      }
-    };
-  }]
-);
+        contact: '='
+      },
+      link: function(scope, element, attrs) {
+        scope.contactTypeClass = 'summary ' + 
+                                 scope.contact.type.toLowerCase() + '-summary';
 
-
-clioClientSearch.directive('persondetails', 
-  [function() {
-    return {
-      restrict: 'E',
-      replace: true,
-      templateUrl: 'person_details.html',
-      scope: {
-        person: '='
-      }
-    };
-  }]
-);
-
-clioClientSearch.directive('personsummary', 
-  [function() {
-    return {
-      restrict: 'E',
-      replace: true,
-      templateUrl: 'person_summary.html',
-      scope: {
-        person: '='
+        scope.glyphsClass = 'glyphicon ';
+        if (scope.contact.type === 'Person') {
+          scope.glyphsClass += 'glyphicon-user';
+        } else {
+          scope.glyphsClass += 'glyphicon-home';
+        }
       }
     };
   }]
@@ -21790,21 +21776,78 @@ angular.module("clioClientSearch").run(["$templateCache", function($templateCach
     ""
   );
 
-  $templateCache.put("company_details.html",
-    "<div class=\"company-details\">\n" +
+  $templateCache.put("contact_details.html",
+    "<div ng-class=\"contactTypeClass\">\n" +
     "  <header>\n" +
-    "    <h5 class=\"name\">{{company.name}}</h5>\n" +
-    "    <h6 class=\"account\">{{company.accountName}}</h6>\n" +
+    "    <h5 class=\"name\">{{contact.name}}</h5>\n" +
+    "    <span class=\"glyphicon glyphicon-minus-sign\" ng-click='removeContact(contact)'>\n" +
+    "    </span>\n" +
+    "    <h6 class=\"account\">{{contact.accountName}}</h6>\n" +
     "    <div class=\"clearfix\"></div>\n" +
     "  </header>\n" +
+    "  <article>\n" +
+    "    <div class=\"email-addresses\" ng-if='contact.email_addresses.length'>\n" +
+    "      <h6>Email Addresses:</h6>\n" +
+    "      <table class=\"table table-bordered\">\n" +
+    "        <thead><tr>\n" +
+    "          <th>Type</th>\n" +
+    "          <th>Address</th>\n" +
+    "        </tr></thead>\n" +
+    "        <tbody>\n" +
+    "          <tr ng-repeat='email in contact.email_addresses'>\n" +
+    "            <td>{{email.name}}</td>\n" +
+    "            <td>{{email.address}}</td>\n" +
+    "          </tr>\n" +
+    "        </tbody>\n" +
+    "      </table>\n" +
+    "    </div>\n" +
+    "    <div class=\"phone-numbers\" ng-if='contact.phone_numbers.length'>\n" +
+    "      <h6>Phone Numbers:</h6>\n" +
+    "      <table class=\"table table-bordered\">\n" +
+    "        <thead><tr>\n" +
+    "          <th>Type</th>\n" +
+    "          <th>Number</th>\n" +
+    "        </tr></thead>\n" +
+    "        <tbody>\n" +
+    "          <tr ng-repeat='phone in contact.phone_numbers'>\n" +
+    "            <td>{{phone.name}}</td>\n" +
+    "            <td>{{phone.number}}</td>\n" +
+    "          </tr>\n" +
+    "        </tbody>\n" +
+    "      </table>\n" +
+    "    </div>\n" +
+    "    <div class=\"addresses\" ng-if='contact.addresses.length'>\n" +
+    "      <h6>Addresses:</h6>\n" +
+    "      <table class=\"table table-bordered\">\n" +
+    "        <thead><tr>\n" +
+    "          <th>Type</th>\n" +
+    "          <th>City</th>\n" +
+    "          <th>Country</th>\n" +
+    "          <th>Postal Code</th>\n" +
+    "          <th>Street</th>\n" +
+    "          <th>Province</th>\n" +
+    "        </tr></thead>\n" +
+    "        <tbody>\n" +
+    "          <tr ng-repeat='address in contact.addresses'>\n" +
+    "            <td>{{address.name}}</td>\n" +
+    "            <td>{{address.city}}</td>\n" +
+    "            <td>{{address.country}}</td>\n" +
+    "            <td>{{address.postal_code}}</td>\n" +
+    "            <td>{{address.street}}</td>\n" +
+    "            <td>{{address.province}}</td>\n" +
+    "          </tr>\n" +
+    "        </tbody>\n" +
+    "      </table>\n" +
+    "    </div>\n" +
+    "  </article>\n" +
     "</div>"
   );
 
-  $templateCache.put("company_summary.html",
-    "<div class=\"summary company-summary\">\n" +
-    "  <div class=\"glyphicon glyphicon-home\"></div>\n" +
+  $templateCache.put("contact_summary.html",
+    "<div ng-class=\"contactTypeClass\">\n" +
+    "  <div ng-class='glyphsClass'></div>\n" +
     "  <div class=\"details\">\n" +
-    "    <p>{{company.name}}</p>\n" +
+    "    <p>{{contact.name}}</p>\n" +
     "  </div>\n" +
     "  <div class=\"clearfix\"></div>\n" +
     "</div>\n"
@@ -21819,26 +21862,6 @@ angular.module("clioClientSearch").run(["$templateCache", function($templateCach
     "  <div class=\"blockG_1 facebook_blockG\"></div>\n" +
     "  <div class=\"blockG_2 facebook_blockG\"></div>\n" +
     "  <div class=\"blockG_3 facebook_blockG\"></div>\n" +
-    "</div>\n"
-  );
-
-  $templateCache.put("person_details.html",
-    "<div class=\"person-details\">\n" +
-    "  <header>\n" +
-    "    <h5 class=\"name\">{{person.name}}</h5>\n" +
-    "    <h6 class=\"account\">{{person.accountName}}</h6>\n" +
-    "    <div class=\"clearfix\"></div>\n" +
-    "  </header>\n" +
-    "</div>"
-  );
-
-  $templateCache.put("person_summary.html",
-    "<div class=\"summary person-summary\">\n" +
-    "  <span class=\"glyphicon glyphicon-user\"></span>\n" +
-    "  <div class=\"details\">\n" +
-    "    <p>{{person.name}}</p>\n" +
-    "  </div>\n" +
-    "  <div class=\"clearfix\"></div>\n" +
     "</div>\n"
   );
 
