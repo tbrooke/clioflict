@@ -7,7 +7,7 @@
     <div class="clearfix"></div>
   </header>
   <article>
-   <div class="email-addresses" ng-if='contact.email_addresses.length'>
+   <div class="custom_field_values.date_of_birth" ng-if='contact.custom_field_values.date_of_birth.length'>
       <h6>Date of Birth:</h6>
       <table class="table table-bordered">
         <thead><tr>
@@ -15,14 +15,12 @@
           <th>Address</th>
         </tr></thead>
         <tbody>
-          <tr ng-repeat='email in contact.email_addresses'>
-            <td>{{email.name}}</td>
-            <td>{{email.address}}</td>
+          <tr ng-repeat='custom_field_value in contact.custom_field_values'>
+            <td>{{custom_field_value.date_of_birth}}</td>
           </tr>
         </tbody>
       </table>
     </div>
-    
     <div class="email-addresses" ng-if='contact.email_addresses.length'>
       <h6>Email Addresses:</h6>
       <table class="table table-bordered">
