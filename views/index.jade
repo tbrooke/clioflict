@@ -15,7 +15,7 @@ block content
           div.results(ng-switch="account.isLoading", ng-show="!account.isCollapsed")
             clioloader(ng-switch-when="true")
             ul.account-contacts.list-unstyled(ng-switch-when="false")
-              li.account-contact(ng-repeat="contact in account.contacts", ng-click='toggleContact(contact)')
+              li.account-contact(ng-repeat="contact in account.contacts", ng-click='toggleContact(contact, account.name)')
                 personsummary(ng-if='contact.type=="Person"', person='contact')
                 companysummary(ng-if='contact.type=="Company"', company='contact')
 

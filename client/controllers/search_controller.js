@@ -23,7 +23,7 @@ clioClientSearch.controller('SearchController',
         }
       };
 
-      $scope.toggleContact = function(contact) {
+      $scope.toggleContact = function(contact, accountName) {
         var foundIndex;
         $.each($scope.vm.selectedContacts, function(i, selectedContact) {
           if (selectedContact.id === contact.id) {
@@ -31,9 +31,10 @@ clioClientSearch.controller('SearchController',
           }
         });
 
-        if (foundIndex) {
+        if (foundIndex !== undefined) {
           $scope.vm.selectedContacts.splice(foundIndex, 1);
         } else {
+          contact.accountName = accountName;
           $scope.vm.selectedContacts.push(contact);
         }
       };
