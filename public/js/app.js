@@ -1,4 +1,4 @@
-/*! clioflict - v0.0.1 - 2013-09-01 */
+/*! clioflict - v0.0.1 - 2013-09-02 */
 /*! jQuery v2.0.3 | (c) 2005, 2013 jQuery Foundation, Inc. | jquery.org/license
 //@ sourceMappingURL=jquery.min.map
 */
@@ -21631,7 +21631,7 @@ angular.module('ngCookies', ['ng']).
 })(window, window.angular);
 
 
-/*! clioflict - v0.0.1 - 2013-09-01 */
+/*! clioflict - v0.0.1 - 2013-09-02 */
 var clioClientSearch = angular.module('clioClientSearch', []);
 
 
@@ -21729,6 +21729,20 @@ clioClientSearch.directive('clioloader',
 );
 
 
+clioClientSearch.directive('companydetails', 
+  [function() {
+    return {
+      restrict: 'E',
+      replace: true,
+      templateUrl: 'company_details.html',
+      scope: {
+        company: '='
+      }
+    };
+  }]
+);
+
+
 clioClientSearch.directive('companysummary', 
   [function() {
     return {
@@ -21742,6 +21756,19 @@ clioClientSearch.directive('companysummary',
   }]
 );
 
+
+clioClientSearch.directive('persondetails', 
+  [function() {
+    return {
+      restrict: 'E',
+      replace: true,
+      templateUrl: 'person_details.html',
+      scope: {
+        person: '='
+      }
+    };
+  }]
+);
 
 clioClientSearch.directive('personsummary', 
   [function() {
@@ -21759,6 +21786,20 @@ clioClientSearch.directive('personsummary',
 
 angular.module("clioClientSearch").run(["$templateCache", function($templateCache) {
 
+  $templateCache.put("address.html",
+    ""
+  );
+
+  $templateCache.put("company_details.html",
+    "<div class=\"company-details\">\n" +
+    "  <header>\n" +
+    "    <h5 class=\"name\">{{company.name}}</h5>\n" +
+    "    <h6 class=\"account\">{{company.accountName}}</h6>\n" +
+    "    <div class=\"clearfix\"></div>\n" +
+    "  </header>\n" +
+    "</div>"
+  );
+
   $templateCache.put("company_summary.html",
     "<div class=\"summary company-summary\">\n" +
     "  <div class=\"glyphicon glyphicon-home\"></div>\n" +
@@ -21769,12 +21810,26 @@ angular.module("clioClientSearch").run(["$templateCache", function($templateCach
     "</div>\n"
   );
 
+  $templateCache.put("email_address.html",
+    ""
+  );
+
   $templateCache.put("loader.html",
     "<div class=\"loader facebookG\">\n" +
     "  <div class=\"blockG_1 facebook_blockG\"></div>\n" +
     "  <div class=\"blockG_2 facebook_blockG\"></div>\n" +
     "  <div class=\"blockG_3 facebook_blockG\"></div>\n" +
     "</div>\n"
+  );
+
+  $templateCache.put("person_details.html",
+    "<div class=\"person-details\">\n" +
+    "  <header>\n" +
+    "    <h5 class=\"name\">{{person.name}}</h5>\n" +
+    "    <h6 class=\"account\">{{person.accountName}}</h6>\n" +
+    "    <div class=\"clearfix\"></div>\n" +
+    "  </header>\n" +
+    "</div>"
   );
 
   $templateCache.put("person_summary.html",
@@ -21785,6 +21840,10 @@ angular.module("clioClientSearch").run(["$templateCache", function($templateCach
     "  </div>\n" +
     "  <div class=\"clearfix\"></div>\n" +
     "</div>\n"
+  );
+
+  $templateCache.put("phone_number.html",
+    ""
   );
 
 }]);

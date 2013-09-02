@@ -15,5 +15,13 @@ body{padding:50px}
 .summary p{margin:0}
 .person-summary{background-color:#fdd;}
 .person-summary:hover{background-color:#fbb}
+.person-summary.selected{background-color:#fbb}
 .company-summary{background-color:#ddf;}
 .company-summary:hover{background-color:#bbf}
+.company-summary.selected{background-color:#bbf}
+.contact-details ul{list-style-type:none;padding:0;}
+.contact-details ul li{padding:0;margin:0}
+.person-details{background-color:#fdd;}
+.person-details header{background-color:#fbb}
+.company-details{background-color:#ddf;}
+.company-details header{background-color:#bbf}

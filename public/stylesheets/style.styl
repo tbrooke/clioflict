@@ -6,13 +6,12 @@ person-color-dark = #ffbbbb
 company-color = #ddddff
 company-color-dark = #bbbbff
 
+border-style = 2px solid #ccc
 
 #title-space
-  //text-align: center
   margin: 35px 0 35px
 body
   padding: 50px
-  //font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
 
 search-box-padding()
   padding: 0 15px 0 15px
@@ -26,7 +25,7 @@ search-box-padding()
     float: left
     .search-account
       header
-        border-bottom: 2px solid #ccc
+        border-bottom: border-style
         search-box-padding()
         margin-bottom: 0
         padding-bottom: 10px
@@ -74,9 +73,42 @@ search-box-padding()
   background-color: person-color
   &:hover
     background-color: person-color-dark
+  &.selected
+    background-color: person-color-dark
 
 
 .company-summary
   background-color: company-color
   &:hover
+    background-color: company-color-dark
+  &.selected
+    background-color: company-color-dark
+
+.contact-details
+  ul
+    list-style-type: none
+    padding: 0
+    li
+      padding: 0
+      margin: 0
+
+details()
+  padding: 10px
+  border: border-style
+  header
+    .name
+      float: left
+    .account
+      float: right
+
+.person-details
+  details-header()
+  background-color: person-color
+  header
+    background-color: person-color-dark
+
+.company-details
+  details-header()
+  background-color: company-color
+  header
     background-color: company-color-dark

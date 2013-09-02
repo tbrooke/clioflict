@@ -25,4 +25,5 @@ block content
           | Click on a contact from the search results to see their details
         ul(ng-if='vm.selectedContacts.length')
           li.selected-contact(ng-repeat='contact in vm.selectedContacts')
-            p {{contact.name}}
+            persondetails(ng-if='contact.type=="Person"', person='contact')
+            persondetails(ng-if='contact.type=="Company"', company='contact')
