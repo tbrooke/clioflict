@@ -21,7 +21,13 @@ body{padding:50px}
 .company-summary.selected{background-color:#bbf}
 .contact-details ul{list-style-type:none;padding:0;}
 .contact-details ul li{padding:0;margin:0}
-.person-details{background-color:#fdd;}
+.person-details{padding:0;border:2px solid #ccc;background-color:#fdd;}
+.person-details header{width:100%;margin:0;padding:5px;}
+.person-details header h5.name{float:left;margin:0;padding:0}
+.person-details header h6.account{float:right;margin:0;padding:0}
 .person-details header{background-color:#fbb}
-.company-details{background-color:#ddf;}
+.company-details{padding:0;border:2px solid #ccc;background-color:#ddf;}
+.company-details header{width:100%;margin:0;padding:5px;}
+.company-details header h5.name{float:left;margin:0;padding:0}
+.company-details header h6.account{float:right;margin:0;padding:0}
 .company-details header{background-color:#bbf}

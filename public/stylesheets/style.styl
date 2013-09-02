@@ -93,22 +93,29 @@ search-box-padding()
       margin: 0
 
 details()
-  padding: 10px
+  padding: 0
   border: border-style
   header
-    .name
+    width: 100%
+    margin: 0
+    padding: 5px
+    h5.name
       float: left
-    .account
+      margin: 0
+      padding: 0
+    h6.account
       float: right
+      margin: 0
+      padding: 0
 
 .person-details
-  details-header()
+  details()
   background-color: person-color
   header
     background-color: person-color-dark
 
 .company-details
-  details-header()
+  details()
   background-color: company-color
   header
     background-color: company-color-dark
