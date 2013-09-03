@@ -21736,10 +21736,19 @@ clioClientSearch.directive('contactdetails',
       replace: true,
       templateUrl: 'contact_details.html',
       scope: {
-        contact: '='
+        contact: '=',
+        removeContact: '&'
       },
       link: function(scope, element, attrs) {
         scope.contactTypeClass = scope.contact.type.toLowerCase() + '-details';
+
+        scope.showHideContact = function(contact) {
+          if (contact.isCollapsed) {
+            contact.isCollapsed = false;
+          } else {
+            contact.isCollapsed = true;
+          }
+        };
       }
     };
   }]
@@ -21778,30 +21787,14 @@ angular.module("clioClientSearch").run(["$templateCache", function($templateCach
 
   $templateCache.put("contact_details.html",
     "<div ng-class=\"contactTypeClass\">\n" +
-    "  <header>\n" +
+    "  <header ng-click='showHideContact(contact)'>\n" +
     "    <h5 class=\"name\">{{contact.name}}</h5>\n" +
-    "    <span class=\"glyphicon glyphicon-minus-sign\" ng-click='removeContact(contact)'>\n" +
+    "    <span class=\"glyphicon glyphicon-minus-sign\" ng-click='removeContact()'>\n" +
     "    </span>\n" +
     "    <h6 class=\"account\">{{contact.accountName}}</h6>\n" +
     "    <div class=\"clearfix\"></div>\n" +
     "  </header>\n" +
-    "  <article>\n" +
-    "   <div class=\"email-addresses\" ng-if='contact.email_addresses.length'>\n" +
-    "      <h6>Date of Birth:</h6>\n" +
-    "      <table class=\"table table-bordered\">\n" +
-    "        <thead><tr>\n" +
-    "          <th>Type</th>\n" +
-    "          <th>Address</th>\n" +
-    "        </tr></thead>\n" +
-    "        <tbody>\n" +
-    "          <tr ng-repeat='email in contact.email_addresses'>\n" +
-    "            <td>{{email.name}}</td>\n" +
-    "            <td>{{email.address}}</td>\n" +
-    "          </tr>\n" +
-    "        </tbody>\n" +
-    "      </table>\n" +
-    "    </div>\n" +
-    "    \n" +
+    "  <article ng-if='!contact.isCollapsed'>\n" +
     "    <div class=\"email-addresses\" ng-if='contact.email_addresses.length'>\n" +
     "      <h6>Email Addresses:</h6>\n" +
     "      <table class=\"table table-bordered\">\n" +

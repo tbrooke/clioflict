@@ -1,28 +1,12 @@
 <div ng-class="contactTypeClass">
-  <header>
+  <header ng-click='showHideContact(contact)'>
     <h5 class="name">{{contact.name}}</h5>
-    <span class="glyphicon glyphicon-minus-sign" ng-click='removeContact(contact)'>
+    <span class="glyphicon glyphicon-minus-sign" ng-click='removeContact()'>
     </span>
     <h6 class="account">{{contact.accountName}}</h6>
     <div class="clearfix"></div>
   </header>
-  <article>
-   <div class="email-addresses" ng-if='contact.email_addresses.length'>
-      <h6>Date of Birth:</h6>
-      <table class="table table-bordered">
-        <thead><tr>
-          <th>Type</th>
-          <th>Address</th>
-        </tr></thead>
-        <tbody>
-          <tr ng-repeat='email in contact.email_addresses'>
-            <td>{{email.name}}</td>
-            <td>{{email.address}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    
+  <article ng-if='!contact.isCollapsed'>
     <div class="email-addresses" ng-if='contact.email_addresses.length'>
       <h6>Email Addresses:</h6>
       <table class="table table-bordered">
