@@ -7,16 +7,15 @@
     <div class="clearfix"></div>
   </header>
   <article>
-   <div class="custom_field_values.date_of_birth" ng-if='contact.custom_field_values.date_of_birth.length'>
+   <div class="custom_field_values" ng-if='contact.custom_field_values.length'>
       <h6>Date of Birth:</h6>
       <table class="table table-bordered">
-        <thead><tr>
-          <th>Type</th>
-          <th>Address</th>
+          <thead><tr>
+          <th>Birth Date</th>
         </tr></thead>
         <tbody>
           <tr ng-repeat='custom_field_value in contact.custom_field_values'>
-            <td>{{custom_field_value.date_of_birth}}</td>
+            <td>{{custom_field_value.value}}</td>
           </tr>
         </tbody>
       </table>

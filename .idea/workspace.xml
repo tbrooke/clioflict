@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9d87f89c-f389-47ab-8b38-3fde6e60ef7a" name="Default" comment="Merge remote-tracking branch 'origin/users'&#10;&#10;Conflicts:&#10;&#9;models/user.js&#10;&#9;public/css/app.css&#10;&#9;public/js/app.js&#10;&#9;public/stylesheets/style.css&#10;&#9;public/stylesheets/style.styl&#10;&#9;routes/auth.js&#10;&#9;routes/clio.js&#10;&#9;views/admin.jade&#10;&#9;views/signup.jade&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin.jade" afterPath="$PROJECT_DIR$/views/admin.jade" />
-    </list>
+    <list default="true" id="9d87f89c-f389-47ab-8b38-3fde6e60ef7a" name="Default" comment="Merge remote-tracking branch 'origin/users'&#10;&#10;Conflicts:&#10;&#9;models/user.js&#10;&#9;public/css/app.css&#10;&#9;public/js/app.js&#10;&#9;public/stylesheets/style.css&#10;&#9;public/stylesheets/style.styl&#10;&#9;routes/auth.js&#10;&#9;routes/clio.js&#10;&#9;views/admin.jade&#10;&#9;views/signup.jade&#10;" />
     <ignored path="clioflict.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />

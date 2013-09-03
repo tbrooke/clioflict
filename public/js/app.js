@@ -21604,16 +21604,15 @@ angular.module("clioClientSearch").run(["$templateCache", function($templateCach
     "    <div class=\"clearfix\"></div>\n" +
     "  </header>\n" +
     "  <article>\n" +
-    "   <div class=\"custom_field_values.date_of_birth\" ng-if='contact.custom_field_values.date_of_birth.length'>\n" +
+    "   <div class=\"custom_field_values\" ng-if='contact.custom_field_values.length'>\n" +
     "      <h6>Date of Birth:</h6>\n" +
     "      <table class=\"table table-bordered\">\n" +
-    "        <thead><tr>\n" +
-    "          <th>Type</th>\n" +
-    "          <th>Address</th>\n" +
+    "          <thead><tr>\n" +
+    "          <th>Birth Date</th>\n" +
     "        </tr></thead>\n" +
     "        <tbody>\n" +
     "          <tr ng-repeat='custom_field_value in contact.custom_field_values'>\n" +
-    "            <td>{{custom_field_value.date_of_birth}}</td>\n" +
+    "            <td>{{custom_field_value.value}}</td>\n" +
     "          </tr>\n" +
     "        </tbody>\n" +
     "      </table>\n" +
