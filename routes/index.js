@@ -18,6 +18,8 @@ module.exports = function(app) {
 	app.get('/query', [ensureLoggedIn('/login'), streamable, query]);
   app.get('/query/:account_id', [ensureLoggedIn('/login'), streamable, accountQuery]);
 	app.get('/admin', ensureLoggedIn('/login'), admin);
+  app.get('/signup',  ensureLoggedIn('/login'), auth.signupForm);
+  app.post('/signup', ensureLoggedIn('/login'), auth.signup);
 	app.get('/login', auth.loginForm);
 	app.post('/login', auth.login);
 	app.get('/logout', auth.logout);
