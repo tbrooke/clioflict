@@ -12,3 +12,20 @@ exports.logout = function(req, res) {
   req.logout();
   res.redirect('/');
 };
+
+exports.signup = function (req, res) {
+  var user;
+  user = new User ({email: req.body.email, 
+        password: req.body.password, 
+        admin: req.body.admin});
+  user.save(function (err) {
+    if (!err) {
+      res.statusCode=403;
+    } else {
+      res.redirect('/');
+    }
+  });
+
+     res.redirect('/');
+};
+
