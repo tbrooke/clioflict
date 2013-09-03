@@ -51,7 +51,6 @@ module.exports = function(grunt) {
           'bower_components/streamable/client.js',
           'bower_components/angular-1.1.6/build/angular.js',
           'bower_components/angular-1.1.6/build/angular-resource.js',
-          'bower_components/angular-1.1.6/build/angular-cookies.js',
           'tmp/client.js',
           'tmp/templates.js'
         ],

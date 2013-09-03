@@ -1,19 +1,40 @@
 extends layout
 
+
 block content
   div#admin-area
-    header
+    ul.nav.nav-tabs
+      li
+        a(href='#accounts',data-toggle="tab") Accounts
+      li(data-toggle="tab")
+        a(href='#users',data-toggle="tab") Users
+  div#tab-content.tab-content
+    div#accounts.tab-pane.fade
       h5 Linked Accounts
-      a(class='btn btn-primary',href="/clioAuth") Add an Account
-    if accounts.length
-      table.table.table-striped
-        tr
-          th Account Name
-          th
-        each account in accounts
+      if accounts.length
+        table.table.table-striped
           tr
-            td= account.name
-            td
-              a(href="/remove_account/" + account.id) Remove
-
+            th Account Name
+            th
+          each account in accounts
+            tr
+              td= account.name
+              td
+                a(href="/remove_account/" + account.id) Remove
+      a(class='btn btn-primary',href="/clioAuth") Add an Account
+    div#users.tab-pane.fade
+      h5 Users
+      h6= "Current User: " + req.user.email
+      if req.user.admin === true
+      a(class='btn btn-primary',href="/signup") Add a New User
+      if users.length
+        table.table.table-striped
+          tr
+            th User Email
+              th
+          each user in users
+            tr
+              td= user.email
+              td
+                a(href="/remove_user/" + user.id) Remove
     hr

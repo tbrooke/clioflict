@@ -5,6 +5,7 @@
 
 var auth = require('./auth');
 var clio = require('./clio');
+var User        = require('../models').User;
 var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 var streamable = require('../app').streamable;
 
@@ -17,6 +18,8 @@ module.exports = function(app) {
 	app.get('/query', [ensureLoggedIn('/login'), streamable, query]);
   app.get('/query/:account_id', [ensureLoggedIn('/login'), streamable, accountQuery]);
 	app.get('/admin', ensureLoggedIn('/login'), admin);
+  app.get('/signup',  ensureLoggedIn('/login'), auth.signupForm);
+  app.post('/signup', ensureLoggedIn('/login'), auth.signup);
 	app.get('/login', auth.loginForm);
 	app.post('/login', auth.login);
 	app.get('/logout', auth.logout);
@@ -25,6 +28,9 @@ module.exports = function(app) {
   app.get('/remove_account/:account_id', 
           ensureLoggedIn('/login'),
           clio.removeAccount);
+  app.get('/remove_user/:user_id', 
+          ensureLoggedIn('/login'),
+          auth.removeUser);
 };
 
 var index = function(req, res) {
@@ -84,9 +90,23 @@ var accountQuery = function(req, res){
   });
 };
 
+// var admin = function(req, res){
+//   accountIds = req.user.clioAccountIds;
+//   ClioAccount.find().in('_id', accountIds).exec(function(err,accounts) {
+//     res.render('admin', { title: 'Admin', accounts: accounts, req: req });
+//   });
+// };
+
+
 var admin = function(req, res){
   accountIds = req.user.clioAccountIds;
   ClioAccount.find().in('_id', accountIds).exec(function(err,accounts) {
-    res.render('admin', { title: 'Admin', accounts: accounts, req: req });
+    User.find(function(err,users) {
+      res.render('admin', { title: 'Admin', 
+        accounts: accounts,
+        users: users,
+        req: req
+      });
+    });
   });
 };
