@@ -5,6 +5,7 @@
 
 var auth = require('./auth');
 var clio = require('./clio');
+var User        = require('../models').User;
 var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 var streamable = require('../app').streamable;
 
