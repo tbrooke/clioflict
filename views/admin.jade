@@ -25,7 +25,7 @@ block content
     div#users.tab-pane.fade
       h5 Users
       h6= "Current User: " + req.user.email
-      if req.user.admin
+      if req.user.admin === true
       a(class='btn btn-primary',href="/signup") Add a New User
       if users.length
         table.table.table-striped

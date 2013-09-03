@@ -21608,7 +21608,7 @@ angular.module("clioClientSearch").run(["$templateCache", function($templateCach
     "      <h6>Date of Birth:</h6>\n" +
     "      <table class=\"table table-bordered\">\n" +
     "          <thead><tr>\n" +
-    "          <th>Birth Date</th>\n" +
+    "          <th>Date of Birth</th>\n" +
     "        </tr></thead>\n" +
     "        <tbody>\n" +
     "          <tr ng-repeat='custom_field_value in contact.custom_field_values'>\n" +
