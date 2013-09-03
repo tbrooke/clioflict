@@ -1,4 +1,6 @@
+var User     = require('../models').User;
 var passport = require('passport');
+var request = require('request');
 
 exports.loginForm = function(req, res) {
   return res.render('login', {title: 'Login', flash: req.flash('error'), req: req});
