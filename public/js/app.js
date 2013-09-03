@@ -1,4 +1,4 @@
-/*! clioflict - v0.0.1 - 2013-09-02 */
+/*! clioflict - v0.0.1 - 2013-09-03 */
 /*! jQuery v2.0.3 | (c) 2005, 2013 jQuery Foundation, Inc. | jquery.org/license
 //@ sourceMappingURL=jquery.min.map
 */
@@ -21449,7 +21449,7 @@ angular.module('ngResource', ['ng']).
 })(window, window.angular);
 
 
-/*! clioflict - v0.0.1 - 2013-09-02 */
+/*! clioflict - v0.0.1 - 2013-09-03 */
 var clioClientSearch = angular.module('clioClientSearch', []);
 
 
@@ -21554,10 +21554,19 @@ clioClientSearch.directive('contactdetails',
       replace: true,
       templateUrl: 'contact_details.html',
       scope: {
-        contact: '='
+        contact: '=',
+        removeContact: '&'
       },
       link: function(scope, element, attrs) {
         scope.contactTypeClass = scope.contact.type.toLowerCase() + '-details';
+
+        scope.showHideContact = function(contact) {
+          if (contact.isCollapsed) {
+            contact.isCollapsed = false;
+          } else {
+            contact.isCollapsed = true;
+          }
+        };
       }
     };
   }]
