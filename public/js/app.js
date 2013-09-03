@@ -1,4 +1,4 @@
-/*! clioflict - v0.0.1 - 2013-09-02 */
+/*! clioflict - v0.0.1 - 2013-09-03 */
 /*! jQuery v2.0.3 | (c) 2005, 2013 jQuery Foundation, Inc. | jquery.org/license
 //@ sourceMappingURL=jquery.min.map
 */
@@ -21449,7 +21449,7 @@ angular.module('ngResource', ['ng']).
 })(window, window.angular);
 
 
-/*! clioflict - v0.0.1 - 2013-09-02 */
+/*! clioflict - v0.0.1 - 2013-09-03 */
 var clioClientSearch = angular.module('clioClientSearch', []);
 
 
@@ -21554,10 +21554,19 @@ clioClientSearch.directive('contactdetails',
       replace: true,
       templateUrl: 'contact_details.html',
       scope: {
-        contact: '='
+        contact: '=',
+        removeContact: '&'
       },
       link: function(scope, element, attrs) {
         scope.contactTypeClass = scope.contact.type.toLowerCase() + '-details';
+
+        scope.showHideContact = function(contact) {
+          if (contact.isCollapsed) {
+            contact.isCollapsed = false;
+          } else {
+            contact.isCollapsed = true;
+          }
+        };
       }
     };
   }]
@@ -21596,14 +21605,14 @@ angular.module("clioClientSearch").run(["$templateCache", function($templateCach
 
   $templateCache.put("contact_details.html",
     "<div ng-class=\"contactTypeClass\">\n" +
-    "  <header>\n" +
+    "  <header ng-click='showHideContact(contact)'>\n" +
     "    <h5 class=\"name\">{{contact.name}}</h5>\n" +
-    "    <span class=\"glyphicon glyphicon-minus-sign\" ng-click='removeContact(contact)'>\n" +
+    "    <span class=\"glyphicon glyphicon-minus-sign\" ng-click='removeContact()'>\n" +
     "    </span>\n" +
     "    <h6 class=\"account\">{{contact.accountName}}</h6>\n" +
     "    <div class=\"clearfix\"></div>\n" +
     "  </header>\n" +
-    "  <article>\n" +
+    "  <article ng-if='!contact.isCollapsed'>\n" +
     "   <div class=\"custom_field_values\" ng-if='contact.custom_field_values.length'>\n" +
     "      <h6>Date of Birth:</h6>\n" +
     "      <table class=\"table table-bordered\">\n" +
@@ -21671,7 +21680,7 @@ angular.module("clioClientSearch").run(["$templateCache", function($templateCach
     "      </table>\n" +
     "    </div>\n" +
     "  </article>\n" +
-    "</div>"
+    "</div>\n"
   );
 
   $templateCache.put("contact_summary.html",
