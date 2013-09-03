@@ -28,6 +28,9 @@ module.exports = function(app) {
   app.get('/remove_account/:account_id', 
           ensureLoggedIn('/login'),
           clio.removeAccount);
+  app.get('/remove_user/:user_id', 
+          ensureLoggedIn('/login'),
+          auth.removeUser);
 };
 
 var index = function(req, res) {

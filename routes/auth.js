@@ -33,7 +33,14 @@ exports.signup = function (req, res) {
       res.redirect('/');
     }
   });
-
      res.redirect('/');
 };
 
+
+exports.removeUser = function(req, res) {
+  User.findByIdAndRemove(req.params.user_id, function(err) {
+    if (err) console.log("error: ", err);
+    res.redirect('admin');
+  });
+  // Query all users and remove user`
+};
