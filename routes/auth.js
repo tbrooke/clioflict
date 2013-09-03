@@ -13,6 +13,12 @@ exports.logout = function(req, res) {
   res.redirect('/');
 };
 
+
+exports.signupForm = function(req,res) {
+  return res.render('signup', {title: 'Sign Up New User', flash: req.flash('error'), req: req});
+};
+
+
 exports.signup = function (req, res) {
   var user;
   user = new User ({email: req.body.email, 
