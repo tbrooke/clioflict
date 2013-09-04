@@ -34,6 +34,7 @@ namespace :deploy do
   after 'deploy:create_symlink', 'deploy:symlink_node_folders'
   after 'deploy:setup', 'deploy:node_additional_setup'
 
+
   desc "START the servers"
   task :start, :roles => :app, :except => { :no_release => true } do
     run "cd #{current_path} && #{app_environment} node_modules/.bin/forever start -a -l #{current_path}/log/forever.log -o #{current_path}/log/out.log -e #{current_path}/log/err.log #{app_command}"
