@@ -56,7 +56,7 @@ namespace :deploy do
   end
 
   task :node_additional_setup, :roles => :app, :except => { :no_release => true } do
-    run "sudo mkdir -p #{shared_path}/node_modules"
+    run "mkdir -p #{shared_path}/node_modules"
   end
 
   task :npm_install, :roles => :app, :except => { :no_release => true } do
