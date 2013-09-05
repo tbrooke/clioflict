@@ -4,6 +4,7 @@ set :application, "clioflict"
 set :repository,  "git@github.com:tbrooke/clioflict.git"
 set :scm, :git
 set :use_sudo, true
+set :sudo_prompt, ""
 set :user, 'deploy'
 set :ssh_options, {:forward_agent => true}
 set :branch, :master
