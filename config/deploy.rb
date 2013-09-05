@@ -8,14 +8,14 @@ set :user, 'deploy'
 set :ssh_options, {:forward_agent => true}
 set :branch, :master
 set :deploy_via, :remote_cache
-set :port, 2222
+set :port, 2029
 set :keep_releases, 5
 set :deploy_to, "/var/apps/node/#{application}"
 default_run_options[:pty] = true
 
 # node-deploy options
 set :app_command, "app.js"
-set :app_environment, "PORT=43434"
+set :app_environment, "PORT=443"
 
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
