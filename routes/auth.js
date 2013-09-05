@@ -27,13 +27,13 @@ exports.signup = function (req, res) {
         password: req.body.password, 
         admin: req.body.admin});
   user.save(function (err) {
-    if (!err) {
+    if (err) {
       res.statusCode=403;
+      res.redirect('admin');
     } else {
       res.redirect('/');
     }
   });
-     res.redirect('/');
 };
 
 

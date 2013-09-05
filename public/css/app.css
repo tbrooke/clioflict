@@ -1,4 +1,4 @@
-/*! clioflict - v0.0.1 - 2013-09-03 */
+/*! clioflict - v0.0.1 - 2013-09-04 */
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,300,600);/*!
  * Cirrus v0.3.0
  *
@@ -146,6 +146,7 @@ body{padding:50px}
 .search .search-results .search-account ul{margin:0}
 #admin-area header{margin-bottom:20px;}
 #admin-area header h4{display:inline;margin-right:30px}
+#admin-area .nav{font-size:24px}
 .summary{height:35px;width:100%;padding:0 15px 0 15px;border-bottom:2px solid #ccc;position:relative;padding-top:7px;}
 .summary .glyphicon{float:left;margin-right:10px}
 .summary .details{float:left}

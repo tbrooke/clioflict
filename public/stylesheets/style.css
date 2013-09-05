@@ -9,6 +9,7 @@ body{padding:50px}
 .search .search-results .search-account ul{margin:0}
 #admin-area header{margin-bottom:20px;}
 #admin-area header h4{display:inline;margin-right:30px}
+#admin-area .nav{font-size:24px}
 .summary{height:35px;width:100%;padding:0 15px 0 15px;border-bottom:2px solid #ccc;position:relative;padding-top:7px;}
 .summary .glyphicon{float:left;margin-right:10px}
 .summary .details{float:left}

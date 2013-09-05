@@ -9,7 +9,7 @@ block content
       li(data-toggle="tab")
         a(href='#users',data-toggle="tab") Users
   div#tab-content.tab-content
-    div#accounts.tab-pane.fade
+    div#accounts.tab-pane.active
       h5 Linked Accounts
       if accounts.length
         table.table.table-striped
@@ -24,9 +24,6 @@ block content
       a(class='btn btn-primary',href="/clioAuth") Add an Account
     div#users.tab-pane.fade
       h5 Users
-      h6= "Current User: " + req.user.email
-      if req.user.admin === true
-      a(class='btn btn-primary',href="/signup") Add a New User
       if users.length
         table.table.table-striped
           tr
@@ -37,4 +34,6 @@ block content
               td= user.email
               td
                 a(href="/remove_user/" + user.id) Remove
+      if req.user.admin === true
+      a(class='btn btn-primary',href="/signup") Add a New User
     hr
