@@ -66,12 +66,12 @@ namespace :deploy do
   namespace :bower  do
     desc "Install JS/CSS assets using bower"
     task :install do
-    run "cd #{current_path} && bower install --production"
+    run "cd #{current_path} && bower install "
   end
 
   desc 'Force install and resolve dependencies'
     task :force_install do
-    run "cd #{current_path} && bower install --production --force-latest"
+    run "cd #{current_path} && bower install --force-latest"
   end
 
   desc 'Cache clean'
