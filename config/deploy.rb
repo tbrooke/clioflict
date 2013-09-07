@@ -66,22 +66,6 @@ namespace :deploy do
     run "cd #{current_path} && npm install"
   end
 
-  namespace :bower  do
-    desc "Install JS/CSS assets using bower"
-    task :install do
-    run "cd #{current_path} && bower install "
-  end
-
-  desc 'Force install and resolve dependencies'
-    task :force_install do
-    run "cd #{current_path} && bower install --force-latest"
-  end
-
-  desc 'Cache clean'
-    task :cache_clean do
-    run "cd #{current_path} && bower cache clean"
-  end
-end
 
   task :npm_update, :roles => :app, :except => { :no_release => true } do
     run "cd #{current_path} && npm update"
