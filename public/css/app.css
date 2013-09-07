@@ -1,4 +1,4 @@
-/*! clioflict - v0.0.1 - 2013-09-04 */
+/*! clioflict - v0.0.1 - 2013-09-07 */
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,300,600);/*!
  * Cirrus v0.3.0
  *
@@ -136,14 +136,14 @@
 /*- See more at: http://cssload.net/#sthash.p0GFpDTi.dpuf*/
 
 #title-space{margin:35px 0 35px}
-body{padding:50px}
-.search input[type='text']{width:50%;margin-right:20px}
-.search .search-results{margin-top:35px;float:left;}
-.search .search-results .search-account{margin-right:10px;margin-bottom:5px;border:3px solid #eee;-webkit-border-radius:5px;border-radius:5px;padding:0}
-.search .search-results .search-account header{border-bottom:2px solid #ccc;padding:0 15px 0 15px;margin-bottom:0;padding-bottom:10px}
-.search .search-results .search-account .loader{padding:0 15px 0 15px;margin:10px 0}
-.search .search-results .search-account .results{max-height:230px;overflow-y:scroll}
-.search .search-results .search-account ul{margin:0}
+body{padding:50px;background-color:#d6d2c4}
+.navbar-fixed-top{background-color:#c50}
+.search input[type='text']{width:50%;margin-right:20px;}
+.search input[type='text'] .search-results,.search input[type='text'] margin-top: 35px,.search input[type='text'] float: left,.search input[type='text'] .search-account{margin-right:10px;margin-bottom:5px;border:3px solid #eee;-webkit-border-radius:5px;border-radius:5px;padding:0}
+.search input[type='text'] .search-results header,.search input[type='text'] margin-top: 35px header,.search input[type='text'] float: left header,.search input[type='text'] .search-account header{border-bottom:2px solid #ccc;padding:0 15px 0 15px;margin-bottom:0;padding-bottom:10px}
+.search input[type='text'] .search-results .loader,.search input[type='text'] margin-top: 35px .loader,.search input[type='text'] float: left .loader,.search input[type='text'] .search-account .loader{padding:0 15px 0 15px;margin:10px 0}
+.search input[type='text'] .search-results .results,.search input[type='text'] margin-top: 35px .results,.search input[type='text'] float: left .results,.search input[type='text'] .search-account .results{max-height:230px;overflow-y:scroll}
+.search input[type='text'] .search-results ul,.search input[type='text'] margin-top: 35px ul,.search input[type='text'] float: left ul,.search input[type='text'] .search-account ul{margin:0}
 #admin-area header{margin-bottom:20px;}
 #admin-area header h4{display:inline;margin-right:30px}
 #admin-area .nav{font-size:24px}
