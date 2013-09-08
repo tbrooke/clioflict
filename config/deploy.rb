@@ -61,7 +61,7 @@ namespace :deploy do
   end
 
   task :npm_install, :roles => :app, :except => { :no_release => true } do
-    run "cd #{current_path} && npm install"
+    run "cd #{current_path} && sudo npm install"
   end
 
 
