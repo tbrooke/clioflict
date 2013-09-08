@@ -52,19 +52,37 @@ namespace :deploy do
     run "cd #{current_path} && #{app_environment} node_modules/.bin/forever restart #{app_command}"
   end
 
+  desc "Link Shared modules"
   task :symlink_node_folders, :roles => :app, :except => { :no_release => true } do
     run "ln -s #{shared_path}/node_modules #{current_path}/node_modules"
   end
-
+  
+  desc "Create shared directory"
   task :node_additional_setup, :roles => :app, :except => { :no_release => true } do
     run "sudo mkdir -p #{shared_path}/node_modules"
   end
 
+  desc "Setup Bower_components"
+  task :bower_setup, :roles => :app, :except => { :no_release => true } do
+    run "sudo mkdir -p #{shared_path}/bower_components"
+  end
+
+  desc "Link Bower Components"
+  task :symlink_bower_folders, :roles => :app, :except => { :no_release => true } do
+    run "ln -s #{shared_path}/bower_components #{current_path}/bower_components"
+  end
+
+  desc "Node Install"
   task :npm_install, :roles => :app, :except => { :no_release => true } do
     run "cd #{current_path} && npm install"
   end
 
+  desc "Bower Install"
+  task :bower_install, :roles => :app, :except => { :no_release => true } do
+    run "cd #{current_path} && bower install"
+  end
 
+  desc "NPM Update"
   task :npm_update, :roles => :app, :except => { :no_release => true } do
     run "cd #{current_path} && npm update"
   end
