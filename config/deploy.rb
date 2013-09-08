@@ -35,7 +35,7 @@ namespace :deploy do
   before 'deploy:default', 'deploy:setup'
 
   after 'deploy:create_symlink', 'deploy:symlink_node_folders'
-  afer 'deploy:symlink_node_folders', 'deploy:symlink_bower_folders'
+  after 'deploy:symlink_node_folders', 'deploy:symlink_bower_folders'
   after 'deploy:setup', 'deploy:node_additional_setup'
   after 'deploy:node_additional_setup', 'deploy:bower_setup'
 
