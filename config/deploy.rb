@@ -14,7 +14,6 @@ set :deploy_via, :remote_cache
 set :port, 2029
 set :keep_releases, 5
 set :deploy_to, "/var/apps/node/#{application}"
-set :grunt_tasks, 'deploy:production'
 default_run_options[:pty] = true
 
 # node-deploy options
@@ -37,7 +36,6 @@ namespace :deploy do
 
   after 'deploy:create_symlink', 'deploy:symlink_node_folders'
   after 'deploy:setup', 'deploy:node_additional_setup'
-  after 'deploy:update', 'grunt'
 
   desc "START the servers"
   task :start, :roles => :app, :except => { :no_release => true } do
