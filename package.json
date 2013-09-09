@@ -21,7 +21,8 @@
     "session-mongoose": "~0.2.3",
     "nib": "~1.0.1",
     "socket.io": "~0.9.16",
-    "streamable": "~0.6.0"
+    "streamable": "~0.6.0",
+    "forever": "~0.10.8"
   },
   "devDependencies": {
     "mocha": "~1.12.0",
