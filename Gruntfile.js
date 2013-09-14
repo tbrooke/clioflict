@@ -50,7 +50,7 @@ module.exports = function(grunt) {
           'bower_components/socket.io-client/dist/socket.io.js',
           'bower_components/streamable/client.js',
           'bower_components/angular-1.1.6/build/angular.js',
-          'bower_components/angular-1.1.6/build/angular-resource.js',
+          'bower_components/ng-grid/build/ng-grid.js',
           'tmp/client.js',
           'tmp/templates.js'
         ],
@@ -59,6 +59,7 @@ module.exports = function(grunt) {
       css: {
         src: [
           'bower_components/bootstrap-theme-cirrus/dist/css/bootstrap.min.css',
+          'bower_components/ng-grid/ng-grid.css',
           'public/stylesheets/spinner.css',
           'public/stylesheets/style.css'
         ],

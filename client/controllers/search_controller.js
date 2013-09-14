@@ -3,8 +3,15 @@ clioClientSearch.controller('SearchController',
     function($scope, searchDB) {
       $scope.vm = {};
       $scope.vm.accounts = [];
-      $scope.vm.selectedContacts = [];
-      $scope.hasSearched = false;
+      $scope.vm.isLoading = false;
+      $scope.gridData = [];
+      $scope.sampleData = [
+        {firstName: 'Adam', lastName: 'Ferguson'},
+        {firstName: 'Tom', lastName: 'Brooke'}
+      ];
+      $scope.vm.gridOptions = {
+         data: 'gridData'
+      };
 
 
       $.get('/accounts', function(data) {
@@ -15,34 +22,12 @@ clioClientSearch.controller('SearchController',
           });
         });
 
-      $scope.toggleAccount = function(account) {
-        if (account.isCollapsed) {
-          account.isCollapsed = false;
-        } else {
-          account.isCollapsed = true;
-        }
-      };
-
-      $scope.toggleContact = function(contact, accountName) {
-        var foundIndex;
-        $.each($scope.vm.selectedContacts, function(i, selectedContact) {
-          if (selectedContact.id === contact.id) {
-            foundIndex = i;
-          }
-        });
-
-        if (foundIndex !== undefined) {
-          $scope.vm.selectedContacts.splice(foundIndex, 1);
-        } else {
-          contact.accountName = accountName;
-          $scope.vm.selectedContacts.push(contact);
-        }
-      };
-
       $scope.search = function() {
         $scope.hasSearched = true;
+        $scope.vm.isLoading = true;
         var searchData = {params: {searchTerm: $scope.searchTerm}};
-        //searchDB = {};
+        $scope.gridData = [];
+        var totalAccountsCompleted = 0;
 
         $.each($scope.vm.accounts, function(i, account) {
           account.isLoading = true;
@@ -62,9 +47,21 @@ clioClientSearch.controller('SearchController',
 
             $scope.$apply(function () {
               $.extend(account, data.account);
-              account.contacts = results.contacts;
-              console.log(results.contacts);
+              //account.contacts = results.contacts;
+              angular.forEach(results.contacts, function(contact) {
+                var data = {
+                  firstName: contact.first_name,
+                  lastName: contact.last_name
+                };
+
+                $scope.gridData.push(data);
+              });
               account.isLoading = false;
+
+              totalAccountsCompleted++;
+              if (totalAccountsCompleted === $scope.vm.accounts.length) {
+                $scope.vm.isLoading = false;
+              }
             });
           },
           onError: function(err) {
@@ -72,6 +69,7 @@ clioClientSearch.controller('SearchController',
             window.location = '/login';
           }
         });
+
       };
     }
   ]);
