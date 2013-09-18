@@ -1,4 +1,4 @@
-/*! clioflict - v0.0.1 - 2013-09-07 */
+/*! clioflict - v0.0.1 - 2013-09-17 */
 /*! jQuery v2.0.3 | (c) 2005, 2013 jQuery Foundation, Inc. | jquery.org/license
 //@ sourceMappingURL=jquery.min.map
 */
@@ -21449,7 +21449,7 @@ angular.module('ngResource', ['ng']).
 })(window, window.angular);
 
 
-/*! clioflict - v0.0.1 - 2013-09-07 */
+/*! clioflict - v0.0.1 - 2013-09-17 */
 var clioClientSearch = angular.module('clioClientSearch', []);
 
 
@@ -21695,6 +21695,14 @@ angular.module("clioClientSearch").run(["$templateCache", function($templateCach
 
   $templateCache.put("email_address.html",
     ""
+  );
+
+  $templateCache.put("grid.html",
+    "<div ng-class=\"contactTypeClass\">\n" +
+    "\t<div ng-class='glyphsClass'></div>\n" +
+    "      <div class=\"gridStyle\" ng-grid=\"gridOptions\">\n" +
+    "    </div>\n" +
+    "</div>"
   );
 
   $templateCache.put("loader.html",
