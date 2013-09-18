@@ -1,4 +1,4 @@
-/*! clioflict - v0.0.1 - 2013-09-14 */
+/*! clioflict - v0.0.1 - 2013-09-15 */
 /*! jQuery v2.0.3 | (c) 2005, 2013 jQuery Foundation, Inc. | jquery.org/license
 //@ sourceMappingURL=jquery.min.map
 */
@@ -24169,7 +24169,7 @@ angular.module("ngGrid").run(["$templateCache", function($templateCache) {
 
 }(window, jQuery));
 
-/*! clioflict - v0.0.1 - 2013-09-14 */
+/*! clioflict - v0.0.1 - 2013-09-15 */
 var clioClientSearch = angular.module('clioClientSearch', ['ngGrid']);
 
 
@@ -24184,12 +24184,12 @@ clioClientSearch.controller('SearchController',
       $scope.vm.accounts = [];
       $scope.vm.isLoading = false;
       $scope.gridData = [];
-      $scope.sampleData = [
-        {firstName: 'Adam', lastName: 'Ferguson'},
-        {firstName: 'Tom', lastName: 'Brooke'}
-      ];
       $scope.vm.gridOptions = {
-         data: 'gridData'
+         data: 'gridData',
+         columnDefs: [
+           {field: 'first_name', displayName: 'First Name'},
+           {field: 'last_name', displayName: 'Last Name'},
+         ]
       };
 
 
@@ -24226,21 +24226,12 @@ clioClientSearch.controller('SearchController',
 
             $scope.$apply(function () {
               $.extend(account, data.account);
-              //account.contacts = results.contacts;
               angular.forEach(results.contacts, function(contact) {
-                var data = {
-                  firstName: contact.first_name,
-                  lastName: contact.last_name
-                };
-
-                $scope.gridData.push(data);
+                $scope.gridData.push(contact);
               });
               account.isLoading = false;
 
-              totalAccountsCompleted++;
-              if (totalAccountsCompleted === $scope.vm.accounts.length) {
-                $scope.vm.isLoading = false;
-              }
+              $scope.vm.isLoading = false;
             });
           },
           onError: function(err) {
