@@ -10,16 +10,6 @@ var dateOfBirth = function(contact) {
   return date;
 }
 
-/*var contactURL = function(contact) {
-  var typeUrl;
-  if (contact.type === 'Company') {
-    typeUrl = 'companies/';
-  } else {
-    typeUrl = 'people/';
-  }
-  return typeUrl + contact.id;
-};*/
-
 clioClientSearch.controller('SearchController',
   ['$scope','searchDB',
     function($scope, searchDB) {
@@ -27,7 +17,7 @@ clioClientSearch.controller('SearchController',
       $scope.vm.accounts = [];
       $scope.vm.isLoading = false;
       $scope.gridData = [];
-
+      $scope.exportHeaders = ['id','account_name','name','type','prefix','first_name','last_name','title','date_of_birth'];
 
       $scope.vm.gridOptions = {
          data: 'gridData',
@@ -42,10 +32,6 @@ clioClientSearch.controller('SearchController',
            $scope.toggleContact(rowItem.entity, rowItem.entity.account_name);
          },
          showFilter: true
-         //rowTemplate:'<div style="height: 100%"><a ng-href="https://app.goclio.com/{{row.getProperty(\'contact_url\')}}" target="_blank"><div ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell ">' +
-         //              '<div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }"> </div>' +
-         //              '<div ng-cell></div>' +
-         //              '</div></a></div>'
       };
 
       $.get('/accounts', function(data) {
@@ -73,6 +59,22 @@ clioClientSearch.controller('SearchController',
         }
       };
 
+      $scope.exportContacts = function() {
+        var results = [];
+        angular.forEach($scope.gridData, function(contact) {
+          var exportContact = [];
+          angular.forEach($scope.exportHeaders, function(header) {
+            var field = contact[header];
+            exportContact.push(field);
+          });
+          results.push(exportContact);
+        });
+        return results;
+      };
+      $scope.exportFilename = function() {
+        return 'cliosearch-' + $scope.searchTerm + '.csv';
+      };
+
       $scope.search = function() {
         $scope.hasSearched = true;
         $scope.vm.isLoading = true;
@@ -97,12 +99,15 @@ clioClientSearch.controller('SearchController',
                 account = acc;
               }
             });
+            console.log(results);
 
             $scope.$apply(function () {
               angular.forEach(results.contacts, function(contact) {
+
                 contact.account_name = account.name;
                 contact.date_of_birth = dateOfBirth(contact);
                 //contact.contact_url = contactURL(contact);
+
 
                 $scope.gridData.push(contact);
               });
@@ -110,6 +115,7 @@ clioClientSearch.controller('SearchController',
 
               $scope.vm.isLoading = false;
               $scope.vm.accountsSearched++;
+
             });
           },
           onError: function(err) {
