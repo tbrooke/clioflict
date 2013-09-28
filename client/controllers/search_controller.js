@@ -5,10 +5,9 @@ clioClientSearch.controller('SearchController',
       $scope.vm.accounts = [];
       $scope.vm.isLoading = false;
       $scope.gridData = [];
-      $scope.sampleData = [
-        {firstName: 'Adam', lastName: 'Ferguson'},
-        {firstName: 'Tom', lastName: 'Brooke'}
-      ];
+
+      $scope.contactStatus = 'All';
+      $scope.vm.contactStatuses = [{name: 'All'}, {name: 'Open'}, {name: 'Pending'}, {name: 'Closed'}, {name: 'None'}];
       $scope.vm.gridOptions = {
          data: 'gridData'
       };
@@ -25,11 +24,7 @@ clioClientSearch.controller('SearchController',
       $scope.search = function() {
         $scope.hasSearched = true;
         $scope.vm.isLoading = true;
-        $scope.contactStatus = [{id: 1, item: 'All'},
-                                {id: 2, item: 'Open'},
-                                {id: 3, item: 'Pending'},
-                                {id: 4, item: 'Closed'}];
-        var searchData = {params: {searchTerm: $scope.searchTerm + "matters_status=" + contactStatus}};
+        var searchData = {params: {searchTerm: $scope.searchTerm,  matter_status: $scope.contactStatus.name}};
         $scope.gridData = [];
         var totalAccountsCompleted = 0;
 
