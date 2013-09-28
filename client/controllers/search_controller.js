@@ -1,27 +1,47 @@
+var dateOfBirth = function(contact) {
+  var date;
+
+  angular.forEach(contact.custom_field_values, function(custom_data) {
+    if (custom_data.custom_field && custom_data.custom_field.name === 'Date of Birth') {
+      date = custom_data.value;
+    }
+  });
+
+  return date;
+}
+
 clioClientSearch.controller('SearchController',
   ['$scope','searchDB',
     function($scope, searchDB) {
       $scope.vm = {};
       $scope.vm.accounts = [];
-      $scope.vm.selectedContacts = [];
-      $scope.hasSearched = false;
+      $scope.vm.isLoading = false;
+      $scope.gridData = [];
+      $scope.exportHeaders = ['id','account_name','name','type','prefix','first_name','last_name','title','date_of_birth'];
 
+      $scope.vm.gridOptions = {
+         data: 'gridData',
+         columnDefs: [
+           {field: 'account_name', displayName: 'Account Name'},
+           {field: 'first_name', displayName: 'First Name'},
+           {field: 'last_name', displayName: 'Last Name'},
+           {field: 'name', displayName: 'Company Name'},
+           {field: 'date_of_birth', displayName: 'Date of Birth'},
+         ],
+         afterSelectionChange: function(rowItem, state) {
+           $scope.toggleContact(rowItem.entity, rowItem.entity.account_name);
+         },
+         showFilter: true
+      };
 
       $.get('/accounts', function(data) {
           var accounts = data.accounts;
 
           $scope.$apply(function() {
             $scope.vm.accounts = accounts;
+            $scope.vm.totalAccounts = accounts.length;
           });
         });
-
-      $scope.toggleAccount = function(account) {
-        if (account.isCollapsed) {
-          account.isCollapsed = false;
-        } else {
-          account.isCollapsed = true;
-        }
-      };
 
       $scope.toggleContact = function(contact, accountName) {
         var foundIndex;
@@ -39,10 +59,30 @@ clioClientSearch.controller('SearchController',
         }
       };
 
+      $scope.exportContacts = function() {
+        var results = [];
+        angular.forEach($scope.gridData, function(contact) {
+          var exportContact = [];
+          angular.forEach($scope.exportHeaders, function(header) {
+            var field = contact[header];
+            exportContact.push(field);
+          });
+          results.push(exportContact);
+        });
+        return results;
+      };
+      $scope.exportFilename = function() {
+        return 'cliosearch-' + $scope.searchTerm + '.csv';
+      };
+
       $scope.search = function() {
         $scope.hasSearched = true;
+        $scope.vm.isLoading = true;
         var searchData = {params: {searchTerm: $scope.searchTerm}};
-        //searchDB = {};
+        $scope.gridData = [];
+        $scope.vm.selectedContacts = [];
+        $scope.vm.accountsSearched = 0;
+        var totalAccountsCompleted = 0;
 
         $.each($scope.vm.accounts, function(i, account) {
           account.isLoading = true;
@@ -59,12 +99,23 @@ clioClientSearch.controller('SearchController',
                 account = acc;
               }
             });
+            console.log(results);
 
             $scope.$apply(function () {
-              $.extend(account, data.account);
-              account.contacts = results.contacts;
-              console.log(results.contacts);
+              angular.forEach(results.contacts, function(contact) {
+
+                contact.account_name = account.name;
+                contact.date_of_birth = dateOfBirth(contact);
+                //contact.contact_url = contactURL(contact);
+
+
+                $scope.gridData.push(contact);
+              });
               account.isLoading = false;
+
+              $scope.vm.isLoading = false;
+              $scope.vm.accountsSearched++;
+
             });
           },
           onError: function(err) {
@@ -72,6 +123,7 @@ clioClientSearch.controller('SearchController',
             window.location = '/login';
           }
         });
+
       };
     }
   ]);

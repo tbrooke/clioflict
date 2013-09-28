@@ -39,3 +39,4 @@ body{padding:50px;background-color:#d6d2c4}
 .table-bordered{border:1px solid #ccc;}
 .table-bordered thead > tr > th{font-size:11px;border:1px solid #ccc}
 .table-bordered tbody > tr > td{border:1px solid #ccc}
+.grid-style{margin-top:30px;height:400px}

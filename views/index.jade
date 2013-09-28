@@ -6,19 +6,15 @@ block content
       form.form-inline
         input.form-control(type='text', ng-model='searchTerm', placeholder='Search for Clients')
         input.btn.btn-default(type='submit', ng-click='search()') Search
+        button.btn.btn-default(style="margin-left: 10px;", ng-csv='exportContacts()', filename='{{exportFilename()}}', csv-header='exportHeaders') Export
 
-      .search-results.col-md-6(ng-if='hasSearched')
-        .search-account.col-md-12(ng-repeat="account in vm.accounts")
-          header(ng-click='toggleAccount(account)')
-            h4 {{account.name}}
-            p ({{account.contacts.length}} matching contacts)
-          div.results(ng-switch="account.isLoading", ng-show="!account.isCollapsed")
-            clioloader(ng-switch-when="true")
-            ul.account-contacts.list-unstyled(ng-switch-when="false")
-              li.account-contact(ng-repeat="contact in account.contacts", ng-click='toggleContact(contact, account.name)')
-                contactsummary(contact='contact')
+      .search-results.col-md-7(ng-if='hasSearched')
+        p.search-summary {{vm.accountsSearched}} of {{vm.totalAccounts}} completed
+        div.results(ng-switch="vm.isLoading")
+          clioloader(ng-switch-when='true')
+          .grid-style(ng-grid="vm.gridOptions", ng-switch-when='false')
 
-      .contact-details.col-md-6(ng-if='hasSearched')
+      .contact-details.col-md-5(ng-if='hasSearched')
         h3 Selected Contact Details
         p.prompt(ng-if='!vm.selectedContacts.length')
           | Click on a contact from the search results to see their details
