@@ -22,7 +22,7 @@ var ClioAccount = require('../models').ClioAccount;
 var User        = require('../models').User;
 
 var url = 'https://app.goclio.com';
-var myUrl = 'https://conflicts.austin.utexas.edu';
+var myUrl = 'https://conflicts.law.utexas.edu';
 //var myUrl = 'https://6a432a90.ngrok.com';
 
 var clioClientId = 'qgRdVxi60UATe1JlaDBr3KWfNbOaLB0Ce2Ehzdnk';
