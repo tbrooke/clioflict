@@ -8,6 +8,7 @@ block content
         input.btn.btn-default(type='submit', ng-click='search()') Search
 
       .search-results.col-md-8(ng-if='hasSearched')
+        p.search-summary {{vm.accountsSearched}} of {{vm.totalAccounts}} completed
         div.results(ng-switch="vm.isLoading")
           clioloader(ng-switch-when='true')
           .grid-style(ng-grid="vm.gridOptions", ng-switch-when='false')

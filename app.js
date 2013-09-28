@@ -11,13 +11,17 @@ var express = require('express'),
 require('./lib/db');
 var mongoose = require('mongoose');
 
-var SessionStore = require("session-mongoose")(express);
-var store = new SessionStore({
-    connection: mongoose.connection,
-    //interval: 120000 // expiration check worker run interval in millisec (default: 60000)
-    sweeper: false
+//var SessionStore = require("session-mongoose")(express);
+//var store = new SessionStore({
+//    connection: mongoose.connection,
+//    //interval: 120000 // expiration check worker run interval in millisec (default: 60000)
+//    sweeper: false
+//});
+var MongoStore = require("connect-mongo")(express);
+var store = new MongoStore({
+  db: 'clioflict',
+  mongoose_connection: mongoose.connection
 });
-
 
 var app = express();
 
