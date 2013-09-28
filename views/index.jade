@@ -7,7 +7,7 @@ block content
         input.form-control(type='text', ng-model='searchTerm', placeholder='Search for Clients')
         input.btn.btn-default(type='submit', ng-click='search()') Search
 
-      .search-results.col-md-6(ng-if='hasSearched')
+      .search-results.col-md-8(ng-if='hasSearched')
         div.results(ng-switch="vm.isLoading")
           clioloader(ng-switch-when='true')
           .grid-style(ng-grid="vm.gridOptions", ng-switch-when='false')

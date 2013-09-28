@@ -1,4 +1,4 @@
-/*! clioflict - v0.0.1 - 2013-09-15 */
+/*! clioflict - v0.0.1 - 2013-09-28 */
 /*! jQuery v2.0.3 | (c) 2005, 2013 jQuery Foundation, Inc. | jquery.org/license
 //@ sourceMappingURL=jquery.min.map
 */
@@ -24169,13 +24169,25 @@ angular.module("ngGrid").run(["$templateCache", function($templateCache) {
 
 }(window, jQuery));
 
-/*! clioflict - v0.0.1 - 2013-09-15 */
+/*! clioflict - v0.0.1 - 2013-09-28 */
 var clioClientSearch = angular.module('clioClientSearch', ['ngGrid']);
 
 
 clioClientSearch.factory('searchDB', [function($scope){
   return {};
 }]);
+
+function dateOfBirth(contact) {
+  var date;
+
+  angular.forEach(contact.custom_field_values, function(custom_data) {
+    if (custom_data.custom_field && custom_data.custom_field.name === 'Date of Birth') {
+      date = custom_data.value;
+    }
+  });
+
+  return date;
+}
 
 clioClientSearch.controller('SearchController',
   ['$scope','searchDB',
@@ -24187,10 +24199,19 @@ clioClientSearch.controller('SearchController',
       $scope.vm.gridOptions = {
          data: 'gridData',
          columnDefs: [
+           {field: 'account_name', displayName: 'Account Name'},
            {field: 'first_name', displayName: 'First Name'},
            {field: 'last_name', displayName: 'Last Name'},
+           {field: 'date_of_birth', displayName: 'Date of Birth'},
+           {field: 'name', displayName: 'Company Name'},
          ]
       };
+      // first_name
+      // last_name
+      // clio account name
+      // company_name
+      // date_of_birth
+      // custom_data.custom_field === 'Date of Birth'
 
 
       $.get('/accounts', function(data) {
@@ -24224,9 +24245,13 @@ clioClientSearch.controller('SearchController',
               }
             });
 
+            console.log(results);
+
             $scope.$apply(function () {
-              $.extend(account, data.account);
               angular.forEach(results.contacts, function(contact) {
+                contact.account_name = account.name;
+                contact.date_of_birth = dateOfBirth(contact);
+
                 $scope.gridData.push(contact);
               });
               account.isLoading = false;
