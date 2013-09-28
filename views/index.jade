@@ -7,8 +7,16 @@ block content
         input.form-control(type='text', ng-model='searchTerm', placeholder='Search for Clients')
         input.btn.btn-default(type='submit', ng-click='search()') Search
 
-      .search-results.col-md-8(ng-if='hasSearched')
+      .search-results.col-md-7(ng-if='hasSearched')
         p.search-summary {{vm.accountsSearched}} of {{vm.totalAccounts}} completed
         div.results(ng-switch="vm.isLoading")
           clioloader(ng-switch-when='true')
           .grid-style(ng-grid="vm.gridOptions", ng-switch-when='false')
+
+      .contact-details.col-md-5(ng-if='hasSearched')
+        h3 Selected Contact Details
+        p.prompt(ng-if='!vm.selectedContacts.length')
+          | Click on a contact from the search results to see their details
+        ul(ng-if='vm.selectedContacts.length')
+          li.selected-contact(ng-repeat='contact in vm.selectedContacts')
+            contactdetails(contact='contact', remove-contact='toggleContact(contact)')

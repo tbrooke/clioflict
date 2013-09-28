@@ -37,7 +37,10 @@ clioClientSearch.controller('SearchController',
            {field: 'last_name', displayName: 'Last Name'},
            {field: 'name', displayName: 'Company Name'},
            {field: 'date_of_birth', displayName: 'Date of Birth'},
-         ]//,
+         ],
+         afterSelectionChange: function(rowItem, state) {
+           $scope.toggleContact(rowItem.entity, rowItem.entity.account_name);
+         }
          //rowTemplate:'<div style="height: 100%"><a ng-href="https://app.goclio.com/{{row.getProperty(\'contact_url\')}}" target="_blank"><div ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell ">' +
          //              '<div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }"> </div>' +
          //              '<div ng-cell></div>' +
@@ -53,11 +56,28 @@ clioClientSearch.controller('SearchController',
           });
         });
 
+      $scope.toggleContact = function(contact, accountName) {
+        var foundIndex;
+        $.each($scope.vm.selectedContacts, function(i, selectedContact) {
+          if (selectedContact.id === contact.id) {
+            foundIndex = i;
+          }
+        });
+
+        if (foundIndex !== undefined) {
+          $scope.vm.selectedContacts.splice(foundIndex, 1);
+        } else {
+          contact.accountName = accountName;
+          $scope.vm.selectedContacts.push(contact);
+        }
+      };
+
       $scope.search = function() {
         $scope.hasSearched = true;
         $scope.vm.isLoading = true;
         var searchData = {params: {searchTerm: $scope.searchTerm}};
         $scope.gridData = [];
+        $scope.vm.selectedContacts = [];
         $scope.vm.accountsSearched = 0;
         var totalAccountsCompleted = 0;
 
@@ -76,9 +96,6 @@ clioClientSearch.controller('SearchController',
                 account = acc;
               }
             });
-
-            console.log(account);
-            console.log(results);
 
             $scope.$apply(function () {
               angular.forEach(results.contacts, function(contact) {
