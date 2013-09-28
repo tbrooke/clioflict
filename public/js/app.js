@@ -24219,7 +24219,8 @@ clioClientSearch.controller('SearchController',
          ],
          afterSelectionChange: function(rowItem, state) {
            $scope.toggleContact(rowItem.entity, rowItem.entity.account_name);
-         }
+         },
+         showFilter: true
          //rowTemplate:'<div style="height: 100%"><a ng-href="https://app.goclio.com/{{row.getProperty(\'contact_url\')}}" target="_blank"><div ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell ">' +
          //              '<div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }"> </div>' +
          //              '<div ng-cell></div>' +
@@ -24385,8 +24386,8 @@ angular.module("clioClientSearch").run(["$templateCache", function($templateCach
     "          <th>Date of Birth</th>\n" +
     "        </tr></thead>\n" +
     "        <tbody>\n" +
-    "          <tr ng-repeat='custom_field_value in contact.custom_field_values'>\n" +
-    "            <td>{{custom_field_value.value}}</td>\n" +
+    "          <tr>\n" +
+    "            <td>{{contact.date_of_birth}}</td>\n" +
     "          </tr>\n" +
     "        </tbody>\n" +
     "      </table>\n" +

@@ -40,7 +40,8 @@ clioClientSearch.controller('SearchController',
          ],
          afterSelectionChange: function(rowItem, state) {
            $scope.toggleContact(rowItem.entity, rowItem.entity.account_name);
-         }
+         },
+         showFilter: true
          //rowTemplate:'<div style="height: 100%"><a ng-href="https://app.goclio.com/{{row.getProperty(\'contact_url\')}}" target="_blank"><div ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell ">' +
          //              '<div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }"> </div>' +
          //              '<div ng-cell></div>' +
