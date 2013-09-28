@@ -4,9 +4,9 @@ block content
   .app(ng-app='clioClientSearch')
     .search(ng-controller='SearchController')
       form.form-inline
-        input.form-control(type='text', ng-model='searchTerm', placeholder='Search for Clients')
+        input.form-control(type='text', ng-model='searchTerm', placeholder='Search for Clients')	
+        input.select(ng-model='contactStatus', ng-options="item as items in contactStatus")
         input.btn.btn-default(type='submit', ng-click='search()') Search
-
       .search-results.col-md-6(ng-if='hasSearched')
         div.results(ng-switch="vm.isLoading")
           clioloader(ng-switch-when='true')

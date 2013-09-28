@@ -1,4 +1,4 @@
-/*! clioflict - v0.0.1 - 2013-09-14 */
+/*! clioflict - v0.0.1 - 2013-09-28 */
 /*! jQuery v2.0.3 | (c) 2005, 2013 jQuery Foundation, Inc. | jquery.org/license
 //@ sourceMappingURL=jquery.min.map
 */
@@ -24169,7 +24169,7 @@ angular.module("ngGrid").run(["$templateCache", function($templateCache) {
 
 }(window, jQuery));
 
-/*! clioflict - v0.0.1 - 2013-09-14 */
+/*! clioflict - v0.0.1 - 2013-09-28 */
 var clioClientSearch = angular.module('clioClientSearch', ['ngGrid']);
 
 

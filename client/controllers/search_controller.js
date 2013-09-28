@@ -25,7 +25,11 @@ clioClientSearch.controller('SearchController',
       $scope.search = function() {
         $scope.hasSearched = true;
         $scope.vm.isLoading = true;
-        var searchData = {params: {searchTerm: $scope.searchTerm}};
+        $scope.contactStatus = [{id: 1, item: 'All'},
+                                {id: 2, item: 'Open'},
+                                {id: 3, item: 'Pending'},
+                                {id: 4, item: 'Closed'}];
+        var searchData = {params: {searchTerm: $scope.searchTerm + "matters_status=" + contactStatus}};
         $scope.gridData = [];
         var totalAccountsCompleted = 0;
 
