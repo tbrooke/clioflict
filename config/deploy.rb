@@ -18,7 +18,7 @@ default_run_options[:pty] = true
 
 # node-deploy options
 set :app_command, "app.js"
-set :app_environment, "PORT=443"
+set :app_environment, "PORT=43434"
 
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`

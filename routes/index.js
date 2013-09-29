@@ -56,7 +56,6 @@ var accounts = function(req, res) {
 
 var query = function(req, res){
   var query = req.query.searchTerm;
-  var matter_status = req.query.matter_status;
   var totalAccounts, totalCompletedRequests = 0;
 
   ClioAccount.find().
@@ -68,7 +67,7 @@ var query = function(req, res){
               });
 
   function searchForClients(account, query) {
-    var options = {qs: {query: query, matter_status: matter_status}, headers: {ContentType: 'application/json'}};
+    var options = {qs: {query: query}, headers: {ContentType: 'application/json'}};
     var request = clioApi.get(account.accessToken, '/contacts', options, function(err, response) {
       totalCompletedRequests++;
       toSend = {account: account, results: response.body};

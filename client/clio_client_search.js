@@ -1,1 +1,1 @@
-var clioClientSearch = angular.module('clioClientSearch', ['ngGrid']);
+var clioClientSearch = angular.module('clioClientSearch', ['ngSanitize','ngGrid','ngCsv']);
