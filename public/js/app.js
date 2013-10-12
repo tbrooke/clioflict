@@ -1,4 +1,4 @@
-/*! clioflict - v0.0.1 - 2013-09-28 */
+/*! clioflict - v0.0.1 - 2013-10-12 */
 /*! jQuery v2.0.3 | (c) 2005, 2013 jQuery Foundation, Inc. | jquery.org/license
 //@ sourceMappingURL=jquery.min.map
 */
@@ -24828,7 +24828,7 @@ angular.module('ngCsv.directives', []).
   }]);
 })(window, document);
 
-/*! clioflict - v0.0.1 - 2013-09-28 */
+/*! clioflict - v0.0.1 - 2013-10-12 */
 var clioClientSearch = angular.module('clioClientSearch', ['ngSanitize','ngGrid','ngCsv']);
 
 
