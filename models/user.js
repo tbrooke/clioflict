@@ -17,7 +17,7 @@ var userSchema = mongoose.Schema({
 
 userSchema.plugin(require('mongoose-lifecycle'));
 
-userSchema.virtual('isLocked').get(function) {
+userSchema.virtual('isLocked').get(function() {
   return !!(this.lockUntil && this.lockUntil > Date.now());
 }); 
   
@@ -29,7 +29,7 @@ userSchema.virtual('password').set(function(password){
   }).get(function(){ return this._password; });
 
 
-userSchema.virtual('passwordConfirmation').set(function(passwordConfirmation){
+userSchema.virtual('getAuthenticated').set(function(passwordConfirmation){
     this._passwordConfirmation = passwordConfirmation;
   }).get(function(){ return this._passwordConfirmation; });
 
@@ -55,8 +55,8 @@ userSchema.methods.incLoginAttempts = function(cb) {
     updates.$set = { lockUntil: Date.now() + LOCK_TIME};
 };
 
-userSchema.statics.getAuthenticated = function(username, password, cb) {
-    this.findOne({ username: username }, function(err, user) {
+userSchema.statics.getAuthenticated = function(email, hashedPassword, cb) {
+    this.findOne({ email: email }, function(err, user) {
         if (err) return cb(err);
 
         // make sure the user exists
