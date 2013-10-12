@@ -17,6 +17,11 @@ var userSchema = mongoose.Schema({
 
 userSchema.plugin(require('mongoose-lifecycle'));
 
+userSchema.virtual('isLocked').get(function) {
+  return !!(this.lockUntil && this.lockUntil > Date.now());
+}); 
+  
+
 userSchema.virtual('password').set(function(password){
     this._password = password;
     this.salt = this.makeSalt();
@@ -29,6 +34,24 @@ userSchema.virtual('passwordConfirmation').set(function(passwordConfirmation){
 
 userSchema.methods.authenticate = function(plainText) {
   return this.encryptPassword(plainText) === this.hashedPassword;
+};
+
+userSchema.statics.failedLogin = {
+    NOT_FOUND: 0,
+    PASSWORD_INCORRECT: 1,
+    MAX_ATTEMPTS: 2
+};
+
+userSchema.methods.incLoginAttempts = function(cb) {
+  if (this.lockUntil  && this.lockUntil < Date.now()) {
+    return this.update({
+      $set: { loginAttempts: 1 },
+      $unset: { lockUntil: 1}
+    }, cb);
+  }
+  var updates = { $inc: {loginAttempts: 1 }};
+  if (this.loginAttempts + 1 >= MAX_LOGIN_ATTEMPTS && !this.isLocked)
+    updates.$set = { lockUntil: Date.now() + LOCK_TIME};
 };
 
 userSchema.methods.makeSalt = function() {
