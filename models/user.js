@@ -1,10 +1,15 @@
 var mongoose = require('mongoose');
 var crypto   = require('crypto');
 
+MAX_LOGIN_ATTEMPTS = 10;
+LOCK_TIME = 2 * 60 * 60 * 1000;
+
 var userSchema = mongoose.Schema({
   email: { type: String, required: true, index: {unique: true}},
   hashedPassword: String,
   salt: String,
+  loginAttempts: { type: number, required: true, default: 0},
+  lockUntil: {type: Number},
   authenticationToken: { type: String, index: {unique: true} },
   resetToken: String,
   clioAccountIds: [String]
