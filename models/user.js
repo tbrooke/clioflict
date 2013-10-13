@@ -29,7 +29,7 @@ userSchema.virtual('password').set(function(password){
   }).get(function(){ return this._password; });
 
     
-userSchema.virtual('authenticate').get(function(email,hashedPassword,err) {
+userSchema.virtual('getAuthenticated').get(function(email,hashedPassword,err) {
 
         if (err) throw err;
 
@@ -51,7 +51,6 @@ userSchema.virtual('authenticate').get(function(email,hashedPassword,err) {
             case reasons.MAX_ATTEMPTS:
                  return done(null, false, { message: 'To Many Attempts Try again later ' }); 
                 break; }
-        }
     });
 
 
