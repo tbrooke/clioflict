@@ -62,7 +62,7 @@ userSchema.methods.authenticate = function(plainText) {
   return this.encryptPassword(plainText) === this.hashedPassword;
 };
 
-userSchema.statics.failedLogin = {
+var failedLogin = {
     NOT_FOUND: 0,
     PASSWORD_INCORRECT: 1,
     MAX_ATTEMPTS: 2
