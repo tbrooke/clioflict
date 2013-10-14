@@ -29,29 +29,26 @@ userSchema.virtual('password').set(function(password){
   }).get(function(){ return this._password; });
 
     
-userSchema.virtual('getAuthenticated').get(function(email,hashedPassword,err) {
+// userSchema.virtual('getAuthenticated').get(function(email,hashedPassword,err) {
 
-        if (err) throw err;
+//         if (err) throw err;
 
-        // login was successful if we have a user
-        if (user) {
-            // handle login success
-            console.log('login success');
-            return;
-        }
+//         // login was successful if we have a user
+//         if (user) {
+//             // handle login success
+//             console.log('login success');
+//             return;
+//         }
 
-        // otherwise we can determine why we failed
-        var reasons = User.failedLogin;
-        switch (reason) {
-            case reasons.NOT_FOUND:
-            case reasons.PASSWORD_INCORRECT:
-                // note: these cases are usually treated the same - don't tell
-                // the user *why* the login failed, only that it did
-                break;
-            case reasons.MAX_ATTEMPTS:
-                 return done(null, false, { message: 'To Many Attempts Try again later ' }); 
-                break; }
-    });
+//         var reasons = User.failedLogin;
+//         switch (reason) {
+//             case reasons.NOT_FOUND:
+//             case reasons.PASSWORD_INCORRECT:
+//                 break;
+//             case reasons.MAX_ATTEMPTS:
+//                  return done(null, false, { message: 'To Many Attempts Try again later ' }); 
+//                 break; }
+//     });
 
 
 // .set(function(passwordConfirmation){
@@ -80,25 +77,14 @@ userSchema.methods.incLoginAttempts = function(cb) {
     updates.$set = { lockUntil: Date.now() + LOCK_TIME};
 };
 
-userSchema.statics.getAuthenticated = function(email, hashedPassword, cb) {
-    this.findOne({ email: email }, function(err, user) {
-        if (err) return cb(err);
+userSchema.static.blockBrute = function(email, password, cb) {
 
-        // make sure the user exists
-        if (!user) {
-            return cb(null, null, reasons.NOT_FOUND);
-        }
-
-        // check if the account is currently locked
         if (user.isLocked) {
-            // just increment login attempts if account is already locked
             return user.incLoginAttempts(function(err) {
                 if (err) return cb(err);
                 return cb(null, null, reasons.MAX_ATTEMPTS);
             });
           }
-         // test for a matching password
-        user.comparePassword(password, function(err, isMatch) {
             if (err) return cb(err);
 
             // check if the password was a match
@@ -121,9 +107,7 @@ userSchema.statics.getAuthenticated = function(email, hashedPassword, cb) {
                 return cb(null, null, reasons.PASSWORD_INCORRECT);
             });
         };
-    });
-  });
-};
+    };
 
 
 userSchema.methods.makeSalt = function() {

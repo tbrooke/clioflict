@@ -90,12 +90,6 @@ var accountQuery = function(req, res){
   });
 };
 
-// var admin = function(req, res){
-//   accountIds = req.user.clioAccountIds;
-//   ClioAccount.find().in('_id', accountIds).exec(function(err,accounts) {
-//     res.render('admin', { title: 'Admin', accounts: accounts, req: req });
-//   });
-// };
 
 
 var admin = function(req, res){
