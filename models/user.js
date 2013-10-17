@@ -77,7 +77,7 @@ userSchema.methods.incLoginAttempts = function(cb) {
     updates.$set = { lockUntil: Date.now() + LOCK_TIME};
 };
 
-userSchema.static.blockBrute = function(email, password, cb) {
+userSchema.statics.blockBrute = function(email, password, cb) {
 
         if (user.isLocked) {
             return user.incLoginAttempts(function(err) {
