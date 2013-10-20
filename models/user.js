@@ -59,55 +59,55 @@ userSchema.methods.authenticate = function(plainText) {
   return this.encryptPassword(plainText) === this.hashedPassword;
 };
 
-var failedLogin = {
-    NOT_FOUND: 0,
-    PASSWORD_INCORRECT: 1,
-    MAX_ATTEMPTS: 2
-};
+// var failedLogin = {
+//     NOT_FOUND: 0,
+//     PASSWORD_INCORRECT: 1,
+//     MAX_ATTEMPTS: 2
+// };
 
-userSchema.methods.incLoginAttempts = function(cb) {
-  if (this.lockUntil  && this.lockUntil < Date.now()) {
-    return this.update({
-      $set: { loginAttempts: 1 },
-      $unset: { lockUntil: 1}
-    }, cb);
-  }
-  var updates = { $inc: {loginAttempts: 1 }};
-  if (this.loginAttempts + 1 >= MAX_LOGIN_ATTEMPTS && !this.isLocked)
-    updates.$set = { lockUntil: Date.now() + LOCK_TIME};
-};
+// userSchema.methods.incLoginAttempts = function(cb) {
+//   if (this.lockUntil  && this.lockUntil < Date.now()) {
+//     return this.update({
+//       $set: { loginAttempts: 1 },
+//       $unset: { lockUntil: 1}
+//     }, cb);
+//   }
+//   var updates = { $inc: {loginAttempts: 1 }};
+//   if (this.loginAttempts + 1 >= MAX_LOGIN_ATTEMPTS && !this.isLocked)
+//     updates.$set = { lockUntil: Date.now() + LOCK_TIME};
+// };
 
-userSchema.statics.blockBrute = function(email, password, cb) {
+// userSchema.statics.blockBrute = function(email, password, cb) {
 
-        if (user.isLocked) {
-            return user.incLoginAttempts(function(err) {
-                if (err) return cb(err);
-                return cb(null, null, reasons.MAX_ATTEMPTS);
-            });
-          }
-            if (err) return cb(err);
+//         if (user.isLocked) {
+//             return user.incLoginAttempts(function(err) {
+//                 if (err) return cb(err);
+//                 return cb(null, null, reasons.MAX_ATTEMPTS);
+//             });
+//           }
+//             if (err) return cb(err);
 
-            // check if the password was a match
-            if (isMatch) {
-                // if there's no lock or failed attempts, just return the user
-                if (!user.loginAttempts && !user.lockUntil) return cb(null, user);
-                // reset attempts and lock info
-                var updates = {
-                    $set: { loginAttempts: 0 },
-                    $unset: { lockUntil: 1 }
-                };
-                return user.update(updates, function(err) {
-                    if (err) return cb(err);
-                    return cb(null, user);
-                });
+//             // check if the password was a match
+//             if (isMatch) {
+//                 // if there's no lock or failed attempts, just return the user
+//                 if (!user.loginAttempts && !user.lockUntil) return cb(null, user);
+//                 // reset attempts and lock info
+//                 var updates = {
+//                     $set: { loginAttempts: 0 },
+//                     $unset: { lockUntil: 1 }
+//                 };
+//                 return user.update(updates, function(err) {
+//                     if (err) return cb(err);
+//                     return cb(null, user);
+//                 });
 
-            // password is incorrect, so increment login attempts before responding
-            user.incLoginAttempts(function(err) {
-                if (err) return cb(err);
-                return cb(null, null, reasons.PASSWORD_INCORRECT);
-            });
-        };
-    };
+//             // password is incorrect, so increment login attempts before responding
+//             user.incLoginAttempts(function(err) {
+//                 if (err) return cb(err);
+//                 return cb(null, null, reasons.PASSWORD_INCORRECT);
+//             });
+//         };
+//     };
 
 
 userSchema.methods.makeSalt = function() {
