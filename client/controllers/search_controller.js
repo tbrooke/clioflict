@@ -46,6 +46,7 @@ clioClientSearch.controller('SearchController',
 
       $scope.vm.gridOptions = {
          data: 'gridData',
+         enablePinning: true,
          columnDefs: [
            {field: 'account_name', displayName: 'Account Name'},
            {field: 'first_name', displayName: 'First Name'},
