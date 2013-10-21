@@ -1,15 +1,3 @@
-/*var dateOfBirth = function(contact) {
-  var date;
-
-  angular.forEach(contact.custom_field_values, function(custom_data) {
-    if (custom_data.custom_field && custom_data.custom_field.name === 'Date of Birth') {
-      date = custom_data.value;
-    }
-  });
-
-  return date;
-};*/
-
 // field name should be a regular expression to match the
 // custom data field against
 var customDataExtraction = function(fieldName, contact) {
@@ -31,6 +19,10 @@ clioClientSearch.controller('SearchController',
       $scope.vm.accounts = [];
       $scope.vm.isLoading = false;
       $scope.gridData = [];
+      $scope.filterOptions = {
+        filterText: ''
+      };
+
       $scope.exportHeaders = ['id',
                               'account_name',
                               'first_name',
@@ -48,6 +40,7 @@ clioClientSearch.controller('SearchController',
          data: 'gridData',
          enableColumnReordering: true,
          enableColumnResize: true,
+         filterOptions: $scope.filterOptions,
          columnDefs: [
            {field: 'account_name', displayName: 'Account Name', width: 120},
            {field: 'first_name', displayName: 'First Name'},
@@ -64,7 +57,7 @@ clioClientSearch.controller('SearchController',
          afterSelectionChange: function(rowItem, state) {
            $scope.toggleContact(rowItem.entity, rowItem.entity.account_name);
          },
-         showFilter: true
+         //showFilter: true
       };
 
       $.get('/accounts', function(data) {

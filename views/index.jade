@@ -10,6 +10,8 @@ block content
 
       .search-results.col-md-13(ng-if='hasSearched')
         p.search-summary {{vm.accountsSearched}} of {{vm.totalAccounts}} completed
+        .form-small
+          input.form-control(type='text', ng-model='filterOptions.filterText', placeholder='Fine grained filter')
         div.results(ng-switch="vm.isLoading")
           clioloader(ng-switch-when='true')
           .grid-style(ng-grid="vm.gridOptions", ng-switch-when='false')
