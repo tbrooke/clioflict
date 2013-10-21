@@ -605,7 +605,7 @@ body{padding:50px;background-color:#d6d2c4}
 .company-summary.selected{background-color:#394348}
 .contact-details ul{list-style-type:none;padding:0;}
 .contact-details ul li{padding:0;margin:0}
-.person-details{padding:0;border:2px solid #ccc;}
+.person-details{background-color:#c8c9c7;border:solid;border-color:#003057;padding:0;border:2px solid #ccc;}
 .person-details article{padding:5px}
 .person-details header{width:100%;margin:0;padding:10px 5px;}
 .person-details header h5.name{float:left;margin:0;padding:0}
