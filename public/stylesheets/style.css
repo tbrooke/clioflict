@@ -1,5 +1,8 @@
+#detail{width:960px}
 #title-space{margin:35px 0 35px}
 body{padding:50px;background-color:#d6d2c4}
+.ngHeaderButton{position:absolute;right:290px;top:-77px;-moz-border-radius:50%;-webkit-border-radius:50%;-webkit-border-radius:50%;border-radius:50%;width:14px;height:14px;z-index:1;background-color:#9fbbb4;cursor:pointer}
+.ngColMenu{right:74px;padding:5px;top:-90px;-moz-border-radius:3px;-webkit-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;background-color:#bdd0cb;position:absolute;border:2px solid #d4d4d4;z-index:1}
 .navbar-fixed-top{background-color:#c50}
 .search input[type='text']{width:50%;margin-right:20px;}
 .search input[type='text'] .search-results,.search input[type='text'] margin-top: 35px,.search input[type='text'] float: left,.search input[type='text'] .search-account{margin-right:10px;margin-bottom:5px;border:3px solid #eee;-webkit-border-radius:5px;border-radius:5px;padding:0}
