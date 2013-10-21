@@ -14,10 +14,11 @@ block content
           clioloader(ng-switch-when='true')
           .grid-style(ng-grid="vm.gridOptions", ng-switch-when='false')
 
-      .contact-details.col-md-5(ng-if='hasSearched')
-        h3 Selected Contact Details
-        p.prompt(ng-if='!vm.selectedContacts.length')
-          | Click on a contact from the search results to see their details
-        ul(ng-if='vm.selectedContacts.length')
-          li.selected-contact(ng-repeat='contact in vm.selectedContacts')
-            contactdetails(contact='contact', remove-contact='toggleContact(contact)')
+      #detail 
+        .contact-details.col-md-5(ng-if='hasSearched')
+          h3 Selected Contact Details
+          p.prompt(ng-if='!vm.selectedContacts.length')
+             | Click on a contact from the search results to see their details
+          ul(ng-if='vm.selectedContacts.length')
+            li.selected-contact(ng-repeat='contact in vm.selectedContacts')
+              contactdetails(contact='contact', remove-contact='toggleContact(contact)')

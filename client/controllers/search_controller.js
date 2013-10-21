@@ -46,9 +46,10 @@ clioClientSearch.controller('SearchController',
 
       $scope.vm.gridOptions = {
          data: 'gridData',
-         enablePinning: true,
+         enableColumnReordering: true,
+         enableColumnResize: true,
          columnDefs: [
-           {field: 'account_name', displayName: 'Account Name'},
+           {field: 'account_name', displayName: 'Account Name', width: 120},
            {field: 'first_name', displayName: 'First Name'},
            {field: 'last_name', displayName: 'Last Name'},
            {field: 'middle_name', displayName: 'Middle Name'},
@@ -174,3 +175,5 @@ clioClientSearch.controller('SearchController',
       };
     }
   ]);
+
+
