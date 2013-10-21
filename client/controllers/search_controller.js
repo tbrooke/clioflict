@@ -1,4 +1,4 @@
-var dateOfBirth = function(contact) {
+/*var dateOfBirth = function(contact) {
   var date;
 
   angular.forEach(contact.custom_field_values, function(custom_data) {
@@ -8,6 +8,20 @@ var dateOfBirth = function(contact) {
   });
 
   return date;
+};*/
+
+// field name should be a regular expression to match the
+// custom data field against
+var customDataExtraction = function(fieldName, contact) {
+  var customDataValue;
+
+  angular.forEach(contact.custom_field_values, function(custom_data) {
+    if (custom_data.custom_field && custom_data.custom_field.name.match(fieldName)) {
+      customDataValue = custom_data.value;
+    }
+  });
+
+  return customDataValue;
 }
 
 clioClientSearch.controller('SearchController',
@@ -17,7 +31,18 @@ clioClientSearch.controller('SearchController',
       $scope.vm.accounts = [];
       $scope.vm.isLoading = false;
       $scope.gridData = [];
-      $scope.exportHeaders = ['id','account_name','name','type','prefix','first_name','last_name','title','date_of_birth'];
+      $scope.exportHeaders = ['id',
+                              'account_name',
+                              'first_name',
+                              'last_name',
+                              'middle_name',
+                              'date_of_birth',
+                              'phone_number',
+                              'street',
+                              'city',
+                              'state',
+                              'postal_code',
+                              'organization'];
 
       $scope.vm.gridOptions = {
          data: 'gridData',
@@ -25,8 +50,14 @@ clioClientSearch.controller('SearchController',
            {field: 'account_name', displayName: 'Account Name'},
            {field: 'first_name', displayName: 'First Name'},
            {field: 'last_name', displayName: 'Last Name'},
-           {field: 'name', displayName: 'Company Name'},
+           {field: 'middle_name', displayName: 'Middle Name'},
            {field: 'date_of_birth', displayName: 'Date of Birth'},
+           {field: 'phone_number', displayName: 'Phone Number'},
+           {field: 'street', displayName: 'Street'},
+           {field: 'city', displayName: 'City'},
+           {field: 'state', displayName: 'State'},
+           {field: 'postal_code', displayName: 'Zip Code'},
+           {field: 'organization', displayName: 'Organization'},
          ],
          afterSelectionChange: function(rowItem, state) {
            $scope.toggleContact(rowItem.entity, rowItem.entity.account_name);
@@ -61,14 +92,16 @@ clioClientSearch.controller('SearchController',
 
       $scope.exportContacts = function() {
         var results = [];
-        angular.forEach($scope.gridData, function(contact) {
-          var exportContact = [];
-          angular.forEach($scope.exportHeaders, function(header) {
-            var field = contact[header];
-            exportContact.push(field);
+        if ($scope.vm.gridOptions.ngGrid) {
+          angular.forEach($scope.vm.gridOptions.ngGrid.filteredRows, function(contact) {
+            var exportContact = [];
+            angular.forEach($scope.exportHeaders, function(header) {
+              var field = contact.entity[header];
+              exportContact.push(field);
+            });
+            results.push(exportContact);
           });
-          results.push(exportContact);
-        });
+        }
         return results;
       };
       $scope.exportFilename = function() {
@@ -104,12 +137,25 @@ clioClientSearch.controller('SearchController',
             $scope.$apply(function () {
               angular.forEach(results.contacts, function(contact) {
 
-                contact.account_name = account.name;
-                contact.date_of_birth = dateOfBirth(contact);
-                //contact.contact_url = contactURL(contact);
+                if (contact.type !== 'Company') {
+                  contact.account_name = account.name;
+                  contact.date_of_birth = customDataExtraction(/date of birth/i, contact);
+                  contact.middle_name = customDataExtraction(/middle name/i, contact);
+                  var firstPhone = contact.phone_numbers[0];
+                  var firstAddress = contact.addresses[0];
+                  if (firstPhone) {
+                    contact.phone_number = firstPhone.number;
+                  }
+                  if (firstAddress) {
+                    contact.street      = firstAddress.street;
+                    contact.city        = firstAddress.city;
+                    contact.state       = firstAddress.state;
+                    contact.postal_code = firstAddress.postal_code;
+                  }
+                  contact.organization = contact.company ? contact.company.name : null;
 
-
-                $scope.gridData.push(contact);
+                  $scope.gridData.push(contact);
+                }
               });
               account.isLoading = false;
 
