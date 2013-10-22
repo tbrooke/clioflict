@@ -8,7 +8,7 @@ html
     link(rel='stylesheet', href='/css/app.css')
   body
     .navbar.navbar-inverse.navbar-fixed-top
-      .container
+      .container-fluid
         .navbar-header
           button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
             span.icon-bar
@@ -28,7 +28,7 @@ html
               li(class=navBarClasses(req, '/login'))
                 a(href='/login') Login
 
-    .container
+    .container-fluid
       #title-space
         h1= title
       block content
