@@ -20,7 +20,7 @@ var mongoose = require('mongoose');
 var MongoStore = require("connect-mongo")(express);
 var store = new MongoStore({
   db: 'clioflict',
-  mongoose_connection: mongoose.connection
+  clear_interval: 30
 });
 
 var app = express();
@@ -44,7 +44,7 @@ app.configure(function() {
   app.use(express.cookieParser());
   app.use(express.session({
     secret: '48hgU2kykg97LKEipHoK',
-    cookie: {maxAge: new Date(Date.now() + 3600000)},
+    // cookie: {maxAge: new Date(Date.now() + 3600000)},
     store: store,
   }));
   app.use(passport.initialize());
