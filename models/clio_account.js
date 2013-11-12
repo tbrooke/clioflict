@@ -31,17 +31,7 @@ clioAccountSchema.static('setupAccount', function(accessToken, user, callback) {
 
   function handleAccountSave(err, clioAccount) {
     if (err) console.log("error: " + err);
-    else {
-      addAccountIdToUser(clioAccount.id);
-    }
     return callback();
-  };
-
-  function addAccountIdToUser(accountId) {
-    if (!_.find(user.clioAccountIds, function(acc) { return acc === accountId; })) {
-      user.clioAccountIds.push(accountId);
-      user.save();
-    }
   };
 
 });
