@@ -39,7 +39,6 @@ var index = function(req, res) {
 
 var accounts = function(req, res) {
   ClioAccount.find().
-    where('_id').in(req.user.clioAccountIds).
     exec(function(err,accounts) {
       if (err) { console.log(err); }
       var accountsToSend = [];
