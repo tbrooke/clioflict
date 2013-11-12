@@ -57,9 +57,7 @@ var query = function(req, res){
   var query = req.query.searchTerm;
   var totalAccounts, totalCompletedRequests = 0;
 
-  ClioAccount.find().
-              where('_id').in(req.user.clioAccountIds).
-              exec(function(err,accounts) {
+  ClioAccount.find().exec(function(err,accounts) {
                 accounts.forEach(function(account) {
                   searchForClients(account, query);
                 });
@@ -98,8 +96,7 @@ var accountQuery = function(req, res){
 
 
 var admin = function(req, res){
-  accountIds = req.user.clioAccountIds;
-  ClioAccount.find().in('_id', accountIds).exec(function(err,accounts) {
+  ClioAccount.find().exec(function(err,accounts) {
     User.find(function(err,users) {
       res.render('admin', { title: 'Admin', 
         accounts: accounts,
