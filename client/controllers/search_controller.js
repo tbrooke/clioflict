@@ -127,30 +127,31 @@ clioClientSearch.controller('SearchController',
                 account = acc;
               }
             });
-            console.log(results);
 
             $scope.$apply(function () {
               angular.forEach(results.contacts, function(contact) {
 
-                if (contact.type !== 'Company') {
-                  contact.account_name = account.name;
-                  contact.date_of_birth = customDataExtraction(/date of birth/i, contact);
-                  contact.middle_name = customDataExtraction(/middle name/i, contact);
-                  var firstPhone = contact.phone_numbers[0];
-                  var firstAddress = contact.addresses[0];
-                  if (firstPhone) {
-                    contact.phone_number = firstPhone.number;
-                  }
-                  if (firstAddress) {
-                    contact.street      = firstAddress.street;
-                    contact.city        = firstAddress.city;
-                    contact.state       = firstAddress.state;
-                    contact.postal_code = firstAddress.postal_code;
-                  }
-                  contact.organization = contact.company ? contact.company.name : null;
-
-                  $scope.gridData.push(contact);
+                contact.account_name = account.name;
+                contact.date_of_birth = customDataExtraction(/date of birth/i, contact);
+                contact.middle_name = customDataExtraction(/middle name/i, contact);
+                var firstPhone = contact.phone_numbers[0];
+                var firstAddress = contact.addresses[0];
+                if (firstPhone) {
+                  contact.phone_number = firstPhone.number;
                 }
+                if (firstAddress) {
+                  contact.street      = firstAddress.street;
+                  contact.city        = firstAddress.city;
+                  contact.state       = firstAddress.state;
+                  contact.postal_code = firstAddress.postal_code;
+                }
+                if (contact.type === 'Company') {
+                  contact.organization = contact.name;
+                } else {
+                  contact.organization = contact.company ? contact.company.name : null;
+                }
+
+                $scope.gridData.push(contact);
               });
               account.isLoading = false;
 
