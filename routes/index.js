@@ -6,7 +6,6 @@
 var auth = require('./auth');
 var clio = require('./clio');
 var User = require('../models').User;
-// var role = require('connect-roles');
 var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 var streamable = require('../app').streamable;
 
@@ -97,20 +96,33 @@ var accountQuery = function(req, res){
 
 
 var admin = function(req, res){
-  ClioAccount.find().exec(function(err,accounts) {
+  if (req.user.admin === true) {
+    ClioAccount.find().exec(function(err,accounts) {
     User.find(function(err,users) {
-      if (req.user.admin === true) {
       res.render('admin', { title: 'Admin', 
         accounts: accounts,
         users: users,
         req: req
-      })}
+      })
+    })
+  })}
       else 
-        res.send(401, 'Unauthorized');
-        res.redirect('admin');
-    });
-    });
-};
+        res.redirect('/');
+    };
+
+
+
+// var admin = function(req, res){
+//   ClioAccount.find().exec(function(err,accounts) {
+//     User.find(function(err,users) {
+//       res.render('admin', { title: 'Admin', 
+//         accounts: accounts,
+//         users: users,
+//         req: req
+//       });
+//     });
+//   });
+// };
 
 var requiresAdmin = function() {
   return [

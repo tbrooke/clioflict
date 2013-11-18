@@ -22,7 +22,6 @@
     "socket.io": "~0.9.16",
     "streamable": "~0.6.0",
     "forever": "~0.10.8",
-    "connect-roles": "~2.1.0",
     "connect-mongo": "~0.3.3"
   },
   "devDependencies": {
