@@ -107,7 +107,7 @@ var admin = function(req, res){
     })
   })}
       else 
-        res.redirect('/');
+        res.redirect('/query');
     };
 
 
