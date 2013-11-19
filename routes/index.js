@@ -107,32 +107,10 @@ var admin = function(req, res){
     })
   })}
       else 
-        res.redirect('/query');
-    };
+        res.redirect('/')
+  };
 
 
 
-// var admin = function(req, res){
-//   ClioAccount.find().exec(function(err,accounts) {
-//     User.find(function(err,users) {
-//       res.render('admin', { title: 'Admin', 
-//         accounts: accounts,
-//         users: users,
-//         req: req
-//       });
-//     });
-//   });
-// };
 
-var requiresAdmin = function() {
-  return [
-    ensureLoggedIn('/login'),
-    function(req, res, next) {
-      if (req.user && req.user.admin  === true)
-        next();
-      else
-        res.send(401, 'Unauthorized');
-        res.redirect('admin');
-    }
-  ]
-};
+
