@@ -63,6 +63,7 @@ app.configure(function() {
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(express.csrf());
+  app.use(frameBusting);
   app.use(stylus.middleware({src: __dirname + '/public', compile: compile}));
   app.use(express.static(path.join(__dirname, 'public')));
 });
