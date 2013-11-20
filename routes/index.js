@@ -5,31 +5,43 @@
 
 var auth = require('./auth');
 var clio = require('./clio');
-var User        = require('../models').User;
+var User = require('../models').User;
 var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 var streamable = require('../app').streamable;
 
 var ClioAccount = require('../models').ClioAccount;
 var clioApi     = require('../lib/clio_api');
 
+var ensureAdmin = function(req, res, next) {
+  if (req.user.admin) {
+    next();
+  } else {
+    res.send(401, 'You do not have access to this page');
+  }
+}
+
 module.exports = function(app) {
 	app.get('/', ensureLoggedIn('/login'), index);
-  app.get('/accounts', ensureLoggedIn('/login'), accounts);
 	app.get('/query', [ensureLoggedIn('/login'), streamable, query]);
   app.get('/query/:account_id', [ensureLoggedIn('/login'), streamable, accountQuery]);
-	app.get('/admin', ensureLoggedIn('/login'), admin);
-  app.get('/signup',  ensureLoggedIn('/login'), auth.signupForm);
-  app.post('/signup', ensureLoggedIn('/login'), auth.signup);
 	app.get('/login', auth.loginForm);
 	app.post('/login', auth.login);
 	app.get('/logout', auth.logout);
 	app.get('/callback', clio.callback);
 	app.get('/clioAuth', ensureLoggedIn('/login'), clio.clioAuth);
+
+  // Admin routes
+  app.get('/admin', ensureLoggedIn('/login'), ensureAdmin, admin);
+  app.get('/signup', ensureLoggedIn('/login'), ensureAdmin, auth.signupForm);
+  app.post('/signup', ensureLoggedIn('/login'), ensureAdmin, auth.signup);
+  app.get('/accounts', ensureLoggedIn('/login'), ensureAdmin, accounts);
   app.get('/remove_account/:account_id', 
           ensureLoggedIn('/login'),
+          ensureAdmin,
           clio.removeAccount);
   app.get('/remove_user/:user_id', 
           ensureLoggedIn('/login'),
+          ensureAdmin,
           auth.removeUser);
 };
 
@@ -95,7 +107,7 @@ var accountQuery = function(req, res){
 // };
 
 
-var admin = function(req, res){
+var admin = function(req, res) {
   ClioAccount.find().exec(function(err,accounts) {
     User.find(function(err,users) {
       res.render('admin', { title: 'Admin', 
@@ -106,3 +118,8 @@ var admin = function(req, res){
     });
   });
 };
+
+
+
+
+

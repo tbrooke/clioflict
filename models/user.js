@@ -7,6 +7,7 @@ var userSchema = mongoose.Schema({
   salt: String,
   authenticationToken: { type: String, index: {unique: true} },
   resetToken: String,
+  admin: Boolean,
   //clioAccountIds: [String]
 });
 

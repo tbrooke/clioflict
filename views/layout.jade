@@ -19,8 +19,9 @@ html
           ul.nav.navbar-nav
             li(class=navBarClasses(req, '/'))
               a(href='/') Home
-            li(class=navBarClasses(req, '/admin'))
-              a(href='/admin') Admin
+            if req.isAuthenticated() && req.user.admin
+              li(class=navBarClasses(req, '/admin'))
+                a(href='/admin') Admin
             if req.isAuthenticated()
               li(class=navBarClasses(req, '/logout'))
                 a(href='/logout') Logout
