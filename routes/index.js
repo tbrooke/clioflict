@@ -34,12 +34,12 @@ module.exports = function(app) {
 	app.get('/logout', auth.logout);
 	app.get('/callback', clio.callback);
 	app.get('/clioAuth', ensureLoggedIn('/login'), clio.clioAuth);
+  app.get('/accounts', ensureLoggedIn('/login'), accounts);
 
   // Admin routes
   app.get('/admin', ensureLoggedIn('/login'), ensureAdmin, admin);
   app.get('/signup', ensureLoggedIn('/login'), ensureAdmin, csrf, auth.signupForm);
   app.post('/signup', ensureLoggedIn('/login'), ensureAdmin, auth.signup);
-  app.get('/accounts', ensureLoggedIn('/login'), ensureAdmin, accounts);
   app.get('/remove_account/:account_id', 
           ensureLoggedIn('/login'),
           ensureAdmin,
