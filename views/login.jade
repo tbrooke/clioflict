@@ -7,6 +7,7 @@ block content
         .alert.alert-danger= flash
       h5 Please enter your login information
       form(action='login', method='post', role='form')
+        input(type='hidden', name='_csrf', value=token)
         .form-group
           label Email
           input.form-control(type='text', name='email')

@@ -32,6 +32,23 @@ function compile(str, path) {
     .use(nib());
 }
 
+var frameBusting = function(req, res, next) {
+  res.set('X-Frame-Options', 'Deny');
+  next();
+};
+
+var sessionSettings = {
+  secret: '48hgU2kykg97LKEipHoK',
+  //cookie: {maxAge: new Date(Date.now() + 3600000)},
+  cookie: {path: '/', httpOnly: true, maxAge: null},
+  store: store,
+};
+
+if (process.env.NODE_ENV === 'production') {
+ sessionSettings.cookie.secure = true;
+ sessionSettings.proxy = true;
+}
+
 // all environments
 app.configure(function() {
   app.set('port', process.env.PORT || 3000);
@@ -42,13 +59,10 @@ app.configure(function() {
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.cookieParser());
-  app.use(express.session({
-    secret: '48hgU2kykg97LKEipHoK',
-    // cookie: {maxAge: new Date(Date.now() + 3600000)},
-    store: store,
-  }));
+  app.use(express.session(sessionSettings));
   app.use(passport.initialize());
   app.use(passport.session());
+  app.use(express.csrf());
   app.use(stylus.middleware({src: __dirname + '/public', compile: compile}));
   app.use(express.static(path.join(__dirname, 'public')));
 });

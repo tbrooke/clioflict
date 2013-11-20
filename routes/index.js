@@ -18,13 +18,18 @@ var ensureAdmin = function(req, res, next) {
   } else {
     res.send(401, 'You do not have access to this page');
   }
-}
+};
+
+var csrf = function(req, res, next) {
+  res.locals.token = req.session._csrf;
+  next();
+};
 
 module.exports = function(app) {
 	app.get('/', ensureLoggedIn('/login'), index);
 	app.get('/query', [ensureLoggedIn('/login'), streamable, query]);
   app.get('/query/:account_id', [ensureLoggedIn('/login'), streamable, accountQuery]);
-	app.get('/login', auth.loginForm);
+	app.get('/login', csrf, auth.loginForm);
 	app.post('/login', auth.login);
 	app.get('/logout', auth.logout);
 	app.get('/callback', clio.callback);
@@ -32,7 +37,7 @@ module.exports = function(app) {
 
   // Admin routes
   app.get('/admin', ensureLoggedIn('/login'), ensureAdmin, admin);
-  app.get('/signup', ensureLoggedIn('/login'), ensureAdmin, auth.signupForm);
+  app.get('/signup', ensureLoggedIn('/login'), ensureAdmin, csrf, auth.signupForm);
   app.post('/signup', ensureLoggedIn('/login'), ensureAdmin, auth.signup);
   app.get('/accounts', ensureLoggedIn('/login'), ensureAdmin, accounts);
   app.get('/remove_account/:account_id', 

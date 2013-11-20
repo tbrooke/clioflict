@@ -19,6 +19,7 @@ default_run_options[:pty] = true
 # node-deploy options
 set :app_command, "app.js"
 set :app_environment, "PORT=43434"
+set :node_env, "NODE_ENV=production"
 
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
@@ -41,7 +42,7 @@ namespace :deploy do
 
   desc "START the servers"
   task :start, :roles => :app, :except => { :no_release => true } do
-    run "cd #{current_path} && #{app_environment} node_modules/.bin/forever start -a -l #{current_path}/log/forever.log -o #{current_path}/log/out.log -e #{current_path}/log/err.log #{app_command}"
+    run "cd #{current_path} && #{app_environment} #{node_env} node_modules/.bin/forever start -a -l #{current_path}/log/forever.log -o #{current_path}/log/out.log -e #{current_path}/log/err.log #{app_command}"
   end
 
   desc "STOP the servers"
