@@ -9,10 +9,11 @@
 current_path="/var/apps/node/clioflict/current"
 app_command="app.js"
 app_environment="PORT=43434"
+node_env="NODE_ENV=production"
 
 start() {
         initlog -c "echo -n Starting clioflict server: "
-        cd $current_path && $app_environment node_modules/.bin/forever start -a -l $current_path/log/forever.log -o $current_path/log/out.log -e $current_path/log/err.log $app_command
+        cd $current_path && $app_environment $node_env node_modules/.bin/forever start -a -l $current_path/log/forever.log -o $current_path/log/out.log -e $current_path/log/err.log $app_command
         success $"clioserver server startup"
         echo
 }
