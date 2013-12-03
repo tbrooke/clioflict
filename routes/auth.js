@@ -44,3 +44,4 @@ exports.removeUser = function(req, res) {
   });
   // Query all users and remove user`
 };
+

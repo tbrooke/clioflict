@@ -4,6 +4,7 @@
  */
 
 var auth = require('./auth');
+var users = require('./users');
 var clio = require('./clio');
 var User = require('../models').User;
 var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
@@ -40,6 +41,9 @@ module.exports = function(app) {
   app.get('/admin', ensureLoggedIn('/login'), ensureAdmin, admin);
   app.get('/signup', ensureLoggedIn('/login'), ensureAdmin, csrf, auth.signupForm);
   app.post('/signup', ensureLoggedIn('/login'), ensureAdmin, auth.signup);
+  app.get('/users/:user_id/edit', ensureLoggedIn('/login'), ensureAdmin, csrf, users.edit);
+  app.put('/users/:user_id', ensureLoggedIn('/login'), ensureAdmin, users.update);
+
   app.get('/remove_account/:account_id', 
           ensureLoggedIn('/login'),
           ensureAdmin,

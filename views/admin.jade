@@ -28,11 +28,15 @@ block content
         table.table.table-striped
           tr
             th User Email
-              th
+            th
+            th
+            th
           each user in users
             tr
               td= user.email
               td= (user.admin === true ? 'Admin' : '')
+              td
+                a(href="/users/" + user.id + "/edit") Edit
               td
                 a(href="/remove_user/" + user.id) Remove
       if req.user.admin === true
