@@ -22,7 +22,7 @@ block content
               td
                 a.btn.btn-sm.btn-warning(href="/remove_account/" + account.id) Remove
                 if account.authenticationRequired
-                  a.btn.btn-sm.btn-danger(href="/clioAuth") Reauthenticate
+                  a.btn.btn-sm.btn-danger(href="/clioAuth", style="margin-left: 20px") Reauthenticate
       a(class='btn btn-primary',href="/clioAuth") Add an Account
     div#users.tab-pane.fade
       h5 Users
@@ -32,14 +32,12 @@ block content
             th User Email
             th
             th
-            th
           each user in users
             tr
               td= user.email
               td= (user.admin === true ? 'Admin' : '')
               td
                 a.btn.btn-sm.btn-info(href="/users/" + user.id + "/edit") Edit
-              td
                 a.btn.btn-sm.btn-warning(href="/remove_user/" + user.id) Remove
       if req.user.admin === true
       a(class='btn btn-primary',href="/signup") Add a New User
