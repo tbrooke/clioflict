@@ -5,6 +5,7 @@ var _ = require('lodash');
 var clioAccountSchema = mongoose.Schema({
   accessToken: { type: String, required: true, index: {unique: true}},
   clioId: { type: String, required: true, index: {unique: true}},
+  authenticationRequired: { type: Boolean, default: false},
   name: String
 });
 

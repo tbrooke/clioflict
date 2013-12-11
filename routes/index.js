@@ -88,10 +88,25 @@ var query = function(req, res){
     var options = {qs: {query: query}, headers: {ContentType: 'application/json'}};
     var request = clioApi.get(account.accessToken, '/contacts', options, function(err, response) {
       totalCompletedRequests++;
-      toSend = {account: account, results: response.body};
-      res.write(JSON.stringify(toSend));
+      // wish that we could just check the response.statusCode
+      // unfortunately, clio sends back a 200 along with an html
+      // version of the login page. FTW!
+      try {
+        JSON.parse(response.body);
+        toSend = {account: account, results: response.body};
+        res.write(JSON.stringify(toSend));
+      } catch(e) {
+        handleAccountError(account);
+      }
       if (totalCompletedRequests === totalAccounts) res.end();
     });
+  };
+
+  function handleAccountError(account) {
+    toSend = {account: account, errors: ['The account requires authentication']};
+    res.write(JSON.stringify(toSend));
+    account.authenticationRequired = true;
+    account.save();
   };
 };
 
@@ -127,8 +142,4 @@ var admin = function(req, res) {
     });
   });
 };
-
-
-
-
 
