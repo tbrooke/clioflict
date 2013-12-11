@@ -23,4 +23,4 @@ block content
              | Click on a contact from the search results to see their details
           ul(ng-if='vm.selectedContacts.length')
             li.selected-contact(ng-repeat='contact in vm.selectedContacts')
-              contactdetails(contact='contact', remove-contact='toggleContact(contact)')
+              contactdetails(contact='contact', remove-contact='toggleContact(contact, null, true)')

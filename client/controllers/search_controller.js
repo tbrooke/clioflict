@@ -55,6 +55,7 @@ clioClientSearch.controller('SearchController',
            {field: 'organization', displayName: 'Organization'},
          ],
          afterSelectionChange: function(rowItem, state) {
+           rowItem.entity.rowIndex = rowItem.rowIndex;
            $scope.toggleContact(rowItem.entity, rowItem.entity.account_name);
          },
          //showFilter: true
@@ -69,7 +70,7 @@ clioClientSearch.controller('SearchController',
           });
         });
 
-      $scope.toggleContact = function(contact, accountName) {
+      $scope.toggleContact = function(contact, accountName, toggleGrid) {
         var foundIndex;
         $.each($scope.vm.selectedContacts, function(i, selectedContact) {
           if (selectedContact.id === contact.id) {
@@ -82,6 +83,9 @@ clioClientSearch.controller('SearchController',
         } else {
           contact.accountName = accountName;
           $scope.vm.selectedContacts.push(contact);
+        }
+        if (toggleGrid) {
+          $scope.vm.gridOptions.selectRow(contact.rowIndex);
         }
       };
 
