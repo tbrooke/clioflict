@@ -103,7 +103,8 @@ var query = function(req, res){
   };
 
   function handleAccountError(account) {
-    toSend = {account: account, errors: ['The account requires authentication']};
+    var errorMessage = 'The ' + account.name + ' account requires authentication'
+    toSend = {account: account, errors: [errorMessage]};
     res.write(JSON.stringify(toSend));
     account.authenticationRequired = true;
     account.save();

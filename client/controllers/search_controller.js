@@ -117,48 +117,63 @@ clioClientSearch.controller('SearchController',
           account.contacts = [];
         });
 
+        var resultsHandler = function(data) {
+          var results = JSON.parse(data.results);
+          var accountId = data.account['_id'];
+          var account = {};
+          $.each($scope.vm.accounts, function(i, acc) {
+            if (acc.id == accountId) {
+              account = acc;
+            }
+          });
+
+          $scope.$apply(function () {
+            angular.forEach(results.contacts, function(contact) {
+
+              contact.account_name = account.name;
+              contact.date_of_birth = customDataExtraction(/date of birth/i, contact);
+              contact.middle_name = customDataExtraction(/middle name/i, contact);
+              var firstPhone = contact.phone_numbers[0];
+              var firstAddress = contact.addresses[0];
+              if (firstPhone) {
+                contact.phone_number = firstPhone.number;
+              }
+              if (firstAddress) {
+                contact.street      = firstAddress.street;
+                contact.city        = firstAddress.city;
+                contact.state       = firstAddress.state;
+                contact.postal_code = firstAddress.postal_code;
+              }
+              if (contact.type === 'Company') {
+                contact.organization = contact.name;
+              } else {
+                contact.organization = contact.company ? contact.company.name : null;
+              }
+
+              $scope.gridData.push(contact);
+            });
+            account.isLoading = false;
+
+            $scope.vm.isLoading = false;
+            $scope.vm.accountsSearched++;
+
+          });
+
+        };
+
+        var errorsHandler = function(data) {
+          angular.forEach(data.errors, function(error) {
+            $.gritter.add({title: 'Error', text: error});
+          });
+        };
+
         Streamable.get('/query', searchData, {
           onData: function(data) {
-            var results = JSON.parse(data.results);
-            var accountId = data.account['_id'];
-            var account = {};
-            $.each($scope.vm.accounts, function(i, acc) {
-              if (acc.id == accountId) {
-                account = acc;
-              }
-            });
-
-            $scope.$apply(function () {
-              angular.forEach(results.contacts, function(contact) {
-
-                contact.account_name = account.name;
-                contact.date_of_birth = customDataExtraction(/date of birth/i, contact);
-                contact.middle_name = customDataExtraction(/middle name/i, contact);
-                var firstPhone = contact.phone_numbers[0];
-                var firstAddress = contact.addresses[0];
-                if (firstPhone) {
-                  contact.phone_number = firstPhone.number;
-                }
-                if (firstAddress) {
-                  contact.street      = firstAddress.street;
-                  contact.city        = firstAddress.city;
-                  contact.state       = firstAddress.state;
-                  contact.postal_code = firstAddress.postal_code;
-                }
-                if (contact.type === 'Company') {
-                  contact.organization = contact.name;
-                } else {
-                  contact.organization = contact.company ? contact.company.name : null;
-                }
-
-                $scope.gridData.push(contact);
-              });
-              account.isLoading = false;
-
-              $scope.vm.isLoading = false;
-              $scope.vm.accountsSearched++;
-
-            });
+            if (data.results) {
+              resultsHandler(data);
+            } else if (data.errors) {
+              errorsHandler(data);
+            }
           },
           onError: function(err) {
             // assume error happened b/c user is required to reauthenticate

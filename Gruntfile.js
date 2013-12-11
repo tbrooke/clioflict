@@ -22,9 +22,15 @@ module.exports = function(grunt) {
     copy: {
       bootstrapFonts: {
         expand: true,
-        cwd: 'bower_components/bootstrap-theme-cirrus/dist/fonts',
-        src: '*',
-        dest: 'public/fonts/'
+        cwd:    'bower_components/bootstrap-theme-cirrus/dist/fonts',
+        src:    '*',
+        dest:   'public/fonts/'
+      },
+      gritterImages: {
+        expand: true,
+        cwd:    'bower_components/jquery.gritter/images',
+        src:    '*',
+        dest:   'public/images/'
       }
     },
     concat: {
@@ -53,6 +59,7 @@ module.exports = function(grunt) {
           'bower_components/angular-sanitize/angular-sanitize.js',
           'bower_components/ng-grid/build/ng-grid.js',
           'bower_components/ng-csv/build/ng-csv.js',
+          'bower_components/jquery.gritter/js/jquery.gritter.min.js',
           'tmp/client.js',
           'tmp/templates.js'
         ],
@@ -61,6 +68,7 @@ module.exports = function(grunt) {
       css: {
         src: [
           'bower_components/bootstrap-theme-cirrus/dist/css/bootstrap.min.css',
+          'bower_components/jquery.gritter/css/jquery.gritter.css',
           'bower_components/ng-grid/ng-grid.css',
           'public/stylesheets/spinner.css',
           'public/stylesheets/style.css'
