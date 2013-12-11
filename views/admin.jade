@@ -21,6 +21,8 @@ block content
               td= account.name
               td
                 a(href="/remove_account/" + account.id) Remove
+                if account.authenticationRequired
+                  a.btn.btn-danger(href="/clioAuth") Reauthenticate
       a(class='btn btn-primary',href="/clioAuth") Add an Account
     div#users.tab-pane.fade
       h5 Users
