@@ -38,7 +38,7 @@ block content
               td= (user.admin === true ? 'Admin' : '')
               td
                 a.btn.btn-sm.btn-info(href="/users/" + user.id + "/edit") Edit
-                a.btn.btn-sm.btn-warning(href="/remove_user/" + user.id) Remove
+                a.btn.btn-sm.btn-warning(href="/remove_user/" + user.id, style="margin-left: 20px") Remove
       if req.user.admin === true
       a(class='btn btn-primary',href="/signup") Add a New User
     hr
