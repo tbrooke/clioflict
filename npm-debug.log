@@ -1,0 +1,138 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'socket.io', '1.0.0' ]
+2 info using npm@1.4.15
+3 info using node@v0.10.26
+4 verbose node symlink /usr/local/bin/node
+5 verbose readDependencies using package.json deps
+6 verbose cache add [ 'socket.io@~0.9.16', null ]
+7 verbose cache add name=undefined spec="socket.io@~0.9.16" args=["socket.io@~0.9.16",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: 'socket.io@~0.9.16',
+8 verbose parsed url   path: 'socket.io@~0.9.16',
+8 verbose parsed url   href: 'socket.io@~0.9.16' }
+9 verbose cache add [ '1.0.0', null ]
+10 verbose cache add name=undefined spec="1.0.0" args=["1.0.0",null]
+11 verbose parsed url { protocol: null,
+11 verbose parsed url   slashes: null,
+11 verbose parsed url   auth: null,
+11 verbose parsed url   host: null,
+11 verbose parsed url   port: null,
+11 verbose parsed url   hostname: null,
+11 verbose parsed url   hash: null,
+11 verbose parsed url   search: null,
+11 verbose parsed url   query: null,
+11 verbose parsed url   pathname: '1.0.0',
+11 verbose parsed url   path: '1.0.0',
+11 verbose parsed url   href: '1.0.0' }
+12 verbose cache add name="socket.io" spec="~0.9.16" args=["socket.io","~0.9.16"]
+13 verbose parsed url { protocol: null,
+13 verbose parsed url   slashes: null,
+13 verbose parsed url   auth: null,
+13 verbose parsed url   host: null,
+13 verbose parsed url   port: null,
+13 verbose parsed url   hostname: null,
+13 verbose parsed url   hash: null,
+13 verbose parsed url   search: null,
+13 verbose parsed url   query: null,
+13 verbose parsed url   pathname: '~0.9.16',
+13 verbose parsed url   path: '~0.9.16',
+13 verbose parsed url   href: '~0.9.16' }
+14 verbose addNamed [ 'socket.io', '~0.9.16' ]
+15 verbose addNamed [ null, '>=0.9.16-0 <0.10.0-0' ]
+16 silly lockFile 673bedd6-socket-io-0-9-16 socket.io@~0.9.16
+17 verbose lock socket.io@~0.9.16 /Users/tmb/.npm/673bedd6-socket-io-0-9-16.lock
+18 silly lockFile 91e95be6-1-0-0 1.0.0
+19 verbose lock 1.0.0 /Users/tmb/.npm/91e95be6-1-0-0.lock
+20 silly addNameRange { name: 'socket.io',
+20 silly addNameRange   range: '>=0.9.16-0 <0.10.0-0',
+20 silly addNameRange   hasData: false }
+21 silly lockFile 91e95be6-1-0-0 1.0.0
+22 silly lockFile 91e95be6-1-0-0 1.0.0
+23 verbose addNamed [ '1.0.0', '' ]
+24 verbose addNamed [ null, '*' ]
+25 silly lockFile 11abb083-1-0-0 1.0.0@
+26 verbose lock 1.0.0@ /Users/tmb/.npm/11abb083-1-0-0.lock
+27 silly addNameRange { name: '1.0.0', range: '*', hasData: false }
+28 verbose url raw 1.0.0
+29 verbose url resolving [ 'https://registry.npmjs.org/', './1.0.0' ]
+30 verbose url resolved https://registry.npmjs.org/1.0.0
+31 info trying registry request attempt 1 at 21:55:39
+32 http GET https://registry.npmjs.org/1.0.0
+33 verbose url raw socket.io
+34 verbose url resolving [ 'https://registry.npmjs.org/', './socket.io' ]
+35 verbose url resolved https://registry.npmjs.org/socket.io
+36 info trying registry request attempt 1 at 21:55:39
+37 verbose etag "3HCU2AEI91MNSOVMLRFN6QIN6"
+38 http GET https://registry.npmjs.org/socket.io
+39 http 304 https://registry.npmjs.org/socket.io
+40 silly registry.get cb [ 304,
+40 silly registry.get   { date: 'Tue, 15 Jul 2014 01:55:40 GMT',
+40 silly registry.get     server: 'Apache',
+40 silly registry.get     via: '1.1 varnish',
+40 silly registry.get     'last-modified': 'Tue, 15 Jul 2014 01:55:40 GMT',
+40 silly registry.get     'cache-control': 'max-age=30',
+40 silly registry.get     etag: '"3HCU2AEI91MNSOVMLRFN6QIN6"',
+40 silly registry.get     'x-served-by': 'cache-jfk1032-JFK',
+40 silly registry.get     'x-cache': 'HIT',
+40 silly registry.get     'x-cache-hits': '1',
+40 silly registry.get     'x-timer': 'S1405389340.240087,VS0,VE0',
+40 silly registry.get     vary: 'Accept',
+40 silly registry.get     'content-length': '0',
+40 silly registry.get     'keep-alive': 'timeout=10, max=50',
+40 silly registry.get     connection: 'Keep-Alive' } ]
+41 verbose etag socket.io from cache
+42 http 404 https://registry.npmjs.org/1.0.0
+43 verbose headers { date: 'Tue, 15 Jul 2014 01:55:40 GMT',
+43 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+43 verbose headers   'content-type': 'application/json',
+43 verbose headers   'cache-control': 'max-age=0',
+43 verbose headers   'content-length': '52',
+43 verbose headers   'accept-ranges': 'bytes',
+43 verbose headers   via: '1.1 varnish',
+43 verbose headers   age: '0',
+43 verbose headers   'x-served-by': 'cache-jfk1021-JFK',
+43 verbose headers   'x-cache': 'MISS',
+43 verbose headers   'x-cache-hits': '0',
+43 verbose headers   'x-timer': 'S1405389340.233814,VS0,VE18',
+43 verbose headers   'keep-alive': 'timeout=10, max=50',
+43 verbose headers   connection: 'Keep-Alive' }
+44 silly registry.get cb [ 404,
+44 silly registry.get   { date: 'Tue, 15 Jul 2014 01:55:40 GMT',
+44 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+44 silly registry.get     'content-type': 'application/json',
+44 silly registry.get     'cache-control': 'max-age=0',
+44 silly registry.get     'content-length': '52',
+44 silly registry.get     'accept-ranges': 'bytes',
+44 silly registry.get     via: '1.1 varnish',
+44 silly registry.get     age: '0',
+44 silly registry.get     'x-served-by': 'cache-jfk1021-JFK',
+44 silly registry.get     'x-cache': 'MISS',
+44 silly registry.get     'x-cache-hits': '0',
+44 silly registry.get     'x-timer': 'S1405389340.233814,VS0,VE18',
+44 silly registry.get     'keep-alive': 'timeout=10, max=50',
+44 silly registry.get     connection: 'Keep-Alive' } ]
+45 silly lockFile 11abb083-1-0-0 1.0.0@
+46 silly lockFile 11abb083-1-0-0 1.0.0@
+47 error 404 404 Not Found: 1.0.0
+47 error 404
+47 error 404 '1.0.0' is not in the npm registry.
+47 error 404 You should bug the author to publish it
+47 error 404 It was specified as a dependency of 'clioflict'
+47 error 404
+47 error 404 Note that you can also install from a
+47 error 404 tarball, folder, or http url, or git url.
+48 error System Darwin 13.3.0
+49 error command "node" "/usr/local/bin/npm" "install" "socket.io" "1.0.0"
+50 error cwd /Users/tmb/node/clioflict
+51 error node -v v0.10.26
+52 error npm -v 1.4.15
+53 error code E404
+54 verbose exit [ 1, true ]

@@ -27,18 +27,19 @@ var customDataExtraction = function(fieldName, contact) {
     // displayed:                      (boolean, required) If the custom field is displayed by default or not
     // custom_field_picklist_options:  (array of hashes) If the field_type is a "picklist" this field is populated with a collection of options, otherwise nil.
 
+  
     angular.forEach(contact.custom_field_values, function(custom_data) {
       if (custom_data.custom_field && custom_data.custom_field.name.match(fieldName)) {
-        debugger;
-
-        if (custom_data.custom_field.field_type === "picklist") {
-          customDataValue = custom_data.custom_field_picklist_option.value;
+    
+        if (custom_data.custom_field.name.match("Contact Type")) {
+          customDataValue = custom_data.custom_field_picklist_option.name;
         } else {
           customDataValue = custom_data.value;
         }
-      }
+      }})
       return customDataValue;
-    });
+    };
+
 
 
 
