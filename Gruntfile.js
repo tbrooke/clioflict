@@ -51,11 +51,12 @@ module.exports = function(grunt) {
       },
       js: {
         src: [
-          'bower_components/jquery/jquery.min.js',
+          'bower_components/jquery/dist/jquery.min.js',
           'bower_components/bootstrap/dist/js/bootstrap.min.js',
           'bower_components/socket.io-client/dist/socket.io.js',
           'bower_components/streamable/client.js',
-          'bower_components/angular-1.1.6/build/angular.js',
+          //'bower_components/angular-1.1.6/build/angular.js',
+          'bower_components/angular/angular.min.js',
           'bower_components/angular-sanitize/angular-sanitize.js',
           'bower_components/ng-grid/build/ng-grid.js',
           'bower_components/ng-csv/build/ng-csv.js',

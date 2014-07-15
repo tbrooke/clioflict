@@ -79,6 +79,7 @@ var query = function(req, res){
   var totalAccounts, totalCompletedRequests = 0;
 
   ClioAccount.find().exec(function(err,accounts) {
+                debugger;
                 accounts.forEach(function(account) {
                   searchForClients(account, query);
                 });
@@ -92,6 +93,7 @@ var query = function(req, res){
       // unfortunately, clio sends back a 200 along with an html
       // version of the login page. FTW!
       try {
+        debugger;
         JSON.parse(response.body);
         toSend = {account: account, results: response.body};
         res.write(JSON.stringify(toSend));
