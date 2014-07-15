@@ -32,6 +32,8 @@ var customDataExtraction = function(fieldName, contact) {
       if (custom_data.custom_field && custom_data.custom_field.name.match(fieldName)) {
     
         if (custom_data.custom_field.name.match("Contact Type")) {
+      //    this would be better but I couldn't get it to work for some reason
+      //    if (custom_data.custom_type.match("picklist")) {
           customDataValue = custom_data.custom_field_picklist_option.name;
         } else {
           customDataValue = custom_data.value;
