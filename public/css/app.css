@@ -1,4 +1,4 @@
-/*! clioflict - v0.0.1 - 2013-12-10 */
+/*! clioflict - v0.0.1 - 2014-07-18 */
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,300,600);/*!
  * Cirrus v0.3.0
  *
@@ -157,6 +157,12 @@
   width: 1px;
   background-color: #d4d4d4;
 }
+#testDataLength {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -100000;
+}
 .ngHeaderContainer {
   position: relative;
   overflow: hidden;
@@ -302,11 +308,10 @@
 }
 .ngColList {
   list-style-type: none;
+  margin-top: 2px;
+  margin-left: 8px;
 }
 .ngColListItem {
-  position: relative;
-  right: 17px;
-  top: 2px;
   white-space: nowrap;
 }
 .ngMenuText {
@@ -338,8 +343,7 @@
   width: 100%;
 }
 .ngGroupIcon {
-  background-image: url(data:image/png;
-    base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAANCAYAAACZ3F9/AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAAEFJREFUKFNjoAhISkr+h2J5JDZODNXGwGBsbPwfhIGAA8bGh6HaGBiAGhxAGJmND4M1gQCSM0adCsVQbcPcqQwMALWDGyDvWPefAAAAAElFTkSuQmCC);
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAANCAYAAACZ3F9/AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAAEFJREFUKFNjoAhISkr+h2J5JDZODNXGwGBsbPwfhIGAA8bGh6HaGBiAGhxAGJmND4M1gQCSM0adCsVQbcPcqQwMALWDGyDvWPefAAAAAElFTkSuQmCC);
   background-repeat: no-repeat;
   height: 15px;
   width: 15px;
@@ -348,8 +352,7 @@
   top: 2px;
 }
 .ngGroupedByIcon {
-  background-image: url(data:image/png;
-    base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAANCAYAAACZ3F9/AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAAElJREFUKFNjoAhISkr+R8LyaHwMDNXGwGBsbPwfhoGAA5mPDUO1oWpE52PDYE0gALTFAYbR+dgwWBMIoPlh1I9ADNU2NPzIwAAAFQYI9E4OLvEAAAAASUVORK5CYII=);
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAANCAYAAACZ3F9/AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAAElJREFUKFNjoAhISkr+R8LyaHwMDNXGwGBsbPwfhoGAA5mPDUO1oWpE52PDYE0gALTFAYbR+dgwWBMIoPlh1I9ADNU2NPzIwAAAFQYI9E4OLvEAAAAASUVORK5CYII=);
   background-repeat: no-repeat;
   height: 15px;
   width: 15px;
@@ -518,6 +521,9 @@
 }
 .ngFooterTotalItems.ngnoMultiSelect {
   padding: 0 !important;
+}
+.ngGridMaxPagesNumber {
+  vertical-align: middle;
 }
 .ngPagerFirstBar {
   width: 10px;
