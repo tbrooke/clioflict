@@ -42,20 +42,6 @@ var customDataExtraction = function(fieldName, contact) {
 };
 
 
-var reformatDateField = function(dateString) {
-  if (typeof(dateString) === 'string' ) {
-    var dateMatch = dateString.match(/^(\d{4})\-(\d{2})\-(\d{2})$/);
-    if (dateMatch) {
-      var year = dateMatch[1], month = dateMatch[2], day = dateMatch[3];
-      if (year && month && day) {
-        return month + '-' + day + '-' + year;
-      }
-    }
-  }
-  return dateString;
-};
-
-
 clioClientSearch.controller('SearchController', ['$scope', 'searchDB',
   function($scope, searchDB) {
     $scope.vm = {};
@@ -64,6 +50,19 @@ clioClientSearch.controller('SearchController', ['$scope', 'searchDB',
     $scope.gridData = [];
     $scope.filterOptions = {
       filterText: ''
+    };
+
+    var reformatDateField = function(dateString) {
+      if (typeof(dateString) === 'string' ) {
+        var dateMatch = dateString.match(/^(\d{4})\-(\d{2})\-(\d{2})$/);
+        if (dateMatch) {
+          var year = dateMatch[1], month = dateMatch[2], day = dateMatch[3];
+          if (year && month && day) {
+            return month + '-' + day + '-' + year;
+          }
+        }
+      }
+      return dateString;
     };
 
     $scope.exportHeaders = ['id',
