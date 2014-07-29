@@ -42,6 +42,18 @@ var customDataExtraction = function(fieldName, contact) {
 };
 
 
+var reformatDateField = function(dateString) {
+  if (typeof(dateString) === 'string' ) {
+    var dateMatch = dateString.match(/^(\d{4})\-(\d{2})\-(\d{2})$/);
+    if (dateMatch) {
+      var year = dateMatch[1], month = dateMatch[2], day = dateMatch[3];
+      if (year && month && day) {
+        return month + '-' + day + '-' + year;
+      }
+    }
+  }
+  return dateString;
+};
 
 
 clioClientSearch.controller('SearchController', ['$scope', 'searchDB',
@@ -197,7 +209,10 @@ clioClientSearch.controller('SearchController', ['$scope', 'searchDB',
           angular.forEach(results.contacts, function(contact) {
 
             contact.account_name = account.name;
-            contact.date_of_birth = customDataExtraction(/date of birth/i, contact);
+            var dateOfBirth = customDataExtraction(/date of birth/i, contact);
+            if (dateOfBirth) {
+              contact.date_of_birth = reformatDateField(dateOfBirth);
+            }
             contact.middle_name = customDataExtraction(/middle name/i, contact);
             contact.contact_type = customDataExtraction(/contact type/i, contact);
             var firstPhone = contact.phone_numbers[0];
